@@ -136,11 +136,11 @@ The LMS enables instructors and administrators to track the progress of students
 Learnopia provides comprehensive reporting and analytics features. As an administrator, you can generate reports on course performance, user activity, and overall system usage. These insights can aid in making data-driven decisions to enhance the learning experience.
 
 
-#### AdminKit Admin Panel
+## AdminKit Admin Panel
 Learnopia incorporates the AdminKit Admin Panel to streamline administrative tasks. AdminKit is a flexible and modern admin dashboard template built with Bootstrap and other front-end technologies. Its customizable components and UI elements enable efficient management of various LMS functionalities.
 
 Get it from here: **[AdminKit](https://adminkit.io/)**
 
 
 ## License
-Learnopia is distributed under the `GNU General Public License version 3.0 (GPL-3.0)`. You can find the full text of the license in the `**LICENSE**` file.
+Learnopia is distributed under the `GNU General Public License version 3.0 (GPL-3.0)`. You can find the full text of the license in the `LICENSE` file.
