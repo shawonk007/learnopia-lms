@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,8 +21,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin', function () {
-    return view('admin.dashboard');
+Route::prefix('admin')->group(function () {
+  Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+  Route::resource('users', UserController::class);
+  Route::resource('roles', RoleController::class);
 });
 
 Route::get('/dashboard', function () {

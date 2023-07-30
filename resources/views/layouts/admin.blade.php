@@ -8,7 +8,7 @@
 	<meta name="author" content="Muhammad Nasir Uddin Khan Shawon" />
 	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-	<title>@yield('title') | {{ config('app.name', 'Laravel') }}</title>
+	<title>{{ $title }} | {{ config('app.name', 'Laravel') }}</title>
 	<link rel="preconnect" href="https://fonts.gstatic.com" />
 	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 	<link rel="canonical" href="https://github.com/shawonk007/learnopia-lms" />
@@ -17,25 +17,25 @@
     <!-- Scripts -->
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
   </head>
-
-<body>
+  <body>
 	<div class="wrapper">
-		@include('partials.admin.sidebar')
+	  <x-admin-sidebar />
 		<div class="main">
-            @include('partials.admin.navbar')
-			<main class="content">
-				<div class="container-fluid p-0">
-                    @yield('heading')
-					@yield('content')
-				</div>
-			</main>
-			@include('partials.admin.footer')
-		</div>
+          <x-admin-navbar />
+		  <main class="content">
+			<div class="container-fluid p-0">
+              @isset($header)
+                {{ $header }}
+              @endisset
+			  {{ $slot }}
+			</div>
+		  </main>
+          <x-admin-footer />
+	  </div>
 	</div>
 	<script src="{{ asset('js/app.js') }}"></script>
-    @yield('script')
-	
-
-</body>
-
+	@isset($script)
+      {{ $script }}
+    @endisset
+  </body>
 </html>

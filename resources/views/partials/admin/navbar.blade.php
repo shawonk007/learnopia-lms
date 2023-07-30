@@ -81,7 +81,7 @@
             <a href="javascript:void(0)" class="list-group-item">
               <div class="row g-0 align-items-center">
                 <div class="col-2">
-                  <img src="img/avatars/avatar-5.jpg" class="avatar img-fluid rounded-circle" alt="Vanessa Tucker">
+                  <img src="{{ asset('img/avatars/avatar-5.jpg') }}" class="avatar img-fluid rounded-circle" alt="Vanessa Tucker">
                 </div>
                 <div class="col-10 ps-2">
                   <div class="text-dark">Vanessa Tucker</div>
@@ -93,7 +93,7 @@
             <a href="javascript:void(0)" class="list-group-item">
               <div class="row g-0 align-items-center">
                 <div class="col-2">
-                  <img src="img/avatars/avatar-2.jpg" class="avatar img-fluid rounded-circle" alt="William Harris">
+                  <img src="{{ asset('img/avatars/avatar-2.jpg') }}" class="avatar img-fluid rounded-circle" alt="William Harris">
                 </div>
                 <div class="col-10 ps-2">
                   <div class="text-dark">William Harris</div>
@@ -105,7 +105,7 @@
             <a href="javascript:void(0)" class="list-group-item">
               <div class="row g-0 align-items-center">
                 <div class="col-2">
-                  <img src="img/avatars/avatar-4.jpg" class="avatar img-fluid rounded-circle" alt="Christina Mason">
+                  <img src="{{ asset('img/avatars/avatar-4.jpg') }}" class="avatar img-fluid rounded-circle" alt="Christina Mason">
                 </div>
                 <div class="col-10 ps-2">
                   <div class="text-dark">Christina Mason</div>
@@ -117,7 +117,7 @@
             <a href="javascript:void(0)" class="list-group-item">
               <div class="row g-0 align-items-center">
                 <div class="col-2">
-                  <img src="img/avatars/avatar-3.jpg" class="avatar img-fluid rounded-circle" alt="Sharon Lessman">
+                  <img src="{{ asset('img/avatars/avatar-3.jpg') }}" class="avatar img-fluid rounded-circle" alt="Sharon Lessman">
                 </div>
                 <div class="col-10 ps-2">
                   <div class="text-dark">Sharon Lessman</div>
@@ -137,7 +137,7 @@
           <i class="align-middle" data-feather="settings"></i>
         </a>
         <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="javascript:void(0)" data-bs-toggle="dropdown">
-          <img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">Charles Hall</span>
+          <img src="{{ asset('img/avatars/avatar.jpg') }}" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">Charles Hall</span>
         </a>
         <div class="dropdown-menu dropdown-menu-end">
           <a class="dropdown-item" href="javascript:void(0)"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
@@ -146,7 +146,7 @@
           <a class="dropdown-item" href="javascript:void(0)"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
           <a class="dropdown-item" href="javascript:void(0)"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="javascript:void(0)">Log out</a>
+          <a class="dropdown-item" href="javascript:void(0)"><i class="align-middle me-1" data-feather="log-out"></i> Log out</a>
         </div>
       </li>
     </ul>
