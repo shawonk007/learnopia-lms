@@ -4,78 +4,36 @@
       <span class="align-middle">{{ config('app.name', 'AdminKit') }}</span>
     </a>
     <ul class="sidebar-nav">
-      <li class="sidebar-header">Pages</li>
       <li class="sidebar-item active">
         <a class="sidebar-link" href="{{ route('admin.dashboard') }}">
-          <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+          <i class="fas fa-gauge-high align-middle"></i> <span class="align-middle">{{ __('Dashboard') }}</span>
+        </a>
+      </li>
+      <li class="sidebar-header">{{ __('Course Management') }}</li>
+      <li class="sidebar-item">
+        <a class="sidebar-link" href="javascript:void(0)">
+          <i class="fas fa-graduation-cap align-middle"></i> <span class="align-middle">{{ __('Manage Courses') }}</span>
         </a>
       </li>
       <li class="sidebar-item">
         <a class="sidebar-link" href="javascript:void(0)">
-          <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
+          <i class="fas fa-chalkboard-user align-middle"></i> <span class="align-middle">{{ __('Manage Lessons') }}</span>
         </a>
       </li>
       <li class="sidebar-item">
-        <a class="sidebar-link" href="javascript:void(0)">
-          <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
+        <a class="sidebar-link" href="{{ route('category.index') }}">
+          <i class="align-middle" data-feather="tag"></i> <span class="align-middle">{{ __('Category') }}</span>
         </a>
       </li>
-      <li class="sidebar-item">
-        <a class="sidebar-link" href="javascript:void(0)">
-          <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Sign Up</span>
-        </a>
-      </li>
-      <li class="sidebar-item">
-        <a class="sidebar-link" href="javascript:void(0)">
-          <i class="align-middle" data-feather="book"></i> <span class="align-middle">Blank</span>
-        </a>
-      </li>
-      <li class="sidebar-header">Users Management</li>
+      <li class="sidebar-header">{{ __('Users Management') }}</li>
       <li class="sidebar-item">
         <a class="sidebar-link" href="{{ route('users.index') }}">
-          <i class="align-middle" data-feather="users"></i> <span class="align-middle">Manage Users</span>
+          <i class="align-middle" data-feather="users"></i> <span class="align-middle">{{ __('Manage Users') }}</span>
         </a>
       </li>
       <li class="sidebar-item">
         <a class="sidebar-link" href="{{ route('roles.index') }}">
-          <i class="align-middle" data-feather="shield"></i> <span class="align-middle">User Settings</span>
-        </a>
-      </li>
-      <li class="sidebar-header">Tools & Components</li>
-      <li class="sidebar-item">
-        <a class="sidebar-link" href="javascript:void(0)">
-          <i class="align-middle" data-feather="square"></i> <span class="align-middle">Buttons</span>
-        </a>
-      </li>
-      <li class="sidebar-item">
-        <a class="sidebar-link" href="javascript:void(0)">
-          <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Forms</span>
-        </a>
-      </li>
-      <li class="sidebar-item">
-        <a class="sidebar-link" href="javascript:void(0)">
-          <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Cards</span>
-        </a>
-      </li>
-      <li class="sidebar-item">
-        <a class="sidebar-link" href="javascript:void(0)">
-          <i class="align-middle" data-feather="align-left"></i> <span class="align-middle">Typography</span>
-        </a>
-      </li>
-      <li class="sidebar-item">
-        <a class="sidebar-link" href="javascript:void(0)">
-          <i class="align-middle" data-feather="coffee"></i> <span class="align-middle">Icons</span>
-        </a>
-      </li>
-      <li class="sidebar-header">Plugins & Addons</li>
-      <li class="sidebar-item">
-        <a class="sidebar-link" href="javascript:void(0)">
-          <i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Charts</span>
-        </a>
-      </li>
-      <li class="sidebar-item">
-        <a class="sidebar-link" href="javascript:void(0)">
-          <i class="align-middle" data-feather="map"></i> <span class="align-middle">Maps</span>
+          <i class="align-middle" data-feather="shield"></i> <span class="align-middle">{{ __('User Settings') }}</span>
         </a>
       </li>
     </ul>

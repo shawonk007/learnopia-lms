@@ -3,49 +3,72 @@
     {{ __('Add New User') }}
   </x-slot>
   <x-slot name="header">
-    <h1 class="h3 mb-3">Users & Members</h1>
+    <h1 class="h3 mb-3">{{ __('Users & Members') }}</h1>
   </x-slot>
   <form action="" method="post">
     <div class="row g-3">
       <div class="col-12 col-xl-5">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title mb-0">Create New User</h5>
+            <h5 class="card-title mb-0">{{ __('Create New User') }}</h5>
           </div>
           <div class="card-body py-0">
             <div class="row g-3">
+              <div class="col-6">    
+                <label for="imageInput" class="d-flex flex-column align-items-center justify-content-center bg-light h-100" style="border: 3px solid lightgray; border-style: dashed;">
+                  <div class="d-flex flex-column align-items-center justify-content-center py-1">
+                    <h1 class="h1 mb-0"><i class="align-middle" data-feather="upload-cloud"></i></h1>
+                    <h6 class="my-1 text-dark text-center"><strong>{{ __('Click to upload') }}</strong></h6>
+                    <p class="mb-2 text-dark text-center" style="font-size: 0.75rem;">
+                      <span>{{ __('PNG, JPG or JPEG') }}</span><br />
+                      <span>{{ __('(MAX. UPLOAD 2MB)') }}</span><br/>
+                      <span>{{ __('(MIN. RES. 300X300)') }}</span>
+                    </p>
+                  </div>
+                  <input type="file" name="avatar" class="d-none" id="imageInput" required accept="image/*;capture=camera" />
+                </label>
+              </div>
+              <div class="col-6">
+                <img id="dummy" src="{{ asset('img/dummy/square.jpg') }}" class="w-100" alt="" />
+              </div>
               <div class="col-12">
                 <div class="input-group">
-                  <input type="text" name="firstname" class="form-control" id="fName" placeholder="First Name" required />
-                  <input type="text" name="lastname" class="form-control" id="lName" placeholder="Last Name" required />
+                  <input type="text" name="firstname" class="form-control" id="fName" placeholder="{{ __('First Name') }}" required />
+                  <input type="text" name="lastname" class="form-control" id="lName" placeholder="{{ __('Last Name') }}" required />
                 </div>
               </div>
               <div class="col-6">
-                <input type="text" name="username" class="form-control" id="uName" placeholder="Username" required />
+                <input type="text" name="username" class="form-control" id="uName" placeholder="{{ __('Username') }}" required />
               </div>
               <div class="col-6">
                 <input type="date" name="dob" class="form-control" id="dob" />
               </div>
               <div class="col-12">
-                <input type="email" name="email" class="form-control" id="email" placeholder="Primary Email" required />
+                <input type="email" name="email" class="form-control" id="email" placeholder="{{ __('Primary Email') }}" required />
               </div>
               <div class="col-12">
-                <input type="email" name="email_alt" class="form-control" id="emailAlt" placeholder="Secondary Email" />
+                <input type="email" name="email_alt" class="form-control" id="emailAlt" placeholder="{{ __('Secondary Email') }}" />
               </div>
               <div class="col-6">
-                <input type="tel" name="phone" class="form-control" id="phone" placeholder="Primary Phone" required />
+                <input type="tel" name="phone" class="form-control" id="phone" placeholder="{{ __('Primary Phone') }}" required oninput="formatPhoneNumber(this)" maxlength="19" />
               </div>
               <div class="col-6">
-                <input type="tel" name="phone_alt" class="form-control" id="phoneAlt" placeholder="Secondary Phone" />
+                <input type="tel" name="phone_alt" class="form-control" id="phoneAlt" placeholder="{{ __('Secondary Phone') }}" oninput="formatPhoneNumber(this)" maxlength="19" />
+              </div>
+              <div class="col-6">
+                <input type="password" name="password" class="form-control" id="pass" placeholder="{{ __('Password') }}" required />
+              </div>
+              <div class="col-6">
+                <input type="password" name="c_password" class="form-control" id="cPass" placeholder="{{ __('Confirm Password') }}" required />
               </div>
               <div class="col-6">
                 <select name="role" class="form-control" id="userRole">
-                  <option value="">-- User Role --</option>
+                  <option value="">{{ __('-- User Role --') }}</option>
                 </select>
               </div>
               <div class="col-6">
                 <select name="status" class="form-control" id="roleStats">
-                  <option value="">-- User Status --</option>
+                  <option value="">{{ __('-- User Status --') }}</option>
                 </select>
               </div>
             </div>
@@ -55,13 +78,13 @@
               <div class="col-6 d-grid">
                 <a href="{{ route('users.index') }}" class="btn btn-outline-secondary" >
                   <i class="align-middle me-1" data-feather="arrow-left"></i>
-                  <span class="ps-1">Discard</span>
+                  <span class="ps-1">{{ __('Discard') }}</span>
                 </a>
               </div>
               <div class="col-6 d-grid">
                 <button type="submit" class="btn btn-outline-primary" >
-                  <i class="align-middle me-1" data-feather="check"></i>
-                  <span class="ps-1">Create New</span>
+                  <i class="align-middle me-1" data-feather="plus"></i>
+                  <span class="ps-1">{{ __('Create New') }}</span>
                 </button>
               </div>
             </div>
@@ -73,15 +96,41 @@
           <div class="card-body">
             <div class="row g-3">
               <div class="col-12">
-                <textarea name="description" class="form-control" id="roelDesc" cols="30" rows="10" placeholder="Type details here ..."></textarea>
+                <textarea name="biography" class="form-control" id="roelDesc" cols="30" rows="10" placeholder="{{ __('Type details here ...') }}"></textarea>
               </div>
-              <div class="col-12">
-                <input type="text" name="slug" class="form-control" id="roleSlug" placeholder="Role Slug" />
-              </div>
-              <div class="col-12">
-                <select name="status" class="form-control" id="roleStats">
-                  <option value="">-- Choose One --</option>
+              <div class="col-4">
+                <select name="gender" class="form-control" id="gender">
+                  <option value="">{{ __('-- Gender --') }}</option>
                 </select>
+              </div>
+              <div class="col-4">
+                <select name="religion" class="form-control" id="religion">
+                  <option value="">{{ __('-- Religion --') }}</option>
+                </select>
+              </div>
+              <div class="col-4">
+                <select name="marital" class="form-control" id="marital">
+                  <option value="">{{ __('-- Marital Status --') }}</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <input type="text" name="address_one" class="form-control" id="addressOne" placeholder="{{ __('Address Line 01') }}" />
+              </div>
+              <div class="col-12">
+                <input type="text" name="address_two" class="form-control" id="addressTwo" placeholder="{{ __('Address Line 02') }}" />
+              </div>
+              <div class="col-4">
+                <select name="division" class="form-control" id="division">
+                  <option value="">{{ __('-- Division --') }}</option>
+                </select>
+              </div>
+              <div class="col-4">
+                <select name="district" class="form-control" id="district">
+                  <option value="">{{ __('-- District --') }}</option>
+                </select>
+              </div>
+              <div class="col-4">
+                <input type="text" name="postal" class="form-control" id="postalCode" placeholder="{{ __('Postal Code') }}" />
               </div>
             </div>
           </div>
@@ -89,4 +138,38 @@
       </div>
     </div>
   </form>
+
+  <x-slot name="script">
+    <script>
+      var imgInp = document.getElementById("imageInput");
+      var dummy = document.getElementById("dummy");
+      imgInp.onchange = evt => {
+        const [file] = imgInp.files
+        if (file) {
+          dummy.src = URL.createObjectURL(file)
+        }
+      }
+    </script>
+    <script>
+      function formatPhoneNumber(input) {
+        let phoneNumber = input.value;
+        phoneNumber = phoneNumber.replace(/\D/g, '');
+        phoneNumber = phoneNumber.substring(0, 13);
+        const countryCode = phoneNumber.substring(0, 2);
+        const operator = phoneNumber.substring(2, 5);
+        const prefix = phoneNumber.substring(5, 7);
+        const lineNumber = phoneNumber.substring(7);
+        if (phoneNumber.length > 7) {
+          phoneNumber = `+${countryCode} (${operator}) ${prefix}-${lineNumber}`;
+        } else if (phoneNumber.length > 5) {
+          phoneNumber = `+${countryCode} (${operator}) ${prefix}`;
+        } else if (phoneNumber.length > 2) {
+          phoneNumber = `+${countryCode} (${operator})`;
+        } else {
+          phoneNumber = `+${countryCode}`;
+        }
+        input.value = phoneNumber;
+      }
+    </script>
+  </x-slot>
 </x-admin-layout>

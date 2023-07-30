@@ -31,11 +31,11 @@ Learnopia is an LMS developed using Laravel Blade, a powerful template engine pr
 
 The following technologies have been used in the development of Learnopia:
 
-- **Laravel (v10.16.1)** : A popular PHP web application framework known for its elegant syntax and feature-rich ecosystem.
-- **Laravel Blade** : The templating engine provided by Laravel for designing and rendering views.
-- **MySQL** : The database management system used to store application data.
-- **Bootstrap (v5.3.0)** : A CSS framework for creating responsive and attractive UI components.
-- **Feather Icons** : A collection of simple and beautiful open-source icons designed by Cole Bemis. These icons are easily customizable and can be used with any frontend framework.
+- **[Laravel](https://laravel.com/)** : A popular PHP web application framework known for its elegant syntax and feature-rich ecosystem.
+- **[Laravel Blade](https://laravel.com/)** : The templating engine provided by Laravel for designing and rendering views.
+- **[MySQL]** : The database management system used to store application data.
+- **[Bootstrap](https://getbootstrap.com/)** : A CSS framework for creating responsive and attractive UI components.
+- **[FontAwesome](https://fontawesome.com/)**: A popular icon library that provides a wide range of icons for web projects.
 
 
 ## Getting Started

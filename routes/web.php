@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -21,10 +22,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('admin')->group(function () {
+Route::middleware('guest')->prefix('admin')->group(function () {
   Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+  Route::resource('category', CategoryController::class);
   Route::resource('users', UserController::class);
   Route::resource('roles', RoleController::class);
+});
+
+Route::middleware('guest')->prefix('auth')->group(function () {
+  Route::get('/', function () {
+    return view('auth.login2');
+  });
+  Route::get('/login', function () {
+    return view('auth.login2');
+  });
+  Route::get('/register', function () {
+    return view('auth.register2');
+  });
 });
 
 Route::get('/dashboard', function () {
