@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
             $table->string('email_alt')->unique()->nullable();
             $table->string('phone_alt')->unique()->nullable();
+            $table->string('website')->nullable();
             $table->string('address_one')->nullable();
             $table->string('address_two')->nullable();
             $table->string('division')->nullable();

@@ -41,8 +41,11 @@
               <td>
                 <form action="" method="post">
                   <a href="javascript:void(0)" class="btn btn-outline-primary btn-sm">
-                    <i class="align-middle" data-feather="edit"></i>
+                    <i class="fas fa-edit"></i>
                   </a>
+                  <button type="submit" class="btn btn-outline-danger btn-sm">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
                 </form>
               </td>
             </tr>

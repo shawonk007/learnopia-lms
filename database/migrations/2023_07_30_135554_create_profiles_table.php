@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('avatar')->nullable();
             $table->text('biography')->nullable();
             $table->date('date_of_birth')->nullable();
+            $table->string('nationality')->nullable();
             $table->string('gender')->nullable();
             $table->string('religion')->nullable();
             $table->string('marital')->nullable();

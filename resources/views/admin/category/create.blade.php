@@ -23,7 +23,21 @@
               <div class="col-12">
                 <input type="text" name="slug" class="form-control" id="catSlug" placeholder="{{ __('Category Slug') }}" />
               </div>
-              <div class="col-12">
+              <div class="col-6">
+                <select name="main_cat" class="form-control" id="catMain">
+                  <option value="">{{ __('-- Main Category --') }}</option>
+                </select>
+              </div>
+              <div class="col-6">
+                <select name="sub_cat" class="form-control" id="catSub">
+                  <option value="">{{ __('-- Sub Category --') }}</option>
+                </select>
+              </div>
+              <div class="col-6">
+                <input type="checkbox" name="featured" class="form-check-input align-middle" id="catFeatured" value="1" />
+                <label for="catFeatured" class="align-middle ps-2">{{ __('Featured Category') }}</label>
+              </div>
+              <div class="col-6">
                 <select name="status" class="form-control" id="catStatus">
                   <option value="">{{ __('-- Choose Status --') }}</option>
                 </select>

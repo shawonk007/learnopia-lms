@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   <head>
-	<meta charset="utf-8">
+	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="author" content="Muhammad Nasir Uddin Khan Shawon" />
@@ -22,17 +22,17 @@
   <body>
 	<div class="wrapper">
 	  <x-admin-sidebar />
-		<div class="main">
-          <x-admin-navbar />
-		  <main class="content">
-			<div class="container-fluid p-0">
-              @isset($header)
-                {{ $header }}
-              @endisset
+	  <div class="main">
+        <x-admin-navbar />
+		<main class="content">
+		  <div class="container-fluid p-0">
+            @isset($header)
+              {{ $header }}
+            @endisset
 			  {{ $slot }}
-			</div>
-		  </main>
-          <x-admin-footer />
+		  </div>
+		</main>
+        <x-admin-footer />
 	  </div>
 	</div>
 	<script src="{{ asset('plugins/jquery/jquery-3.7.0.min.js') }}"></script>
@@ -42,5 +42,13 @@
 	@isset($script)
       {{ $script }}
     @endisset
+	<script>
+	  $(document).ready(function() {
+		$('.sidebar-item').click(function() {
+		  $(this).addClass('active');
+		  $('sidebar-item').removeClass('active');
+		});
+	  });
+	</script>
   </body>
 </html>
