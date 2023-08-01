@@ -13,9 +13,9 @@
 	<link rel="canonical" href="https://github.com/shawonk007/learnopia-lms" />
 	{{-- <link rel="stylesheet" href="{{ asset('plugins/bootstrap-v5.3.0/css/bootstrap.min.css') }}"> --}}
 	<link rel="stylesheet" href="{{ asset('plugins/font-awesome-6.4.0/css/all.min.css') }}">
-	<link href="{{ asset('css/app.css') }}" rel="stylesheet" />
+	<link rel="stylesheet" href="{{ asset('css/app.css') }}" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" />
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" />
     <!-- Scripts -->
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
   </head>
@@ -42,13 +42,5 @@
 	@isset($script)
       {{ $script }}
     @endisset
-	<script>
-	  $(document).ready(function() {
-		$('.sidebar-item').click(function() {
-		  $(this).addClass('active');
-		  $('sidebar-item').removeClass('active');
-		});
-	  });
-	</script>
   </body>
 </html>

@@ -4,7 +4,7 @@
       <span class="align-middle">{{ config('app.name', 'AdminKit') }}</span>
     </a>
     <ul class="sidebar-nav">
-      <li class="sidebar-item">
+      <li class="sidebar-item active">
         <a class="sidebar-link" href="{{ route('admin.dashboard') }}">
           <i class="fas fa-gauge-high align-middle"></i> <span class="align-middle">{{ __('Dashboard') }}</span>
         </a>
