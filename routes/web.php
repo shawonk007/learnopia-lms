@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SiteController;
@@ -19,11 +20,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/home', [SiteController::class, 'home'])->name('site.home');
+Route::get('/', [SiteController::class, 'home'])->name('site.home');
 Route::get('/about', [SiteController::class, 'about'])->name('site.about');
 Route::get('/courses', [SiteController::class, 'courses'])->name('site.courses');
 Route::get('/team', [SiteController::class, 'team'])->name('site.team');
@@ -36,6 +37,7 @@ Route::get('/sitemap', [SiteController::class, 'sitemap'])->name('site.sitemap')
 
 Route::middleware('guest')->prefix('admin')->group(function () {
   Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+  Route::resource('courses', CourseController::class);
   Route::resource('category', CategoryController::class);
   Route::resource('users', UserController::class);
   Route::resource('roles', RoleController::class);

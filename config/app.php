@@ -17,6 +17,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'tagline' => 'Your Gateway to Knowledge',
 
     /*
     |--------------------------------------------------------------------------

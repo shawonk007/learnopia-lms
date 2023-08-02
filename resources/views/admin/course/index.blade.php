@@ -1,11 +1,11 @@
 <x-admin-layout>
   <x-slot name="title">
-    {{ __('Sample') }}
+    {{ __('Manage Courses') }}
   </x-slot>
   <x-slot name="header">
     <div class="d-flex align-items-center justify-content-between">
-      <h1 class="h3 mb-3">{{ __('Sample') }}</h1>
-      <a href="{{ route('roles.create') }}" class="btn btn-outline-primary mb-4" >
+      <h1 class="h3 mb-3">{{('Course Catalogue')}}</h1>
+      <a href="{{ route('courses.create') }}" class="btn btn-outline-primary mb-4" >
         <i class="align-middle me-1" data-feather="plus"></i>
         <span class="ps-1">{{ __('Add New') }}</span>
       </a>

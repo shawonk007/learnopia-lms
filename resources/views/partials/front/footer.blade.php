@@ -4,14 +4,16 @@
     <div class="row g-5">
       <div class="col-lg-3 col-md-6">
         <h4 class="text-white mb-3">{{ __('Contact') }}</h4>
-        <p class="mb-2"><i class="fas fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-        <p class="mb-2"><i class="fas fa-phone-alt me-3"></i>+012 345 67890</p>
-        <p class="mb-2"><i class="fas fa-envelope me-3"></i>info@example.com</p>
+        <p class="mb-2"><i class="fas fa-map-marker-alt me-3"></i>{{ __('Pallabi, Mirpur, Dhaka-1216') }}</p>
+        <p class="mb-2"><i class="fas fa-phone-alt me-3"></i>{{ __('+88 016 88-947741') }}</p>
+        <p class="mb-2"><i class="fas fa-envelope me-3"></i>{{ __('info@shawon-khan.com') }}</p>
         <div class="d-flex pt-2">
-          <a class="btn btn-outline-light btn-social" href="javascript:void(0)"><i class="fab fa-twitter"></i></a>
-          <a class="btn btn-outline-light btn-social" href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a>
-          <a class="btn btn-outline-light btn-social" href="javascript:void(0)"><i class="fab fa-youtube"></i></a>
-          <a class="btn btn-outline-light btn-social" href="javascript:void(0)"><i class="fab fa-linkedin-in"></i></a>
+          <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/shawonkhan.cupid" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a class="btn btn-outline-light btn-social" href="https://www.twitter.com/shawonk9999" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a class="btn btn-outline-light btn-social" href="https://www.linkedin.com/in/shawonkhan007" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/shawonk9999" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a class="btn btn-outline-light btn-social" href="https://www.github.com/shawonk007" target="_blank"><i class="fab fa-github"></i></a>
+          <a class="btn btn-outline-light btn-social" href="https://www.behance.net/shawonk9999" target="_blank"><i class="fab fa-behance"></i></a>
         </div>
       </div>
       <div class="col-lg-3 col-md-6">

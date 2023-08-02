@@ -11,7 +11,7 @@
       </li>
       <li class="sidebar-header">{{ __('Course Management') }}</li>
       <li class="sidebar-item">
-        <a class="sidebar-link" href="javascript:void(0)">
+        <a class="sidebar-link" href="{{ route('courses.index') }}">
           <i class="fas fa-graduation-cap align-middle"></i> <span class="align-middle">{{ __('Manage Courses') }}</span>
         </a>
       </li>
