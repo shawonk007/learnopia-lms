@@ -5,16 +5,17 @@
   <ul class="navbar-nav navbar-align">
     <li class="nav-item">
       <a href="{{ route('site.home') }}" class="nav-link">
-        {{ __('Home') }}
+        <i class="fas fa-house align-middle pe-1"></i>
+        <span class="align-middle">{{ __('Home') }}</span>
       </a>
     </li>
     <li class="nav-item dropdown">
-      <a class="nav-icon nav-link dropdown-toggle" href="javascript:void(0)" id="alertsDropdown" data-bs-toggle="dropdown">
+      <a class="nav-icon nav-link dropdown-toggle" href="javascript:void(0)" id="itemsDropdown" data-bs-toggle="dropdown">
         <i class="align-middle" data-feather="plus"></i>
+        <span class="align-middle" style="font-size: 0.85rem;">New Items</span>
       </a>
-      </a>
-      <div class="dropdown-menu  py-0" aria-labelledby="alertsDropdown">
-        <div class="dropdown-menu-header">{{ __('New Items') }}</div>
+      <div class="dropdown-menu py-0" aria-labelledby="itemsDropdown">
+        <div class="dropdown-menu-header">{{ __('Add New Items') }}</div>
         <div class="list-group">
           <a href="{{ route('category.create') }}" class="list-group-item">
             <i class="fas fa-plus align-middle"></i>
@@ -24,7 +25,7 @@
             <i class="fas fa-plus align-middle"></i>
             <span class="text-dark ps-2">{{ __('Course') }}</span>
           </a>
-          <a href="javascript:void(0)" class="list-group-item">
+          <a href="{{ route('lessons.create') }}" class="list-group-item">
             <i class="fas fa-plus align-middle"></i>
             <span class="text-dark ps-2">{{ __('Lesson') }}</span>
           </a>

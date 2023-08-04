@@ -18,6 +18,10 @@ class SiteController extends Controller {
         return view('front-end.courses');
     }
     // 
+    public function display() {
+        return view('front-end.display');
+    }
+    // 
     public function team() {
         return view('front-end.team');
     }

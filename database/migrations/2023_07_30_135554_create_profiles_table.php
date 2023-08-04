@@ -13,10 +13,10 @@ return new class extends Migration {
             $table->id();
             $table->bigInteger("user_id")->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
-            $table->string('avatar')->nullable();
+            $table->string('avatar', 255)->nullable();
             $table->text('biography')->nullable();
             $table->date('date_of_birth')->nullable();
-            $table->string('nationality')->nullable();
+            $table->string('nationality', 50)->nullable();
             $table->string('gender')->nullable();
             $table->string('religion')->nullable();
             $table->string('marital')->nullable();

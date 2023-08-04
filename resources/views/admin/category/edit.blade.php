@@ -3,7 +3,7 @@
     {{ __('Edit Category') }}
   </x-slot>
   <x-slot name="header">
-    <h1 class="h3 mb-3">{{ __('Course Category') }}</h1>
+    <h1 class="h3 mb-3"><strong>{{ __('Course') }}</strong> {{ __('Category') }}</h1>
   </x-slot>
   <div class="row">
     <div class="col-12 d-flex justify-content-center">

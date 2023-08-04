@@ -3,16 +3,17 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateRoleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
-    {
-        return false;
-    }
+    // public function authorize(): bool
+    // {
+    //     return false;
+    // }
 
     /**
      * Get the validation rules that apply to the request.
@@ -21,8 +22,14 @@ class UpdateRoleRequest extends FormRequest
      */
     public function rules(): array
     {
+        // $roleId = $this->route('role') ? $this->route('role')->id : null;
+        $roleId = $this->route('role')->id;
+
         return [
-            //
+            'title' => ['required', 'string', 'max:25', Rule::unique('roles')->ignore($roleId)],
+            'slug' => ['required', 'string', 'max:25', Rule::unique('roles')->ignore($roleId)],
+            'description' => ['nullable', 'string', 'max:250'],
+            'status' => ['required', 'integer', 'min:0', 'max:1'],
         ];
     }
 }

@@ -10,7 +10,7 @@
     <div class="navbar-nav ms-auto p-4 p-lg-0">
       <a href="{{ route('site.home') }}" class="nav-item nav-link active">{{ __('Home') }}</a>
       <a href="{{ route('site.about') }}" class="nav-item nav-link">{{ __('About') }}</a>
-      <a href="{{ route('site.courses') }}" class="nav-item nav-link">Courses</a>
+      <a href="{{ route('site.courses') }}" class="nav-item nav-link">{{ __('Courses') }}</a>
       <div class="nav-item dropdown">
         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
         <div class="dropdown-menu fade-down m-0">
@@ -21,7 +21,7 @@
       </div>
       <a href="{{ route('site.contact') }}" class="nav-item nav-link">{{ __('Contact') }}</a>
     </div>
-    <a href="javascript:void(0)" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">{{ __('Join Now') }}<i class="fas fa-arrow-right ms-3"></i></a>
+    <a href="javascript:void(0)" class="btn btn-success py-4 px-lg-4 d-none d-lg-block">{{ __('Enroll Now') }}<i class="fas fa-arrow-right ms-3"></i></a>
   </div>
 </nav>
 <!-- Navbar End -->

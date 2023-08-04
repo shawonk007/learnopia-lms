@@ -11,9 +11,9 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->unique();
-            $table->string('description')->nullable();
-            $table->string('slug')->unique();
+            $table->string('title', 25)->unique();
+            $table->string('description', 250)->nullable();
+            $table->string('slug', 25)->unique();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });

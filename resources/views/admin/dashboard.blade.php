@@ -5,7 +5,7 @@
   </x-slot>
 
   <x-slot name="header">
-    <h1 class="h3 mb-3"><strong>Analytics</strong> Dashboard</h1>
+    <h1 class="h3 mb-3"><strong>{{ __('Analytics') }}</strong> {{ __('Dashboard') }}</h1>
   </x-slot>
 
   <div class="row">

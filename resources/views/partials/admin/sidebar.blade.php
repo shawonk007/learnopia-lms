@@ -16,7 +16,7 @@
         </a>
       </li>
       <li class="sidebar-item">
-        <a class="sidebar-link" href="javascript:void(0)">
+        <a class="sidebar-link" href="{{ route('lessons.index') }}">
           <i class="fas fa-chalkboard-user align-middle"></i> <span class="align-middle">{{ __('Manage Lessons') }}</span>
         </a>
       </li>
@@ -39,6 +39,12 @@
       <li class="sidebar-item">
         <a class="sidebar-link" href="{{ route('roles.index') }}">
           <i class="fas fa-user-shield align-middle"></i> <span class="align-middle">{{ __('User Settings') }}</span>
+        </a>
+      </li>
+      <li class="sidebar-header">{{ __('Settings & Security') }}</li>
+      <li class="sidebar-item">
+        <a class="sidebar-link" href="javascript:void(0)">
+          <i class="fas fa-user-shield align-middle"></i> <span class="align-middle">{{ __('General Settings') }}</span>
         </a>
       </li>
     </ul>

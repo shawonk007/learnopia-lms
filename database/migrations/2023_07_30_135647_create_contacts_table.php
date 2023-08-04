@@ -13,14 +13,14 @@ return new class extends Migration {
             $table->id();
             $table->bigInteger("user_id")->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
-            $table->string('email_alt')->unique()->nullable();
-            $table->string('phone_alt')->unique()->nullable();
-            $table->string('website')->nullable();
-            $table->string('address_one')->nullable();
-            $table->string('address_two')->nullable();
+            $table->string('email_alt', 50)->unique()->nullable();
+            $table->string('phone_alt', 19)->unique()->nullable();
+            $table->string('website', 50)->nullable();
+            $table->string('address_one', 100)->nullable();
+            $table->string('address_two', 100)->nullable();
             $table->string('division')->nullable();
             $table->string('district')->nullable();
-            $table->string('postal_code')->nullable();
+            $table->string('postal_code', 6)->nullable();
             $table->timestamps();
         });
     }

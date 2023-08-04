@@ -4,7 +4,7 @@
   </x-slot>
   <x-slot name="header">
     <div class="d-flex align-items-center justify-content-between">
-      <h1 class="h3 mb-3">{{ __('Users Settings') }}</h1>
+      <h1 class="h3 mb-3"><strong>{{ __('Users') }}</strong> {{ __('Settings') }}</h1>
       <a href="{{ route('roles.create') }}" class="btn btn-outline-primary mb-4" >
         <i class="align-middle me-1" data-feather="plus"></i>
         <span class="ps-1">{{ __('Add New') }}</span>
@@ -30,28 +30,83 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="d-none d-xl-table-cell">01.</td>
-              <td>
-                <strong>Super Admin</strong>
-              </td>
-              <td class="d-none d-xl-table-cell">31/06/2021</td>
-              <td><span class="badge bg-success">Done</span></td>
-              <td class="d-none d-md-table-cell">Vanessa Tucker</td>
-              <td>
-                <form action="" method="post">
-                  <a href="javascript:void(0)" class="btn btn-outline-primary btn-sm">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <button type="submit" class="btn btn-outline-danger btn-sm">
-                    <i class="fas fa-trash-alt"></i>
-                  </button>
-                </form>
-              </td>
-            </tr>
+            @forelse ($roles as $k => $role)
+              <tr>
+                <td class="d-none d-xl-table-cell">{{ $k + 1 }}</td>
+                <td>
+                  <strong>{{ $role->title }}</strong>
+                </td>
+                <td class="d-none d-xl-table-cell">{{ $role->slug }}</td>
+                <td>
+                  @if ($role->status === 1)
+                    <span class="badge bg-success">Enable</span>
+                  @elseif ($role->status === 0)
+                    <span class="badge bg-danger">Disable</span>
+                  @else
+                    <span class="badge bg-secondary">Pending</span>
+                  @endif
+                </td>
+                <td class="d-none d-md-table-cell">{{ $role->created_at->diffforhumans() }}</td>
+                <td width="90px">
+                  <form action="{{ route('roles.destroy', $role->id) }}" method="post" >
+                    @csrf
+                    @method('delete')
+                    <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-outline-primary btn-sm">
+                      <i class="fas fa-edit"></i>
+                    </a>
+                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="deleteRole({{ $role->id }})">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            @empty
+              <p>No data found</p>
+            @endforelse
           </tbody>
         </table>
       </div>
     </div>
   </div>
+
+  <x-slot name="script">
+    <script>
+      function deleteRole(roleId) {
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              url: '{{ route('roles.destroy', $role->id) }}',
+              type: 'POST',
+              data: { id: roleId },
+              success: function(response) {
+                console.log(response);
+                Swal.fire({
+                  title: 'Deleted!',
+                  text: 'Role has been deleted',
+                  icon: 'success'
+                }).then(() => {
+                  location.reload();
+                });
+              },
+              error: function() {
+                Swal.fire({
+                  title: 'Error',
+                  text: 'An error occurred while deleting the role.',
+                  icon: 'error'
+                });
+              }
+            });
+          }
+        });
+      }
+    </script>
+  </x-slot>
 </x-admin-layout>

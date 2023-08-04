@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
 
@@ -12,7 +13,8 @@ class RoleController extends Controller {
      */
     public function index() {
         //
-        return view('admin.roles.index');
+        $roles = Role::all();
+        return view('admin.roles.index', compact('roles'));
     }
 
     /**
@@ -27,7 +29,14 @@ class RoleController extends Controller {
      * Store a newly created resource in storage.
      */
     public function store(StoreRoleRequest $request) {
-        //
+
+        $role = Role::create($request->validated());
+
+        if ($request->expectsJson()) {
+            return response()->json(['data' => $role, 'success' => true, 'message' => 'Role created successfully'], 201);
+        }
+
+        return redirect()->route('roles.create');
     }
 
     /**
@@ -42,20 +51,35 @@ class RoleController extends Controller {
      */
     public function edit(Role $role) {
         //
-        return view('admin.roles.edit');
+        return view('admin.roles.edit', compact('role'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRoleRequest $request, Role $role) {
+    // public function update(UpdateRoleRequest $request, Role $role) {
+    // public function update(UpdateRoleRequest $request, $id) {
+    public function update(Request $request, $id) {
         //
+        $role = Role::findOrFail($id);
+
+        // $role->update($request->validated());
+        $role->update($request->all());
+
+        if ($request->expectsJson()) {
+            return response()->json(['data' => $role, 'success' => true, 'message' => 'Role updated successfully'], 201);
+        }
+
+        return redirect()->route('roles.edit', ['role' => $role]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Role $role) {
-        //
+        if($role->delete()){
+            return response()->json(['data' => $role, 'success' => true, 'message' => 'Role deleted successfully'], 201);
+        }
+        return redirect()->route('roles.index');
     }
 }

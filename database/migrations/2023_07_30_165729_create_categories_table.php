@@ -11,10 +11,10 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title', 50)->unique();
             $table->string('description')->nullable();
             $table->integer('parent_id')->nullable();
-            $table->string('slug');
+            $table->string('slug', 50)->unique();
             $table->boolean('is_featured')->default(false);
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
