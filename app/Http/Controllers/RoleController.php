@@ -58,10 +58,11 @@ class RoleController extends Controller {
      * Update the specified resource in storage.
      */
     // public function update(UpdateRoleRequest $request, Role $role) {
-    // public function update(UpdateRoleRequest $request, $id) {
-    public function update(Request $request, $id) {
+    public function update(UpdateRoleRequest $request, $id) {
+    // public function update(Request $request, $id) {
         //
         $role = Role::findOrFail($id);
+        // Role::findOrFail($role);
 
         // $role->update($request->validated());
         $role->update($request->all());
@@ -80,6 +81,6 @@ class RoleController extends Controller {
         if($role->delete()){
             return response()->json(['data' => $role, 'success' => true, 'message' => 'Role deleted successfully'], 201);
         }
-        return redirect()->route('roles.index');
+        // return redirect()->route('roles.index');
     }
 }
