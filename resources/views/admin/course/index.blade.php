@@ -1,7 +1,9 @@
 <x-admin-layout>
+
   <x-slot name="title">
     {{ __('Manage Courses') }}
   </x-slot>
+  
   <x-slot name="header">
     <div class="d-flex align-items-center justify-content-between">
       <h1 class="h3 mb-3"><strong>{{ __('Course') }}</strong> {{ __('Catalogue') }}</h1>
@@ -22,6 +24,19 @@
         </div>
       </div>
     </div>
-  </div> 
+  </div>
+
+  <x-slot name="script">
+    <script>
+      @if(session('success'))
+        Swal.fire({
+          title: 'Deleted',
+          text: '{{ session('success') }}',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+      @endif
+    </script>
+  </x-slot>
  
 </x-admin-layout>

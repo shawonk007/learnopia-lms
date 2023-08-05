@@ -48,20 +48,24 @@
                 </td>
                 <td class="d-none d-md-table-cell">{{ $role->created_at->diffforhumans() }}</td>
                 <td width="90px">
-                  <form action="{{ route('roles.destroy', $role->id) }}" method="post" >
+                  <form action="{{ route("roles.destroy", $role->id) }}" method="post">
                     @csrf
-                    @method('delete')
+                    @method("delete")
                     <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-outline-primary btn-sm">
                       <i class="fas fa-edit"></i>
                     </a>
-                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="deleteRole({{ $role->id }})">
+                    <button type="button" class="btn btn-outline-danger btn-sm" >
                       <i class="fas fa-trash-alt"></i>
                     </button>
                   </form>
                 </td>
               </tr>
             @empty
-              <p>No data found</p>
+            <tr>
+              <td colspan="6" class="text-center">
+                No data found
+              </td>
+            </tr>
             @endforelse
           </tbody>
         </table>
@@ -71,42 +75,15 @@
 
   <x-slot name="script">
     <script>
-      function deleteRole(roleId) {
+      @if(session('success'))
         Swal.fire({
-          title: 'Are you sure?',
-          text: "You won't be able revert this!",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            $.ajax({
-              url: '{{ route('roles.destroy', $role->id) }}',
-              type: 'POST',
-              data: { id: roleId },
-              success: function(response) {
-                console.log(response);
-                Swal.fire({
-                  title: 'Deleted!',
-                  text: 'Role has been deleted',
-                  icon: 'success'
-                }).then(() => {
-                  location.reload();
-                });
-              },
-              error: function() {
-                Swal.fire({
-                  title: 'Error',
-                  text: 'An error occurred while deleting the role.',
-                  icon: 'error'
-                });
-              }
-            });
-          }
+          title: 'Deleted',
+          text: '{{ session('success') }}',
+          icon: 'success',
+          confirmButtonText: 'OK'
         });
-      }
+      @endif
     </script>
   </x-slot>
+
 </x-admin-layout>

@@ -59,72 +59,14 @@
 
   <x-slot name="script">
     <script>
-      $(document).ready(function() {
-        $('form').submit(function(e) {
-          e.preventDefault();
-          $.ajax({
-            url: '{{ route('roles.store') }}',
-            type: 'POST',
-            data: $(this).serialize(),
-            dataType: 'json',
-            success: function(response) {
-              console.log(response);
-              if (response.success) {
-                // Show success message using SweetAlert
-                Swal.fire({
-                  icon: 'success',
-                  title: 'Created',
-                  text: response.message,
-                  timer: 1500,
-                  showConfirmButton: false
-                }).then(function() {
-                  location.reload();
-                });
-              } else {
-                // Show error message using SweetAlert
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Error',
-                  text: response.message,
-                  timer: 1500,
-                  showConfirmButton: false
-                });
-              }
-            },
-            error: function(xhr, status, error) {
-              if (xhr.status === 400) {
-                // Bad request error
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Error',
-                  text: 'Bad request. Please check your form data.',
-                  timer: 1500,
-                  showConfirmButton: false
-                });
-              } else if (xhr.status === 500) {
-                // Internal server error
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Error',
-                  text: 'Internal server error. Please try again later.',
-                  timer: 1500,
-                  showConfirmButton: false
-                });
-              } else {
-                // Other errors
-                console.error(error);
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Error',
-                  text: 'An error occurred while processing the request.',
-                  timer: 1500,
-                  showConfirmButton: false
-                });
-              }
-            }
-          });
+      @if(session('success'))
+        Swal.fire({
+          title: 'Created',
+          text: '{{ session('success') }}',
+          icon: 'success',
+          confirmButtonText: 'OK'
         });
-      });
+      @endif
     </script>
   </x-slot>
   

@@ -1,10 +1,13 @@
 <x-admin-layout>
+
   <x-slot name="title">
     {{ __('Edit Role') }}
   </x-slot>
+
   <x-slot name="header">
     <h1 class="h3 mb-3"><strong>{{ __('Users') }}</strong> {{ __('Settings') }}</h1>
   </x-slot>
+
   <div class="row">
     <div class="col-12 d-flex justify-content-center">
       <div class="card col-10 col-lg-6">
@@ -57,72 +60,15 @@
 
   <x-slot name="script">
     <script>
-      $(document).ready(function() {
-        $('form').submit(function(e) {
-          e.preventDefault();
-          $.ajax({
-            url: '{{route('roles.update',$role->id)}}',
-            type: 'POST',
-            data: $(this).serialize(),
-            dataType: 'json',
-            success: function(response) {
-              console.log(response);
-              if (response.success) {
-                // Show success message using SweetAlert
-                Swal.fire({
-                  icon: 'success',
-                  title: 'Updated',
-                  text: response.message,
-                  timer: 1500,
-                  showConfirmButton: false
-                }).then(function() {
-                  location.reload();
-                });
-              } else {
-                // Show error message using SweetAlert
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Error',
-                  text: response.message,
-                  timer: 1500,
-                  showConfirmButton: false
-                });
-              }
-            },
-            error: function(xhr, status, error) {
-              if (xhr.status === 400) {
-                // Bad request error
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Error',
-                  text: 'Bad request. Please check your form data.',
-                  timer: 1500,
-                  showConfirmButton: false
-                });
-              } else if (xhr.status === 500) {
-                // Internal server error
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Error',
-                  text: 'Internal server error. Please try again later.',
-                  timer: 1500,
-                  showConfirmButton: false
-                });
-              } else {
-                // Other errors
-                console.error(error);
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Error',
-                  text: 'An error occurred while processing the request.',
-                  timer: 1500,
-                  showConfirmButton: false
-                });
-              }
-            }
-          });
+      @if(session('success'))
+        Swal.fire({
+          title: 'Updated',
+          text: '{{ session('success') }}',
+          icon: 'success',
+          confirmButtonText: 'OK'
         });
-      });
+      @endif
     </script>
   </x-slot>
+
 </x-admin-layout>

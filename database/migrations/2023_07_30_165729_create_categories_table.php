@@ -12,7 +12,7 @@ return new class extends Migration {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('title', 50)->unique();
-            $table->string('description')->nullable();
+            $table->string('description', 250)->nullable();
             $table->integer('parent_id')->nullable();
             $table->string('slug', 50)->unique();
             $table->boolean('is_featured')->default(false);

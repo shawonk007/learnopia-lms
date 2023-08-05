@@ -12,7 +12,8 @@ class CategoryController extends Controller {
      */
     public function index() {
         //
-        return view('admin.category.index');
+        $cats = Category::all();
+        return view('admin.category.index', compact('cats'));
     }
 
     /**
@@ -20,46 +21,47 @@ class CategoryController extends Controller {
      */
     public function create() {
         //
-        return view('admin.category.create');
+        $mainCat = Category::whereNull('parent_id')->get();
+        return view('admin.category.create', compact('mainCat'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCategoryRequest $request)
-    {
+    public function store(StoreCategoryRequest $request) {
         //
+        $data = $request->validated();
+        $parent = $request->sub() ?? $request->main() ?? null;
+        Category::create(array_merge($data, ['parent_id' => $parent]));
+        return redirect()->route('category.create')->with('success', 'Category created successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
-    {
+    public function show(Category $category) {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
-    {
+    public function edit(Category $category) {
         //
+        return view('admin.category.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
-    {
+    public function update(UpdateCategoryRequest $request, Category $category) {
         //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
-    {
+    public function destroy(Category $category) {
         //
     }
 }

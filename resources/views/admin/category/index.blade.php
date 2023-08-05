@@ -1,7 +1,9 @@
 <x-admin-layout>
+
   <x-slot name="title">
-    {{ __('Manage Roles') }}
+    {{ __('Manage Categories') }}
   </x-slot>
+
   <x-slot name="header">
     <div class="d-flex align-items-center justify-content-between">
       <h1 class="h3 mb-3"><strong>{{ __('Course') }}</strong> {{ __('Category') }}</h1>
@@ -23,6 +25,7 @@
             <tr>
               <th class="d-none d-xl-table-cell">{{ __('SL') }}</th>
               <th>{{ __('Category Title') }}</th>
+              <th>{{ __('Parent Category') }}</th>
               <th class="d-none d-xl-table-cell">{{ __('Category Slug') }}</th>
               <th>{{ __('Status') }}</th>
               <th class="d-none d-md-table-cell">{{ __('Date Created') }}</th>
@@ -30,28 +33,65 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="d-none d-xl-table-cell">01.</td>
-              <td>
-                <strong>Super Admin</strong>
-              </td>
-              <td class="d-none d-xl-table-cell">31/06/2021</td>
-              <td><span class="badge bg-success">Done</span></td>
-              <td class="d-none d-md-table-cell">Vanessa Tucker</td>
-              <td>
-                <form action="" method="post">
-                  <a href="javascript:void(0)" class="btn btn-outline-primary btn-sm">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <button type="submit" class="btn btn-outline-danger btn-sm">
-                    <i class="fas fa-trash-alt"></i>
-                  </button>
-                </form>
-              </td>
-            </tr>
+            @forelse ($cats as $k => $cat)
+              <tr>
+                <td class="d-none d-xl-table-cell">{{ $k + 1 }}</td>
+                <td>
+                  <strong>{{ $cat->title }}</strong>
+                </td>
+                <td>
+                  @if (empty($cat->parent_id))
+                    <span>No Parent</span>
+                  @else
+                    <span>{{ $cat->parent->title }}</span>
+                  @endif
+                </td>
+                <td class="d-none d-xl-table-cell">{{ $cat->slug }}</td>
+                <td>
+                  @if ($cat->status === 1)
+                    <span class="badge bg-success">Enable</span>
+                  @elseif ($cat->status === 0)
+                    <span class="badge bg-danger">Disable</span>
+                  @else
+                    <span class="badge bg-secondary">Pending</span>
+                  @endif
+                </td>
+                <td class="d-none d-md-table-cell">{{ $cat->created_at->diffforhumans() }}</td>
+                <td>
+                  <form action="" method="post">
+                    <a href="{{ route('category.edit', $cat->id) }}" class="btn btn-outline-primary btn-sm">
+                      <i class="fas fa-edit"></i>
+                    </a>
+                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            @empty
+              <tr>
+                <td colspan="7" class="text-center">
+                  No data found
+                </td>
+              </tr>
+            @endforelse
           </tbody>
         </table>
       </div>
     </div>
   </div>
+
+  <x-slot name="script">
+    <script>
+      @if(session('success'))
+        Swal.fire({
+          title: 'Deleted',
+          text: '{{ session('success') }}',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+      @endif
+    </script>
+  </x-slot>
+
 </x-admin-layout>

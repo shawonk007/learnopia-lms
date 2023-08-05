@@ -1,10 +1,13 @@
 <x-admin-layout>
+
   <x-slot name="title">
     {{ __('Add New User') }}
   </x-slot>
+
   <x-slot name="header">
     <h1 class="h3 mb-3">{{ __('Users & Members') }}</h1>
   </x-slot>
+
   <form action="" method="post">
     <div class="row g-3">
       <div class="col-12 col-xl-5">
@@ -141,6 +144,17 @@
 
   <x-slot name="script">
     <script>
+      @if(session('success'))
+        Swal.fire({
+          title: 'Created',
+          text: '{{ session('success') }}',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+      @endif
+    </script>
+
+    <script>
       var imgInp = document.getElementById("imageInput");
       var dummy = document.getElementById("dummy");
       imgInp.onchange = evt => {
@@ -150,6 +164,7 @@
         }
       }
     </script>
+
     <script>
       function formatPhoneNumber(input) {
         let phoneNumber = input.value;
@@ -172,4 +187,5 @@
       }
     </script>
   </x-slot>
+  
 </x-admin-layout>

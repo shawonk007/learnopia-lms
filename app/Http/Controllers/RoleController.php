@@ -30,13 +30,9 @@ class RoleController extends Controller {
      */
     public function store(StoreRoleRequest $request) {
 
-        $role = Role::create($request->validated());
+        Role::create($request->validated());
+        return redirect()->route('roles.create')->with('success', 'Role created successfully');
 
-        if ($request->expectsJson()) {
-            return response()->json(['data' => $role, 'success' => true, 'message' => 'Role created successfully'], 201);
-        }
-
-        return redirect()->route('roles.create');
     }
 
     /**
@@ -57,21 +53,11 @@ class RoleController extends Controller {
     /**
      * Update the specified resource in storage.
      */
-    // public function update(UpdateRoleRequest $request, Role $role) {
     public function update(UpdateRoleRequest $request, $id) {
-    // public function update(Request $request, $id) {
-        //
+
         $role = Role::findOrFail($id);
-        // Role::findOrFail($role);
-
-        // $role->update($request->validated());
         $role->update($request->all());
-
-        if ($request->expectsJson()) {
-            return response()->json(['data' => $role, 'success' => true, 'message' => 'Role updated successfully'], 201);
-        }
-
-        return redirect()->route('roles.edit', ['role' => $role]);
+        return redirect()->route('roles.edit', ['role' => $role])->with('success', 'Role created successfully');
     }
 
     /**
@@ -79,8 +65,8 @@ class RoleController extends Controller {
      */
     public function destroy(Role $role) {
         if($role->delete()){
-            return response()->json(['data' => $role, 'success' => true, 'message' => 'Role deleted successfully'], 201);
+            return redirect()->route('roles.index')->with('success', 'Role deleted successfully');
         }
-        // return redirect()->route('roles.index');
+        return redirect()->route('roles.index');
     }
 }

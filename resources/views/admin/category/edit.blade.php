@@ -1,10 +1,13 @@
 <x-admin-layout>
+
   <x-slot name="title">
     {{ __('Edit Category') }}
   </x-slot>
+
   <x-slot name="header">
     <h1 class="h3 mb-3"><strong>{{ __('Course') }}</strong> {{ __('Category') }}</h1>
   </x-slot>
+
   <div class="row">
     <div class="col-12 d-flex justify-content-center">
       <div class="card col-10 col-lg-6">
@@ -15,7 +18,7 @@
           <div class="card-body py-0">
             <div class="row g-3">
               <div class="col-12">
-                <input type="text" name="title" class="form-control" id="catTitle" placeholder="{{ __('Category Title') }}" required />
+                <input type="text" name="title" class="form-control" id="catTitle" placeholder="{{ __('Category Title') }}" value="{{ $category->title }}" required />
               </div>
               <div class="col-12">
                 <textarea name="description" class="form-control" id="catDesc" cols="30" rows="10" placeholder="{{ __('Type details here ...') }}"></textarea>
@@ -50,4 +53,18 @@
       </div>
     </div>
   </div>
+
+  <x-slot name="script">
+    <script>
+      @if(session('success'))
+        Swal.fire({
+          title: 'Updated',
+          text: '{{ session('success') }}',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+      @endif
+    </script>
+  </x-slot>
+
 </x-admin-layout>
