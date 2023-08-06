@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 
@@ -48,14 +49,22 @@ class CategoryController extends Controller {
      */
     public function edit(Category $category) {
         //
-        return view('admin.category.edit', compact('category'));
+        $mainCat = Category::whereNull('parent_id')->get();
+        return view('admin.category.edit', compact(['category', 'mainCat']));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, Category $category) {
+    public function update(UpdateCategoryRequest $request, $id) {
+    // public function update(Request $request, $id) {
         //
+        $category = Category::findOrFail($id);
+        $data = $request->validate();
+        $parent = $request->sub() ?? $request->main() ?? null;
+        $category->update($data, ['parent_id' => $parent]);
+        return redirect()->route('category.edit', ['category' => $category]);
+        // ->with('success', 'Category updated successfully');
     }
 
     /**
