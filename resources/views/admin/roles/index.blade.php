@@ -1,7 +1,9 @@
 <x-admin-layout>
+
   <x-slot name="title">
     {{ __('Manage Roles') }}
   </x-slot>
+  
   <x-slot name="header">
     <div class="d-flex align-items-center justify-content-between">
       <h1 class="h3 mb-3"><strong>{{ __('Users') }}</strong> {{ __('Settings') }}</h1>
@@ -54,9 +56,9 @@
                     <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-outline-primary btn-sm">
                       <i class="fas fa-edit"></i>
                     </a>
-                    <button type="button" class="btn btn-outline-danger btn-sm" >
+                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="deleteRole({{ $role->id }})">
                       <i class="fas fa-trash-alt"></i>
-                    </button>
+                  </button>
                   </form>
                 </td>
               </tr>
@@ -74,16 +76,7 @@
   </div>
 
   <x-slot name="script">
-    <script>
-      @if(session('success'))
-        Swal.fire({
-          title: 'Deleted',
-          text: '{{ session('success') }}',
-          icon: 'success',
-          confirmButtonText: 'OK'
-        });
-      @endif
-    </script>
+    @include('partials.admin.flash')
   </x-slot>
 
 </x-admin-layout>

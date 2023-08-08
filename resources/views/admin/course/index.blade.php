@@ -27,16 +27,7 @@
   </div>
 
   <x-slot name="script">
-    <script>
-      @if(session('success'))
-        Swal.fire({
-          title: 'Deleted',
-          text: '{{ session('success') }}',
-          icon: 'success',
-          confirmButtonText: 'OK'
-        });
-      @endif
-    </script>
+    @include('partials.admin.flash')
   </x-slot>
  
 </x-admin-layout>

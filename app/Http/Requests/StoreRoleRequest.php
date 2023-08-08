@@ -21,10 +21,10 @@ class StoreRoleRequest extends FormRequest {
      */
     public function rules(): array {
         return [
-            'title' => ['required', 'string', 'max:25', Rule::unique('roles')->ignore($this->route('id')),],
+            'title' => 'required|string|max:25|unique:roles,title',
             'description' => 'nullable|string|max:250',
-            'slug' => ['nullable', 'string', 'max:25', Rule::unique('roles')->ignore($this->route('id')),],
-            'status' => 'nullable|integer|min:0|max:1',
+            'slug' => 'nullable|string|max:25|unique:roles,slug',
+            'status' => 'nullable|integer|min:0|max:1'
         ];
     }
 }

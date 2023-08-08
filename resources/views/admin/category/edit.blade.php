@@ -11,7 +11,9 @@
   <div class="row">
     <div class="col-12 d-flex justify-content-center">
       <div class="card col-10 col-lg-6">
-        <form action="" method="post">
+        <form action="{{ route('category.update', $category->id) }}" method="post">
+          @csrf
+          @method('put')
           <div class="card-header">
             <h5 class="card-title mb-0">{{ __('Update Existing Category') }}</h5>
           </div>
@@ -55,16 +57,7 @@
   </div>
 
   <x-slot name="script">
-    <script>
-      @if(session('success'))
-        Swal.fire({
-          title: 'Updated',
-          text: '{{ session('success') }}',
-          icon: 'success',
-          confirmButtonText: 'OK'
-        });
-      @endif
-    </script>
+    @include('partials.admin.flash')
   </x-slot>
 
 </x-admin-layout>

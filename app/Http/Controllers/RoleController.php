@@ -30,8 +30,26 @@ class RoleController extends Controller {
      */
     public function store(StoreRoleRequest $request) {
 
-        Role::create($request->validated());
-        return redirect()->route('roles.create')->with('success', 'Role created successfully');
+        // Role::create($request->validated());
+        // return redirect()->route('roles.create')->with('success', 'Role created successfully');
+
+        // if (!$request->validated()) {
+        //   return redirect()->route('roles.create')->with('success', 'Title or Slug is not available');
+        // }
+
+        $validatedData = $request->validated();
+    
+    // Check if the validation passed
+    if ($validatedData) {
+        $created = Role::create($validatedData);
+        if ($created) {
+            return redirect()->route('roles.create')->with('created', 'Role created successfully');
+        } else {
+            return redirect()->route('roles.create')->with('error', 'Role creation failed: Unable to create role');
+        }
+    } else {
+        return redirect()->route('roles.create')->withErrors(['error' => 'Title or Slug is not available']);
+    }
 
     }
 
@@ -54,10 +72,12 @@ class RoleController extends Controller {
      * Update the specified resource in storage.
      */
     public function update(UpdateRoleRequest $request, $id) {
+    // public function update(UpdateRoleRequest $request, Role $role) {
 
         $role = Role::findOrFail($id);
-        $role->update($request->all());
-        return redirect()->route('roles.edit', ['role' => $role])->with('success', 'Role created successfully');
+        $role->update($request->validated());
+        return redirect()->route('roles.edit', ['role' => $role])->with('updated', 'Role updated successfully');
+        // return redirect()->back()->with('success', 'Role updated successfully');
     }
 
     /**

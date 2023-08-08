@@ -11,7 +11,7 @@
   <div class="row">
     <div class="col-12 d-flex justify-content-center">
       <div class="card col-10 col-lg-6">
-        <form action="{{route('roles.update',$role->id)}}" method="post">
+        <form action="{{route('roles.update', $role->id)}}" method="post">
           @csrf
           @method('put')
           <div class="card-header">
@@ -20,19 +20,19 @@
           <div class="card-body py-0">
             <div class="row g-3">
               <div class="col-12">
-                <input type="text" name="title" class="form-control" id="roleTitle" placeholder="{{ __('Role Title') }}" value="{{ $role->title }}" required />
+                <input type="text" name="title" class="form-control" id="title" placeholder="{{ __('Role Title') }}" value="{{ $role->title }}" required />
               </div>
               <div class="col-12">
-                <textarea name="description" class="form-control" id="roleDesc" cols="30" rows="10" placeholder="{{ __('Type details here ...') }}">{{ $role->description }}</textarea>
+                <textarea name="description" class="form-control" id="description" cols="30" rows="10" placeholder="{{ __('Type details here ...') }}">{{ $role->description }}</textarea>
               </div>
               <div class="col-12">
-                <input type="text" name="slug" class="form-control" id="roleSlug" placeholder="{{ __('Role Slug') }}" value="{{ $role->slug }}" />
+                <input type="text" name="slug" class="form-control" id="slug" placeholder="{{ __('Role Slug') }}" value="{{ $role->slug }}" />
               </div>
               <div class="col-12">
-                <select name="status" class="form-control" id="roleStatus">
+                <select name="status" class="form-control" id="status">
                   <option value="">{{ __('-- Choose Status --') }}</option>
-                  <option value="1" {{ $role->status == 1 ? 'selected' : '' }}>{{ __('Enable') }}</option>
-                  <option value="0" {{ $role->status == 0 ? 'selected' : '' }}>{{ __('Disable') }}</option>
+                  <option value="1" {{ $role->status == 1 ? 'selected' : '' }} >{{ __('Enable') }}</option>
+                  <option value="0" {{ $role->status == 0 ? 'selected' : '' }} >{{ __('Disable') }}</option>
                 </select>              
               </div>
             </div>
@@ -59,16 +59,7 @@
   </div>
 
   <x-slot name="script">
-    <script>
-      @if(session('success'))
-        Swal.fire({
-          title: 'Updated',
-          text: '{{ session('success') }}',
-          icon: 'success',
-          confirmButtonText: 'OK'
-        });
-      @endif
-    </script>
+    @include('partials.admin.flash')
   </x-slot>
 
 </x-admin-layout>

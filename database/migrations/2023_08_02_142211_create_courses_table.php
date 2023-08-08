@@ -11,9 +11,12 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger("user_id")->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
             $table->string('title', 100)->unique();
             $table->text('description');
             $table->string('course_code', 100)->unique();
+            $table->string('thumbnail', 255)->nullable();
             $table->decimal('regular_price', 10, 2);
             $table->decimal('offer_price', 10, 2)->nullable();
             $table->string('highlights', 255)->nullable();

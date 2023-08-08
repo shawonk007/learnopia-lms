@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable {
     
@@ -59,5 +60,9 @@ class User extends Authenticatable {
 
     public function social(): HasOne {
         return $this->hasOne(Social::class);
+    }
+
+    public function courses(): HasMany {
+        return $this->hasMany(Course::class);
     }
 }

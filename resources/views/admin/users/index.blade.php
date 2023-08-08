@@ -57,4 +57,8 @@
     </div>
   </div>
 
+  <x-slot name="script">
+    @include('partials.admin.flash')
+  </x-slot>
+
 </x-admin-layout>

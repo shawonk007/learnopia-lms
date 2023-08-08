@@ -143,16 +143,8 @@
   </form>
 
   <x-slot name="script">
-    <script>
-      @if(session('success'))
-        Swal.fire({
-          title: 'Created',
-          text: '{{ session('success') }}',
-          icon: 'success',
-          confirmButtonText: 'OK'
-        });
-      @endif
-    </script>
+    
+    @include('partials.admin.flash')
 
     <script>
       var imgInp = document.getElementById("imageInput");
