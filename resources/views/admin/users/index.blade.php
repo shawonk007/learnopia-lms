@@ -31,26 +31,38 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="d-none d-xl-table-cell">01.</td>
-              <td>
-                <strong>Shawon Khan</strong>
-              </td>
-              <td class="d-none d-xl-table-cell">shawonk007@gmail.com</td>
-              <td><span class="badge bg-info">Administrator</span></td>
-              <td class="d-none d-md-table-cell"><span class="badge bg-success">Enable</span></td>
-              <td class="d-none d-md-table-cell">2 minutes ago</td>
-              <td>
-                <form action="" method="post">
-                  <a href="javascript:void(0)" class="btn btn-outline-primary btn-sm">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <button type="submit" class="btn btn-outline-danger btn-sm">
-                    <i class="fas fa-trash-alt"></i>
-                  </button>
-                </form>
-              </td>
-            </tr>
+            @forelse ($users as $user)
+              <tr>
+                <td class="d-none d-xl-table-cell">{{ $loop->iteration }}</td>
+                <td>
+                  <strong>{{ $user->firstname }} {{ $user->lastname }}</strong>
+                </td>
+                <td class="d-none d-xl-table-cell">{{ $user->email }}</td>
+                <td><span class="badge bg-info">{{ $user->role->title }}</span></td>
+                <td class="d-none d-md-table-cell">
+                  @if ($user->status === 1)
+                    <span class="badge bg-success">{{ __('Enable') }}</span>
+                  @elseif($user->status === 0)
+                    <span class="badge bg-danger">{{ __('Disable') }}</span>
+                  @else  
+                    <span class="badge bg-secondary">{{ __('Pending') }}</span>
+                  @endif
+                </td>
+                <td class="d-none d-md-table-cell">{{ $user->created_at->diffforhumans() }}</td>
+                <td>
+                  <form action="" method="post">
+                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-primary btn-sm">
+                      <i class="fas fa-edit"></i>
+                    </a>
+                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            @empty
+                
+            @endforelse
           </tbody>
         </table>
       </div>

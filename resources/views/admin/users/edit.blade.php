@@ -1,15 +1,16 @@
 <x-admin-layout>
 
   <x-slot name="title">
-    {{ __('Add New User') }}
+    {{ __('Edit User') }}
   </x-slot>
 
   <x-slot name="header">
     <h1 class="h3 mb-3">{{ __('Users & Members') }}</h1>
   </x-slot>
 
-  <form action="{{ route('users.store') }}" method="post">
+  <form action="{{ route('users.update', $user->id) }}" method="post">
     @csrf
+    @method('put')
     <div class="row g-3">
       <div class="col-12 col-xl-5">
         <div class="card">
@@ -37,30 +38,30 @@
               </div>
               <div class="col-12">
                 <div class="input-group">
-                  <input type="text" name="firstname" class="form-control" id="fName" placeholder="{{ __('First Name') }}" required />
-                  <input type="text" name="lastname" class="form-control" id="lName" placeholder="{{ __('Last Name') }}" required />
+                  <input type="text" name="firstname" class="form-control" id="fName" placeholder="{{ __('First Name') }}" value="{{ $user->firstname }}" required />
+                  <input type="text" name="lastname" class="form-control" id="lName" placeholder="{{ __('Last Name') }}" value="{{ $user->lastname }}" required />
                 </div>
               </div>
               <div class="col-6">
-                <input type="text" name="username" class="form-control" id="uName" placeholder="{{ __('Username') }}" required />
+                <input type="text" name="username" class="form-control" id="uName" placeholder="{{ __('Username') }}" value="{{ $user->username }}" required />
               </div>
               <div class="col-6">
-                <input type="date" name="dob" class="form-control" id="dob" />
+                <input type="date" name="date_of_birth" class="form-control" id="dob" value="{{ $user->date_of_birth }}" />
               </div>
               <div class="col-12">
-                <input type="email" name="email" class="form-control" id="email" placeholder="{{ __('Primary Email') }}" required />
+                <input type="email" name="email" class="form-control" id="email" placeholder="{{ __('Primary Email') }}" value="{{ $user->email }}" required />
               </div>
               <div class="col-12">
-                <input type="email" name="email_alt" class="form-control" id="emailAlt" placeholder="{{ __('Secondary Email') }}" />
+                <input type="email" name="email_alt" class="form-control" id="emailAlt" placeholder="{{ __('Secondary Email') }}" value="{{ $user->email_alt }}" />
               </div>
               <div class="col-6">
-                <input type="tel" name="phone" class="form-control" id="phone" placeholder="{{ __('Primary Phone') }}" required oninput="formatPhoneNumber(this)" maxlength="19" />
+                <input type="tel" name="phone" class="form-control" id="phone" placeholder="{{ __('Primary Phone') }}" value="{{ $user->phone }}" required oninput="formatPhoneNumber(this)" maxlength="19" />
               </div>
               <div class="col-6">
-                <input type="tel" name="phone_alt" class="form-control" id="phoneAlt" placeholder="{{ __('Secondary Phone') }}" oninput="formatPhoneNumber(this)" maxlength="19" />
+                <input type="tel" name="phone_alt" class="form-control" id="phoneAlt" placeholder="{{ __('Secondary Phone') }}" value="{{ $user->phone_alt }}" oninput="formatPhoneNumber(this)" maxlength="19" />
               </div>
               <div class="col-6">
-                <input type="password" name="password" class="form-control" id="pass" placeholder="{{ __('Password') }}" required />
+                <input type="password" name="password" class="form-control" id="pass" placeholder="{{ __('Password') }}" value="{{ $user->password }}" required />
               </div>
               <div class="col-6">
                 <input type="password" name="c_password" class="form-control" id="cPass" placeholder="{{ __('Confirm Password') }}" required />
@@ -69,15 +70,15 @@
                 <select name="role_id" class="form-control" id="userRole">
                   <option value="">{{ __('-- User Role --') }}</option>
                   @foreach ($roles as $role)
-                    <option value="{{ $role->id }}">{{ $role->title }}</option>
+                    <option value="{{ $role->id }}" {{ $role->id === $user->role_id ? 'selected' : '' }} >{{ $role->title }}</option>
                   @endforeach
                 </select>
               </div>
               <div class="col-6">
                 <select name="status" class="form-control" id="roleStats">
                   <option value="">{{ __('-- User Status --') }}</option>
-                  <option value="1">{{ __('Enable') }}</option>
-                  <option value="0">{{ __('Disable') }}</option>
+                  <option value="1" {{ $user->status === 1 ? 'selected' : '' }} >{{ __('Enable') }}</option>
+                  <option value="0" {{ $user->status === 0 ? 'selected' : '' }} >{{ __('Disable') }}</option>
                 </select>
               </div>
             </div>
@@ -91,9 +92,9 @@
                 </a>
               </div>
               <div class="col-6 d-grid">
-                <button type="submit" class="btn btn-outline-primary" >
-                  <i class="align-middle me-1" data-feather="plus"></i>
-                  <span class="ps-1">{{ __('Create New') }}</span>
+                <button type="submit" class="btn btn-outline-success" >
+                  <i class="align-middle me-1" data-feather="check"></i>
+                  <span class="ps-1">{{ __('Update') }}</span>
                 </button>
               </div>
             </div>

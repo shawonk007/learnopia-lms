@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->decimal('offer_price', 10, 2)->nullable();
             $table->string('highlights', 255)->nullable();
             $table->string('slug', 255)->unique();
-            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('status')->nullable();
             $table->boolean('featured')->default(false);
             $table->timestamps();
         });

@@ -9,12 +9,13 @@ return new class extends Migration {
      * Run the migrations.
      */
     public function up(): void {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('modules', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 25)->unique();
-            $table->string('description', 250)->nullable();
-            $table->string('slug', 25)->unique();
-            $table->tinyInteger('status')->default(0);
+            $table->bigInteger("course_id")->unsigned();
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete("cascade");
+            $table->string('title', 100);
+            $table->string('description')->nullable();
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration {
      * Reverse the migrations.
      */
     public function down(): void {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('modules');
     }
 };

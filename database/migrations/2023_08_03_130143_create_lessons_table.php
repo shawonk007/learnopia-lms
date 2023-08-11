@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('highlights', 255)->nullable();
             $table->string('thumbnail', 255)->nullable();
             $table->string('slug', 255)->unique();
-            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
         });
     }

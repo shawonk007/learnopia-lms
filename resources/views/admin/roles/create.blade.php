@@ -25,7 +25,7 @@
                 <textarea name="description" class="form-control" id="description" cols="30" rows="10" placeholder="{{ __('Type details here ...') }}">{{ old('description') }}</textarea>
               </div>
               <div class="col-12">
-                <input type="text" name="slug" class="form-control" id="slug" placeholder="{{ __('Role Slug') }}" value="{{ old('slug') }}" />
+                <input type="text" name="slug" class="form-control" id="slug" placeholder="{{ __('Role Slug') }}" value="{{ old('slug') }}" readonly />
               </div>
               <div class="col-12">
                 <select name="status" class="form-control" id="status">

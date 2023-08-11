@@ -9,6 +9,7 @@
           <i class="fas fa-gauge-high align-middle"></i> <span class="align-middle">{{ __('Dashboard') }}</span>
         </a>
       </li>
+
       <li class="sidebar-header">{{ __('Course Management') }}</li>
       <li class="sidebar-item">
         <a class="sidebar-link" href="{{ route('courses.index') }}">

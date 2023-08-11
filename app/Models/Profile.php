@@ -9,6 +9,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Profile extends Model {
     use HasFactory;
 
+    protected $fillable = [ 'user_id', 'avatar', 'biography', 'date_of_birth', 'nationality', 'gender', 'religion', 'marital' ];
+
+    protected $casts = [
+        'date_of_birth' => 'date',
+    ];
+
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }

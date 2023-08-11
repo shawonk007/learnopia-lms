@@ -32,9 +32,9 @@
             </tr>
           </thead>
           <tbody>
-            @forelse ($roles as $k => $role)
+            @forelse ($roles as $role)
               <tr>
-                <td class="d-none d-xl-table-cell">{{ $k + 1 }}</td>
+                <td class="d-none d-xl-table-cell">{{ $loop->iteration }}</td>
                 <td>
                   <strong>{{ $role->title }}</strong>
                 </td>
