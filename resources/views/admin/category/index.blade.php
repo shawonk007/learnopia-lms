@@ -26,16 +26,16 @@
               <th class="d-none d-xl-table-cell">{{ __('SL') }}</th>
               <th>{{ __('Category Title') }}</th>
               <th>{{ __('Parent Category') }}</th>
-              <th class="d-none d-xl-table-cell">{{ __('Category Slug') }}</th>
+              {{-- <th class="d-none d-xl-table-cell">{{ __('Category Slug') }}</th> --}}
               <th>{{ __('Status') }}</th>
               <th class="d-none d-md-table-cell">{{ __('Date Created') }}</th>
               <th>{{ __('Action') }}</th>
             </tr>
           </thead>
           <tbody>
-            @forelse ($cats as $k => $cat)
+            @forelse ($cats as $cat)
               <tr>
-                <td class="d-none d-xl-table-cell">{{ $k + 1 }}</td>
+                <td class="d-none d-xl-table-cell">{{ $loop->iteration }}</td>
                 <td>
                   <strong>{{ $cat->title }}</strong>
                 </td>
@@ -46,7 +46,7 @@
                     <span>{{ $cat->parent->title }}</span>
                   @endif
                 </td>
-                <td class="d-none d-xl-table-cell">{{ $cat->slug }}</td>
+                {{-- <td class="d-none d-xl-table-cell">{{ $cat->slug }}</td> --}}
                 <td>
                   @if ($cat->status === 1)
                     <span class="badge bg-success">Enable</span>

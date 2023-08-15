@@ -9,17 +9,13 @@ return new class extends Migration {
      * Run the migrations.
      */
     public function up(): void {
-        Schema::create('profiles', function (Blueprint $table) {
+        Schema::create('answers', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger("question_id")->unsigned();
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete("cascade");
             $table->bigInteger("user_id")->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
-            $table->string('avatar', 255)->nullable();
-            $table->text('biography')->nullable();
-            $table->date('date_of_birth')->nullable();
-            $table->string('nationality', 50)->nullable();
-            $table->string('gender')->nullable();
-            $table->string('religion')->nullable();
-            $table->string('marital')->nullable();
+            $table->text('answer');
             $table->timestamps();
         });
     }
@@ -28,6 +24,6 @@ return new class extends Migration {
      * Reverse the migrations.
      */
     public function down(): void {
-        Schema::dropIfExists('profiles');
+        Schema::dropIfExists('answers');
     }
 };

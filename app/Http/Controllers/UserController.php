@@ -26,7 +26,7 @@ class UserController extends Controller {
      */
     public function create() {
         //
-        $roles = Role::all();
+        $roles = Role::orderBy('created_at', 'ASC')->pluck('title', 'id');
         return view('admin.users.create', compact('roles'));
     }
 

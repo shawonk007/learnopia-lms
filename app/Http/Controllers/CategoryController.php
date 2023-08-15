@@ -15,6 +15,7 @@ class CategoryController extends Controller {
         //
         $cats = Category::all();
         return view('admin.category.index', compact('cats'));
+        return response()->json($cats);
     }
 
     /**

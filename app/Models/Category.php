@@ -20,7 +20,7 @@ class Category extends Model {
         'parent_id',
         'slug',
         'status',
-        'is_featured'
+        'featured'
     ];
 
     public function parent(): BelongsTo {

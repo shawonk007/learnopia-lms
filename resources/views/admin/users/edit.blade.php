@@ -61,12 +61,6 @@
                 <input type="tel" name="phone_alt" class="form-control" id="phoneAlt" placeholder="{{ __('Secondary Phone') }}" value="{{ $user->phone_alt }}" oninput="formatPhoneNumber(this)" maxlength="19" />
               </div>
               <div class="col-6">
-                <input type="password" name="password" class="form-control" id="pass" placeholder="{{ __('Password') }}" value="{{ $user->password }}" required />
-              </div>
-              <div class="col-6">
-                <input type="password" name="c_password" class="form-control" id="cPass" placeholder="{{ __('Confirm Password') }}" required />
-              </div>
-              <div class="col-6">
                 <select name="role_id" class="form-control" id="userRole">
                   <option value="">{{ __('-- User Role --') }}</option>
                   @foreach ($roles as $role)

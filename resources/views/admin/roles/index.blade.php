@@ -18,9 +18,9 @@
     <div class="col-12">
       <div class="card flex-fill">
         <div class="card-header">              
-          <h5 class="card-title mb-0">{{ __('Category DataTable') }}</h5>
+          <h5 class="card-title mb-0">{{ __('Roles DataTable') }}</h5>
         </div>
-        <table class="table table-hover my-0">
+        <table class="table table-hover my-0" id="myTable">
           <thead>
             <tr>
               <th class="d-none d-xl-table-cell">{{ __('SL') }}</th>
@@ -56,9 +56,9 @@
                     <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-outline-primary btn-sm">
                       <i class="fas fa-edit"></i>
                     </a>
-                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="deleteRole({{ $role->id }})">
+                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="deleteRole(event, this)">
                       <i class="fas fa-trash-alt"></i>
-                  </button>
+                    </button>
                   </form>
                 </td>
               </tr>
@@ -76,7 +76,40 @@
   </div>
 
   <x-slot name="script">
-    @include('partials.admin.flash')
+    {{-- @include('partials.admin.flash') --}}
+    <script>
+      function deleteRole(e, t) {
+        e.preventDefault();
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            @if(session('success'))
+              Swal.fire({
+                title: 'Deleted',
+                text: '{{ session('success') }}',
+                icon: 'success',
+                confirmButtonText: 'OK'
+              });
+            @endif
+          }
+          @if(session('error'))
+            Swal.fire({
+              title: 'Error',
+              text: '{{ session('error') }}',
+              icon: 'error',
+              confirmButtonText: 'OK'
+            });
+          @endif
+        });
+      }
+    </script>
   </x-slot>
 
 </x-admin-layout>

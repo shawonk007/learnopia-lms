@@ -9,20 +9,16 @@ return new class extends Migration {
      * Run the migrations.
      */
     public function up(): void {
-        Schema::create('courses', function (Blueprint $table) {
+        Schema::create('education', function (Blueprint $table) {
             $table->id();
             $table->bigInteger("user_id")->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
-            $table->string('title', 100)->unique();
-            $table->text('description');
-            $table->string('course_code', 100)->unique();
-            $table->string('thumbnail', 255)->nullable();
-            $table->decimal('regular_price', 10, 2);
-            $table->decimal('offer_price', 10, 2)->nullable();
-            $table->string('highlights', 255)->nullable();
-            $table->string('slug', 255)->unique();
+            $table->string('title');
+            $table->string('concentration');
+            $table->string('description')->nullable();
+            $table->decimal('result', 3, 2);
+            $table->year('passing_year')->nullable();
             $table->tinyInteger('status')->nullable();
-            $table->boolean('featured')->default(false);
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ return new class extends Migration {
      * Reverse the migrations.
      */
     public function down(): void {
-        Schema::dropIfExists('courses');
+        Schema::dropIfExists('education');
     }
 };

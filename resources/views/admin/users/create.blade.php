@@ -67,10 +67,11 @@
               </div>
               <div class="col-6">
                 <select name="role_id" class="form-control" id="userRole">
-                  <option value="">{{ __('-- User Role --') }}</option>
-                  @foreach ($roles as $role)
-                    <option value="{{ $role->id }}">{{ $role->title }}</option>
-                  @endforeach
+                  @forelse ($roles as $roleId => $roleTitle)
+                    <option value="{{ $roleId }}">{{ $roleTitle }}</option>
+                  @empty
+                    <option value="" selected>{{ __('-- User Role --') }}</option>  
+                  @endforelse
                 </select>
               </div>
               <div class="col-6">
@@ -110,6 +111,9 @@
               <div class="col-4">
                 <select name="gender" class="form-control" id="gender">
                   <option value="">{{ __('-- Gender --') }}</option>
+                  <option value="1">{{ __('Male') }}</option>
+                  <option value="2">{{ __('Female') }}</option>
+                  <option value="3">{{ __('Others') }}</option>
                 </select>
               </div>
               <div class="col-4">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller {
@@ -15,7 +16,8 @@ class SiteController extends Controller {
     }
     // 
     public function courses() {
-        return view('front-end.courses');
+        $categories = Category::all();
+        return view('front-end.courses', compact('categories'));
     }
     // 
     public function display() {

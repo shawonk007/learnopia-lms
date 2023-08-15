@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
+use App\Models\Category;
+use App\Models\User;
 
 class CourseController extends Controller {
     /**
@@ -20,7 +22,12 @@ class CourseController extends Controller {
      */
     public function create() {
         //
-        return view('admin.course.create');
+        $users = User::where([
+            ['role_id', 7],
+            ['status', 1]
+        ])->orderBy('created_at', 'ASC')->get(['firstname', 'lastname', 'id']);
+        $categories = Category::orderBy('created_at', 'ASC')->get(['title', 'parent_id', 'id']);
+        return view('admin.course.create', compact('categories', 'users'));
     }
 
     /**

@@ -39,17 +39,17 @@ class RoleController extends Controller {
 
         $validatedData = $request->validated();
     
-    // Check if the validation passed
-    if ($validatedData) {
-        $created = Role::create($validatedData);
-        if ($created) {
-            return redirect()->route('roles.create')->with('created', 'Role created successfully');
+        // Check if the validation passed
+        if ($validatedData) {
+            $created = Role::create($validatedData);
+            if ($created) {
+                return redirect()->route('roles.create')->with('created', 'Role created successfully');
+            } else {
+                return redirect()->route('roles.create')->with('error', 'Role creation failed: Unable to create role');
+            }
         } else {
-            return redirect()->route('roles.create')->with('error', 'Role creation failed: Unable to create role');
+            return redirect()->route('roles.create')->withErrors(['error' => 'Title or Slug is not available']);
         }
-    } else {
-        return redirect()->route('roles.create')->withErrors(['error' => 'Title or Slug is not available']);
-    }
 
     }
 
@@ -84,9 +84,7 @@ class RoleController extends Controller {
      * Remove the specified resource from storage.
      */
     public function destroy(Role $role) {
-        if($role->delete()){
-            return redirect()->route('roles.index')->with('success', 'Role deleted successfully');
-        }
-        return redirect()->route('roles.index');
+        $role->delete();
+        return back()->with('success', 'Role deleted successfully');
     }
 }

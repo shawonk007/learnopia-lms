@@ -11,15 +11,15 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("role_id")->unsigned();
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete("cascade");
             $table->string('firstname', 50);
             $table->string('lastname', 50);
             $table->string('username', 25)->unique();
-            $table->string('email', 50)->unique();
+            $table->string('email', 100)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone', 19)->unique();
             $table->string('password', 255);
+            $table->bigInteger("role_id")->unsigned()->default(10);
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete("cascade");
             $table->tinyInteger('status')->nullable();
             $table->rememberToken();
             $table->timestamps();

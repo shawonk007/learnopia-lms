@@ -38,18 +38,6 @@
             </div>
           </div>
         </div>
-        <div class="card">
-          <div class="card-header">
-            <h5 class="card-title mb-0">{{ __('Course Modules') }}</h5>
-          </div>
-          <div class="card-body pt-0">
-            <div class="row g-3">
-              <div class="col-12">
-                <textarea name="description" class="form-control" id="description" cols="30" rows="24" placeholder="{{ __('Type course details here ...') }}"></textarea>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       <div class="col-12 col-xl-4">
         <div class="card">
@@ -62,8 +50,12 @@
                 <input type="text" name="title" class="form-control" id="title" placeholder="{{ __('Course Code') }}" required />
               </div>
               <div class="col-12">
-                <select name="status" class="form-control" id="catStatus">
-                  <option value="">{{ __('-- Instructor --') }}</option>
+                <select name="instructor_id" class="form-control" id="instructor">
+                  @forelse ($users as $user)
+                    <option value="{{ $user->id }}">{{ $user->firstname }} {{ $user->lastname }}</option>    
+                  @empty
+                    <option value="">{{ __('-- Instructor --') }}</option>
+                  @endforelse
                 </select>
               </div>
               <div class="col-6">
@@ -111,17 +103,11 @@
             <div class="row g-3">
               <div class="col-12">
                 <select name="main_category" class="form-control" id="mainCat">
-                  <option value="">{{ __('-- Main Category --') }}</option>
-                </select>
-              </div>
-              <div class="col-12">
-                <select name="sub_category" class="form-control" id="subCat">
-                  <option value="">{{ __('-- Sub Category --') }}</option>
-                </select>
-              </div>
-              <div class="col-12">
-                <select name="course_type" class="form-control" id="courseType">
-                  <option value="">{{ __('-- Course Type --') }}</option>
+                  @forelse ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->title }}</option>  
+                  @empty
+                    <option value="">{{ __('-- Choose One --') }}</option>
+                  @endforelse
                 </select>
               </div>
             </div>
@@ -176,7 +162,6 @@
   </form>
 
   <x-slot name="script">
-    @include('partials.admin.flash')
   </x-slot>
  
 </x-admin-layout>
