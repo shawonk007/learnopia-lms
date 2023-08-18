@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Models\Contact;
 use App\Models\Profile;
 use App\Models\Role;
 use App\Models\Social;
@@ -40,9 +39,6 @@ class UserController extends Controller {
             $profile = new Profile($request->all());
             $user->profile()->save($profile);
 
-            $contact = new Contact($request->all());
-            $user->contact()->save($contact);
-
             $social = new Social($request->all());
             $user->social()->save($social);
         }
@@ -76,10 +72,6 @@ class UserController extends Controller {
         $profile = $user->profile ?: new Profile();
         $profile->fill($request->all());
         $user->profile()->save($profile);
-
-        $contact = $user->contact ?: new Contact();
-        $contact->fill($request->all());
-        $user->contact()->save($contact);
 
         $social = $user->social ?: new Social();
         $social->fill($request->all());

@@ -14,8 +14,11 @@ $(document).ready(function() {
       .replace(/\s+/g, '-')
       .replace(/-+/g, '-');
   }
-});
 
+  $('.select-field').select2({
+    theme: 'bootstrap-5'
+  });
+});
 
 // Format Phone Number
 function formatPhoneNumber(input) {

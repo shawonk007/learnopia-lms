@@ -13,6 +13,8 @@
 	<link rel="canonical" href="https://github.com/shawonk007/learnopia-lms" />
 	{{-- <link rel="stylesheet" href="{{ asset('plugins/bootstrap-v5.3.0/css/bootstrap.min.css') }}"> --}}
 	<link rel="stylesheet" href="{{ asset('plugins/font-awesome-6.4.0/css/all.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap-5/css/select2.min.css') }}" />
+  <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap-5/css/select2-bootstrap-5-theme.min.css') }}" />
 	<link rel="stylesheet" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/app.css') }}" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -39,6 +41,7 @@
 	<script src="{{ asset('plugins/jquery/jquery-3.7.0.min.js') }}"></script>
 	{{-- <script src="{{ asset('plugins/bootstrap-v5.3.0/js/bootstrap.bundle.min.js') }}"></script> --}}
 	<script src="{{ asset('plugins/font-awesome-6.4.0/js/all.min.js') }}"></script>
+	<script src="{{ asset('plugins/select2-bootstrap-5/js/select2.min.js') }}"></script>
 	<script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 	<script src="{{ asset('plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
 	<script src="{{ asset('js/app.js') }}"></script>

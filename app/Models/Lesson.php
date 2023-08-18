@@ -9,6 +9,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Lesson extends Model {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'title',
+        'description',
+        'parent_id',
+        'slug',
+        'status',
+        'featured'
+    ];
+
     public function course(): BelongsTo {
         return $this->belongsTo(Course::class);
     }

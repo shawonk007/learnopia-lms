@@ -51,13 +51,7 @@
                 <input type="email" name="email" class="form-control" id="email" placeholder="{{ __('Primary Email') }}" required />
               </div>
               <div class="col-12">
-                <input type="email" name="email_alt" class="form-control" id="emailAlt" placeholder="{{ __('Secondary Email') }}" />
-              </div>
-              <div class="col-6">
                 <input type="tel" name="phone" class="form-control" id="phone" placeholder="{{ __('Primary Phone') }}" required oninput="formatPhoneNumber(this)" maxlength="19" />
-              </div>
-              <div class="col-6">
-                <input type="tel" name="phone_alt" class="form-control" id="phoneAlt" placeholder="{{ __('Secondary Phone') }}" oninput="formatPhoneNumber(this)" maxlength="19" />
               </div>
               <div class="col-6">
                 <input type="password" name="password" class="form-control" id="pass" placeholder="{{ __('Password') }}" required />
@@ -119,31 +113,22 @@
               <div class="col-4">
                 <select name="religion" class="form-control" id="religion">
                   <option value="">{{ __('-- Religion --') }}</option>
+                  <option value="1">{{ __('Islam') }}</option>
+                  <option value="2">{{ __('Christian') }}</option>
+                  <option value="3">{{ __('Hinduism') }}</option>
+                  <option value="4">{{ __('Buddhists') }}</option>
+                  <option value="5">{{ __('Others') }}</option>
                 </select>
               </div>
               <div class="col-4">
                 <select name="marital" class="form-control" id="marital">
                   <option value="">{{ __('-- Marital Status --') }}</option>
+                  <option value="1">{{ __('Married') }}</option>
+                  <option value="2">{{ __('Unmarried') }}</option>
+                  <option value="3">{{ __('Divorced') }}</option>
+                  <option value="4">{{ __('Widowed') }}</option>
+                  <option value="5">{{ __('Separeted') }}</option>
                 </select>
-              </div>
-              <div class="col-12">
-                <input type="text" name="address_one" class="form-control" id="addressOne" placeholder="{{ __('Address Line 01') }}" />
-              </div>
-              <div class="col-12">
-                <input type="text" name="address_two" class="form-control" id="addressTwo" placeholder="{{ __('Address Line 02') }}" />
-              </div>
-              <div class="col-4">
-                <select name="division" class="form-control" id="division">
-                  <option value="">{{ __('-- Division --') }}</option>
-                </select>
-              </div>
-              <div class="col-4">
-                <select name="district" class="form-control" id="district">
-                  <option value="">{{ __('-- District --') }}</option>
-                </select>
-              </div>
-              <div class="col-4">
-                <input type="text" name="postal" class="form-control" id="postalCode" placeholder="{{ __('Postal Code') }}" />
               </div>
             </div>
           </div>

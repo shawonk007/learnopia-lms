@@ -6,6 +6,9 @@ use App\Models\Course;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use App\Models\Category;
+use App\Models\CourseDetails;
+use App\Models\CourseTag;
+use App\Models\Topic;
 use App\Models\User;
 
 class CourseController extends Controller {
@@ -27,7 +30,8 @@ class CourseController extends Controller {
             ['status', 1]
         ])->orderBy('created_at', 'ASC')->get(['firstname', 'lastname', 'id']);
         $categories = Category::orderBy('created_at', 'ASC')->get(['title', 'parent_id', 'id']);
-        return view('admin.course.create', compact('categories', 'users'));
+        $topics = Topic::all();
+        return view('admin.course.create', compact('categories', 'users', 'topics'));
     }
 
     /**
@@ -35,6 +39,20 @@ class CourseController extends Controller {
      */
     public function store(StoreCourseRequest $request) {
         //
+        // dd($request);
+        $course = Course::create($request->all());
+        if ($course) {
+            $details = new CourseDetails($request->all());
+            $course->details()->save($details);
+
+            if ($request->topics) {
+                foreach ($request->topics as $topicId) {
+                    $topic = new CourseTag(['topic_id' => $topicId]);
+                    $course->topics()->save($topic);
+                }
+            }
+        }
+        return back()->with('success', 'Course created successfully');
     }
 
     /**
