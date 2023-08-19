@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class CourseTag extends Model
 {
@@ -15,12 +16,13 @@ class CourseTag extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'course_id',
-        'topic_id'
-    ];
+    protected $fillable = [ 'course_id', 'topic_id' ];
 
     public function course(): BelongsTo {
         return $this->belongsTo(Course::class);
+    }
+
+    public function topics(): BelongsToMany {
+        return $this->belongsToMany(Topic::class);
     }
 }

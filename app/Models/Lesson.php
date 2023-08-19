@@ -14,16 +14,10 @@ class Lesson extends Model {
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'title',
-        'description',
-        'parent_id',
-        'slug',
-        'status',
-        'featured'
-    ];
+    protected $fillable = [ 'course_id', 'title', 'description', 'highlights', 'thumbnail', 'slug', 'status' ];
 
     public function course(): BelongsTo {
         return $this->belongsTo(Course::class);
     }
+
 }

@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->foreign('course_id')->references('id')->on('courses')->onDelete("cascade");
             $table->string('feedback_text');
             $table->integer('rating');
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
         });
     }

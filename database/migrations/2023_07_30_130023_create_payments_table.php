@@ -16,9 +16,9 @@ return new class extends Migration {
             $table->bigInteger("course_id")->unsigned();
             $table->foreign('course_id')->references('id')->on('courses')->onDelete("cascade");
             $table->tinyInteger('payment_method');
-            $table->string('transaction_id');
+            $table->string('transaction_id')->unique();
             $table->decimal('amount', 10, 2);
-            $table->date('purchased_at');
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
         });
     }

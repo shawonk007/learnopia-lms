@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Experience extends Model
 {
@@ -14,12 +15,9 @@ class Experience extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'title',
-        'description',
-        'parent_id',
-        'slug',
-        'status',
-        'featured'
-    ];
+    protected $fillable = [ 'instructor_id', 'designation', 'organization', 'description', 'join_date', 'leave_date', 'status' ];
+
+    public function instrctor(): BelongsTo {
+        return $this->belongsTo(Instructor::class);
+    }
 }

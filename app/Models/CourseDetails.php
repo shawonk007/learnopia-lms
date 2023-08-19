@@ -15,13 +15,7 @@ class CourseDetails extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'course_id',
-        'thumbnail',
-        'description',
-        'highlights',
-        'difficulty'
-    ];
+    protected $fillable = [ 'course_id', 'thumbnail', 'description', 'highlights', 'difficulty' ];
 
     public function course(): BelongsTo {
         return $this->belongsTo(Course::class);

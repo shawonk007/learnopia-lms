@@ -50,8 +50,16 @@ class User extends Authenticatable {
         return $this->hasOne(Profile::class);
     }
 
-    public function contact(): HasOne {
-        return $this->hasOne(Contact::class);
+    public function education(): HasMany {
+        return $this->hasMany(Education::class);
+    }
+
+    public function instructor(): HasOne {
+        return $this->hasOne(Instructor::class);
+    }
+
+    public function student(): HasOne {
+        return $this->hasOne(Student::class);
     }
 
     public function social(): HasOne {
@@ -60,5 +68,25 @@ class User extends Authenticatable {
 
     public function courses(): HasMany {
         return $this->hasMany(Course::class);
+    }
+
+    public function questions(): HasMany {
+        return $this->hasMany(Question::class);
+    }
+
+    public function answers(): HasMany {
+        return $this->hasMany(Answer::class);
+    }
+
+    public function reports(): HasMany {
+        return $this->hasMany(Report::class);
+    }
+
+    public function feedback(): HasMany {
+        return $this->hasMany(Feedback::class);
+    }
+
+    public function payments(): HasMany {
+        return $this->hasMany(Payment::class);
     }
 }

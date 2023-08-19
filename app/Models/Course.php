@@ -16,29 +16,50 @@ class Course extends Model {
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'user_id',
-        'category_id',
-        'title',
-        'course_code',
-        'regular_price',
-        'offer_price',
-        'slug',
-        'ratings',
-        'status',
-        'featured'
-    ];
+    protected $fillable = [ 'user_id', 'category_id', 'title', 'course_code', 'regular_price', 'offer_price', 'slug', 'ratings', 'status', 'featured' ];
 
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
+    }
+
+    public function category(): BelongsTo {
+        return $this->belongsTo(Category::class);
     }
 
     public function details(): HasOne {
         return $this->hasOne(CourseDetails::class);
     }
 
-    public function topic(): HasMany {
+    public function courseTags(): HasMany {
         return $this->hasMany(CourseTag::class);
+    }
+
+    public function lessons(): HasMany {
+        return $this->hasMany(Lesson::class);
+    }
+
+    public function modules(): HasMany {
+        return $this->hasMany(Module::class);
+    }
+
+    public function enrollments(): HasMany {
+        return $this->hasMany(Enrollment::class);
+    }
+
+    public function question(): HasMany {
+        return $this->hasMany(Question::class);
+    }
+
+    public function reports(): HasMany {
+        return $this->hasMany(Report::class);
+    }
+
+    public function feedback(): HasMany {
+        return $this->hasMany(Feedback::class);
+    }
+
+    public function payments(): HasMany {
+        return $this->hasMany(Payment::class);
     }
 
 }

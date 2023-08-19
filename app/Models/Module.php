@@ -14,12 +14,5 @@ class Module extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'title',
-        'description',
-        'parent_id',
-        'slug',
-        'status',
-        'featured'
-    ];
+    protected $fillable = [ 'title', 'description', 'parent_id', 'slug', 'status', 'featured' ];
 }

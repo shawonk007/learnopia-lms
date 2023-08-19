@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->bigInteger("course_id")->unsigned()->nullable();
             $table->foreign('course_id')->references('id')->on('courses')->onDelete("cascade");
             $table->string('report_text');
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Question extends Model
 {
@@ -14,12 +15,13 @@ class Question extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'title',
-        'description',
-        'parent_id',
-        'slug',
-        'status',
-        'featured'
-    ];
+    protected $fillable = [ 'user_id', 'description', 'question', 'status' ];
+
+    public function user(): BelongsTo {
+        return $this->belongsTo(User::class);
+    }
+
+    public function course(): BelongsTo {
+        return $this->belongsTo(Course::class);
+    }
 }
