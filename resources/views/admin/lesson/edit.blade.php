@@ -1,40 +1,41 @@
 <x-admin-layout>
 
   <x-slot name="title">
-    {{ __('Add New Course') }}
+    {{ __('Edit Lesson') }}
   </x-slot>
 
   <x-slot name="header">
-    <h1 class="h3 mb-3"><strong>{{ __('Course') }}</strong> {{ __('Catalogue') }}</h1>
+    <h1 class="h3 mb-3"><strong>{{ __('Course') }}</strong> {{ __('Lessons') }}</h1>
   </x-slot>
   
-  <form action="{{ route('courses.store') }}" method="post" enctype="multipart/form-data" >
+  <form action="{{ route('lessons.update', $lesson->id) }}" method="post" enctype="multipart/form-data">
     @csrf
+    @method('put')
     <div class="row">
       <div class="col-12 col-xl-8">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title mb-0">{{ __('Course Overview') }}</h5>
+            <h5 class="card-title mb-0">{{ __('Lesson Overview') }}</h5>
           </div>
           <div class="card-body pt-0">
             <div class="row g-3">
               <div class="col-12">
-                <input type="text" name="title" class="form-control" id="title" placeholder="{{ __('Course Title') }}" required />
+                <input type="text" name="title" class="form-control" id="title" placeholder="{{ __('Lesson Title') }}" value="{{ $lesson->title }}" required />
               </div>
               <div class="col-12">
-                <textarea name="highlights" class="form-control" id="highlights" cols="30" rows="10" placeholder="{{ __('Type course highlights here ...') }}"></textarea>
+                <textarea name="highlights" class="form-control" id="highlights" cols="30" rows="10" placeholder="{{ __('Type lesson highlights here ...') }}">{{ $lesson->highlights }}</textarea>
               </div>
             </div>
           </div>
         </div>
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title mb-0">{{ __('Course Description') }}</h5>
+            <h5 class="card-title mb-0">{{ __('Lesson Description') }}</h5>
           </div>
           <div class="card-body pt-0">
             <div class="row g-3">
               <div class="col-12">
-                <textarea name="description" class="form-control" id="description" cols="30" rows="24" placeholder="{{ __('Type course details here ...') }}"></textarea>
+                <textarea name="description" class="form-control" id="description" cols="30" rows="24" placeholder="{{ __('Type lesson details here ...') }}">{{ $lesson->description }}</textarea>
               </div>
             </div>
           </div>
@@ -43,48 +44,18 @@
       <div class="col-12 col-xl-4">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title mb-0">{{ __('Course Informations') }}</h5>
+            <h5 class="card-title mb-0">{{ __('Lesson Informations') }}</h5>
           </div>
           <div class="card-body py-0">
             <div class="row g-3">
               <div class="col-12">
-                <input type="text" name="course_code" class="form-control" id="title" placeholder="{{ __('Course Code') }}" required />
+                <input type="text" name="slug" class="form-control" id="slug" placeholder="{{ __('Lesson Slug') }}" value="{{ $lesson->slug }}" required />
               </div>
               <div class="col-12">
-                <select name="user_id" class="form-control" id="instructor">
-                  @forelse ($users as $user)
-                    <option value="{{ $user->id }}">{{ $user->firstname }} {{ $user->lastname }}</option>    
-                  @empty
-                    <option value="">{{ __('-- Instructor --') }}</option>
-                  @endforelse
-                </select>
-              </div>
-              <div class="col-6">
-                <input type="text" name="regular_price" class="form-control" id="rPrice" placeholder="{{ __('Regular Price') }}" required />
-              </div>
-              <div class="col-6">
-                <input type="text" name="offer_price" class="form-control" id="sPrice" placeholder="{{ __('Sell Price') }}" />
-              </div>
-              <div class="col-12">
-                <input type="text" name="slug" class="form-control" id="slug" placeholder="{{ __('Course Slug') }}" required />
-              </div>
-              <div class="col-12">
-                <select name="difficulty" class="form-control" id="difficulty">
-                  <option value="">{{ __('-- Choose Difficulty --') }}</option>
-                  <option value="1">{{ __('Beginner') }}</option>
-                  <option value="2">{{ __('Intermadiate') }}</option>
-                  <option value="3">{{ __('Advanced') }}</option>
-                </select>
-              </div>
-              <div class="col-6">
-                <input type="checkbox" name="featured" class="form-check-input align-middle" id="featured" value="1" />
-                <label for="featured" class="align-middle ps-2">{{ __('Featured') }}</label>
-              </div>
-              <div class="col-6">
                 <select name="status" class="form-control" id="catStatus">
                   <option value="">{{ __('-- Status --') }}</option>
-                  <option value="1">{{ __('Enable') }}</option>
-                  <option value="0">{{ __('Disable') }}</option>
+                  <option value="1" {{ $lesson->status === 1 ? 'selected' : '' }} >{{ __('Enable') }}</option>
+                  <option value="0" {{ $lesson->status === 0 ? 'selected' : '' }} >{{ __('Disable') }}</option>
                 </select>
               </div>
             </div>
@@ -92,15 +63,15 @@
           <div class="card-footer">
             <div class="row g-3">
               <div class="col-6 d-grid">
-                <a href="{{ route('courses.index') }}" class="btn btn-outline-secondary" >
+                <a href="{{ route('lessons.index') }}" class="btn btn-outline-secondary" >
                   <i class="fas fa-arrow-left align-middle"></i>
                   <span class="ps-1">{{ __('Discard') }}</span>
                 </a>
               </div>
               <div class="col-6 d-grid">
-                <button type="submit" class="btn btn-outline-primary" >
-                  <i class="fas fa-plus align-middle"></i>
-                  <span class="ps-1">{{ __('Create New') }}</span>
+                <button type="submit" class="btn btn-outline-secondary" >
+                  <i class="fas fa-check align-middle"></i>
+                  <span class="ps-1">{{ __('Update') }}</span>
                 </button>
               </div>
             </div>
@@ -108,16 +79,16 @@
         </div>
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title mb-0">{{ __('Course Category') }}</h5>
+            <h5 class="card-title mb-0">{{ __('Course') }}</h5>
           </div>
           <div class="card-body pt-0">
             <div class="row g-3">
               <div class="col-12">
-                <select name="category_id" class="form-control" id="mainCat">
-                  @forelse ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->title }}</option>  
-                  @empty
-                    <option value="">{{ __('-- Choose One --') }}</option>
+                <select name="course_id" class="form-control" id="catStatus">
+                  @forelse ($courses as $course)
+                    <option value="{{ $course->id }}" {{ $course->id === $lesson->course_id ? 'selected' : '' }} >{{ $course->title }}</option>
+                  @empty  
+                    <option value="">{{ __('-- Course --') }}</option>
                   @endforelse
                 </select>
               </div>
@@ -126,7 +97,7 @@
         </div>
         {{-- <div class="card">
           <div class="card-header">
-            <h5 class="card-title mb-0">{{ __('Course Tags') }}</h5>
+            <h5 class="card-title mb-0">{{ __('Lesson Tags') }}</h5>
           </div>
           <div class="card-body pt-0">
             <div class="row g-3">
@@ -143,7 +114,7 @@
         </div> --}}
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title mb-0">{{ __('Course Thumbnail') }}</h5>
+            <h5 class="card-title mb-0">{{ __('Lesson Thumbnail') }}</h5>
           </div>
           <div class="card-body pt-0">
             <div class="row g-3">
@@ -176,6 +147,7 @@
   </form>
 
   <x-slot name="script">
+    @include('partials.admin.flash')
   </x-slot>
  
 </x-admin-layout>

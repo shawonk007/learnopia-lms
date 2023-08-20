@@ -22,7 +22,7 @@ class CourseTag extends Model
         return $this->belongsTo(Course::class);
     }
 
-    public function topics(): BelongsToMany {
-        return $this->belongsToMany(Topic::class);
+    public function topic(): BelongsTo {
+        return $this->belongsTo(Topic::class);
     }
 }

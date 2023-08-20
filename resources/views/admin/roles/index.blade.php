@@ -14,7 +14,7 @@
     </div>
   </x-slot>
 
-  <div class="row">
+  <section class="row">
     <div class="col-12">
       <div class="card flex-fill">
         <div class="card-header">              
@@ -73,7 +73,7 @@
         </table>
       </div>
     </div>
-  </div>
+  </section>
 
   <x-slot name="script">
     {{-- @include('partials.admin.flash') --}}

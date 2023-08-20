@@ -8,7 +8,8 @@
     <h1 class="h3 mb-3"><strong>{{ __('Course') }}</strong> {{ __('Lessons') }}</h1>
   </x-slot>
   
-  <form action="" method="post" enctype="multipart/form-data">
+  <form action="{{ route('lessons.store') }}" method="post" enctype="multipart/form-data">
+    @csrf
     <div class="row">
       <div class="col-12 col-xl-8">
         <div class="card">
@@ -47,11 +48,13 @@
           <div class="card-body py-0">
             <div class="row g-3">
               <div class="col-12">
-                <input type="text" name="slug" class="form-control" id="title" placeholder="{{ __('Course Slug') }}" required />
+                <input type="text" name="slug" class="form-control" id="slug" placeholder="{{ __('Lesson Slug') }}" required />
               </div>
               <div class="col-12">
                 <select name="status" class="form-control" id="catStatus">
                   <option value="">{{ __('-- Status --') }}</option>
+                  <option value="1">{{ __('Enable') }}</option>
+                  <option value="0">{{ __('Disable') }}</option>
                 </select>
               </div>
             </div>
@@ -80,27 +83,34 @@
           <div class="card-body pt-0">
             <div class="row g-3">
               <div class="col-12">
-                <select name="status" class="form-control" id="catStatus">
-                  <option value="">{{ __('-- Course --') }}</option>
+                <select name="course_id" class="form-control" id="catStatus">
+                  @forelse ($courses as $course)
+                    <option value="{{ $course->id }}">{{ $course->title }}</option>
+                  @empty  
+                    <option value="">{{ __('-- Course --') }}</option>
+                  @endforelse
                 </select>
               </div>
             </div>
           </div>
         </div>
-        <div class="card">
+        {{-- <div class="card">
           <div class="card-header">
             <h5 class="card-title mb-0">{{ __('Lesson Tags') }}</h5>
           </div>
           <div class="card-body pt-0">
             <div class="row g-3">
               <div class="col-12">
-                <select name="status" class="form-control" id="catStatus" >
+                <select name="topic_id[]" class="select2 select2-bootstrap-5-theme select-field w-100" id="topic" multiple >
                   <option value="">{{ __('-- Tags & Keywords --') }}</option>
+                  @foreach ($topics as $topic)
+                    <option value="{{ $topic->id }}">{{ $topic->title }}</option>
+                  @endforeach
                 </select>
               </div>
             </div>
           </div>
-        </div>
+        </div> --}}
         <div class="card">
           <div class="card-header">
             <h5 class="card-title mb-0">{{ __('Lesson Thumbnail') }}</h5>
@@ -122,7 +132,7 @@
                       </p>
                     </div>
                   </div>
-                  <input type="file" name="avatar" class="d-none" id="imageInput" required accept="image/*;capture=camera" />
+                  <input type="file" name="thumbnail" class="d-none" id="imageInput" accept="image/*;capture=camera" />
                 </label>
               </div>
               <div class="col-12">

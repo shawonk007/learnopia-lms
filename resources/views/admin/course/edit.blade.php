@@ -1,15 +1,16 @@
 <x-admin-layout>
 
   <x-slot name="title">
-    {{ __('Add New Course') }}
+    {{ __('Edit Course') }}
   </x-slot>
 
   <x-slot name="header">
     <h1 class="h3 mb-3"><strong>{{ __('Course') }}</strong> {{ __('Catalogue') }}</h1>
   </x-slot>
   
-  <form action="{{ route('courses.store') }}" method="post" enctype="multipart/form-data" >
+  <form action="{{ route('courses.update', $course->id) }}" method="post" enctype="multipart/form-data" >
     @csrf
+    @method('put')
     <div class="row">
       <div class="col-12 col-xl-8">
         <div class="card">
@@ -19,10 +20,10 @@
           <div class="card-body pt-0">
             <div class="row g-3">
               <div class="col-12">
-                <input type="text" name="title" class="form-control" id="title" placeholder="{{ __('Course Title') }}" required />
+                <input type="text" name="title" class="form-control" id="title" placeholder="{{ __('Course Title') }}" value="{{ $course->title }}" required />
               </div>
               <div class="col-12">
-                <textarea name="highlights" class="form-control" id="highlights" cols="30" rows="10" placeholder="{{ __('Type course highlights here ...') }}"></textarea>
+                <textarea name="highlights" class="form-control" id="highlights" cols="30" rows="10" placeholder="{{ __('Type course highlights here ...') }}">{{ $course->details->highlights }}</textarea>
               </div>
             </div>
           </div>
@@ -34,7 +35,7 @@
           <div class="card-body pt-0">
             <div class="row g-3">
               <div class="col-12">
-                <textarea name="description" class="form-control" id="description" cols="30" rows="24" placeholder="{{ __('Type course details here ...') }}"></textarea>
+                <textarea name="description" class="form-control" id="description" cols="30" rows="24" placeholder="{{ __('Type course details here ...') }}">{{ $course->details->description }}</textarea>
               </div>
             </div>
           </div>
@@ -48,43 +49,43 @@
           <div class="card-body py-0">
             <div class="row g-3">
               <div class="col-12">
-                <input type="text" name="course_code" class="form-control" id="title" placeholder="{{ __('Course Code') }}" required />
+                <input type="text" name="course_code" class="form-control" id="title" placeholder="{{ __('Course Code') }}" value="{{ $course->course_code }}" required />
               </div>
               <div class="col-12">
                 <select name="user_id" class="form-control" id="instructor">
                   @forelse ($users as $user)
-                    <option value="{{ $user->id }}">{{ $user->firstname }} {{ $user->lastname }}</option>    
+                    <option value="{{ $user->id }}" {{ $user->id === $course->user_id ? 'selected' : '' }} >{{ $user->firstname }} {{ $user->lastname }}</option>    
                   @empty
                     <option value="">{{ __('-- Instructor --') }}</option>
                   @endforelse
                 </select>
               </div>
               <div class="col-6">
-                <input type="text" name="regular_price" class="form-control" id="rPrice" placeholder="{{ __('Regular Price') }}" required />
+                <input type="text" name="regular_price" class="form-control" id="rPrice" placeholder="{{ __('Regular Price') }}" value="{{ $course->regular_price }}" required />
               </div>
               <div class="col-6">
-                <input type="text" name="offer_price" class="form-control" id="sPrice" placeholder="{{ __('Sell Price') }}" />
+                <input type="text" name="offer_price" class="form-control" id="sPrice" placeholder="{{ __('Sell Price') }}" value="{{ $course->offer_price }}" />
               </div>
               <div class="col-12">
-                <input type="text" name="slug" class="form-control" id="slug" placeholder="{{ __('Course Slug') }}" required />
+                <input type="text" name="slug" class="form-control" id="slug" placeholder="{{ __('Course Slug') }}" value="{{ $course->slug }}" required />
               </div>
               <div class="col-12">
                 <select name="difficulty" class="form-control" id="difficulty">
                   <option value="">{{ __('-- Choose Difficulty --') }}</option>
-                  <option value="1">{{ __('Beginner') }}</option>
-                  <option value="2">{{ __('Intermadiate') }}</option>
-                  <option value="3">{{ __('Advanced') }}</option>
+                  <option value="1" {{ $course->details->difficulty === 1 ? 'selected' : '' }} >{{ __('Beginner') }}</option>
+                  <option value="2" {{ $course->details->difficulty === 2 ? 'selected' : '' }} >{{ __('Intermadiate') }}</option>
+                  <option value="3" {{ $course->details->difficulty === 3 ? 'selected' : '' }} >{{ __('Advanced') }}</option>
                 </select>
               </div>
               <div class="col-6">
-                <input type="checkbox" name="featured" class="form-check-input align-middle" id="featured" value="1" />
+                <input type="checkbox" name="featured" class="form-check-input align-middle" id="featured" value="1" {{ $course->featured == TRUE ? 'checked' : '' }} />
                 <label for="featured" class="align-middle ps-2">{{ __('Featured') }}</label>
               </div>
               <div class="col-6">
                 <select name="status" class="form-control" id="catStatus">
                   <option value="">{{ __('-- Status --') }}</option>
-                  <option value="1">{{ __('Enable') }}</option>
-                  <option value="0">{{ __('Disable') }}</option>
+                  <option value="1" {{ $course->status === 1 ? 'selected' : '' }} >{{ __('Enable') }}</option>
+                  <option value="0" {{ $course->status === 0 ? 'selected' : '' }}>{{ __('Disable') }}</option>
                 </select>
               </div>
             </div>
@@ -98,9 +99,9 @@
                 </a>
               </div>
               <div class="col-6 d-grid">
-                <button type="submit" class="btn btn-outline-primary" >
-                  <i class="fas fa-plus align-middle"></i>
-                  <span class="ps-1">{{ __('Create New') }}</span>
+                <button type="submit" class="btn btn-outline-success" >
+                  <i class="fas fa-check align-middle"></i>
+                  <span class="ps-1">{{ __('Update') }}</span>
                 </button>
               </div>
             </div>
@@ -115,7 +116,7 @@
               <div class="col-12">
                 <select name="category_id" class="form-control" id="mainCat">
                   @forelse ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->title }}</option>  
+                    <option value="{{ $category->id }}" {{ $category->id === $course->category_id ? 'selected' : '' }} >{{ $category->title }}</option>  
                   @empty
                     <option value="">{{ __('-- Choose One --') }}</option>
                   @endforelse
