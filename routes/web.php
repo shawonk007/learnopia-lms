@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [SiteController::class, 'home'])->name('site.home');
 Route::get('/about', [SiteController::class, 'about'])->name('site.about');
 Route::get('/courses', [SiteController::class, 'courses'])->name('site.courses');
-Route::get('/display', [SiteController::class, 'display'])->name('site.display');
+Route::get('/courses/{slug}', [SiteController::class, 'display'])->name('course.display');
 Route::get('/team', [SiteController::class, 'team'])->name('site.team');
 Route::get('/contact', [SiteController::class, 'contact'])->name('site.contact');
 Route::get('/disclaimer', [SiteController::class, 'disclaimer'])->name('site.disclaimer');

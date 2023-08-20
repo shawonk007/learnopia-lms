@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Course;
+use App\Models\Lesson;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller {
@@ -17,12 +19,18 @@ class SiteController extends Controller {
     // 
     public function courses() {
         $categories = Category::all();
-        return view('front-end.courses', compact('categories'));
+        $courses = Course::all();
+        return view('front-end.courses', compact('categories', 'courses'));
     }
-    // 
-    public function display() {
-        return view('front-end.display');
+    //
+    public function display($slug) {
+        $course = Course::where('slug', $slug)->firstOrFail();
+        // $lessons = Lesson::where()
+        return view('front-end.display', compact('course'));
     }
+    // public function display(Course $course) {
+    //     // return view('front-end.display', compact('course'));
+    // }
     // 
     public function team() {
         return view('front-end.team');
