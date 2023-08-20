@@ -147,6 +147,9 @@
 
   <x-slot name="script">
     @include('partials.admin.flash')
+
+    <script>
+    </script>
   </x-slot>
  
 </x-admin-layout>

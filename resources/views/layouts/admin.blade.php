@@ -41,11 +41,13 @@
 	<script src="{{ asset('plugins/jquery/jquery-3.7.0.min.js') }}"></script>
 	{{-- <script src="{{ asset('plugins/bootstrap-v5.3.0/js/bootstrap.bundle.min.js') }}"></script> --}}
 	<script src="{{ asset('plugins/font-awesome-6.4.0/js/all.min.js') }}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.6.2/tinymce.min.js"></script>
 	<script src="{{ asset('plugins/select2-bootstrap-5/js/select2.min.js') }}"></script>
 	<script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 	<script src="{{ asset('plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
 	<script src="{{ asset('js/app.js') }}"></script>
 	<script src="{{ asset('js/scripts.js') }}"></script>
+	<script src="{{ asset('js/tinymce.js') }}"></script>
 	@isset($script)
       {{ $script }}
     @endisset
