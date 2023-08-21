@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\TopicController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,14 +38,43 @@ Route::get('/terms-and-conditions', [SiteController::class, 'terms'])->name('sit
 Route::get('/faq', [SiteController::class, 'faq'])->name('site.faq');
 Route::get('/sitemap', [SiteController::class, 'sitemap'])->name('site.sitemap');
 
-// Route::middleware('guest')->prefix('admin')->group(function () {
-Route::prefix('admin')->group(function () {
-  Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+Route::middleware('super_admin')->prefix('super')->group(function () {
+// Route::prefix('admin')->group(function () {
+  Route::get('/', [AdminController::class, 'index'])->name('super.dashboard');
   Route::resource('courses', CourseController::class);
   Route::resource('lessons', LessonController::class);
   Route::resource('category', CategoryController::class);
+  Route::resource('topics', TopicController::class);
   Route::resource('users', UserController::class);
   Route::resource('roles', RoleController::class);
+});
+
+Route::middleware('admin')->prefix('admin')->group(function () {
+// Route::prefix('admin')->group(function () {
+  Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+  // Route::resource('courses', CourseController::class);
+  Route::resource('lessons', LessonController::class);
+  Route::resource('category', CategoryController::class);
+  Route::prefix('users')->group(function() {
+    Route::get('/', [UserController::class, 'index'])->name('admin.users.index');
+    Route::get('/create', [UserController::class, 'create'])->name('admin.users.create');
+    Route::post('/', [UserController::class, 'store'])->name('admin.users.store');
+    Route::put('/{id}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+    Route::delete('/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+  });  
+  Route::resource('roles', RoleController::class);
+});
+
+Route::middleware('instructor')->prefix('instructor')->group(function () {
+// Route::prefix('admin')->group(function () {
+  Route::get('/', [AdminController::class, 'index'])->name('instructor.dashboard');
+  // Route::resource('courses', CourseController::class);
+  Route::resource('lessons', LessonController::class);
+});
+
+Route::middleware('student')->prefix('student')->group(function () {
+// Route::prefix('admin')->group(function () {
+  Route::get('/', [AdminController::class, 'index'])->name('student.dashboard');
 });
 
 Route::middleware('guest')->prefix('auth')->group(function () {

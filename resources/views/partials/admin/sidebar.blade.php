@@ -5,8 +5,13 @@
     </a>
     <ul class="sidebar-nav">
       <li class="sidebar-item active">
-        <a class="sidebar-link" href="{{ route('admin.dashboard') }}">
-          <i class="fas fa-gauge-high align-middle"></i> <span class="align-middle">{{ __('Dashboard') }}</span>
+        <a class="sidebar-link" href="{{ 
+          Auth::user()->role->slug === 'super_admin' ? route('super.dashboard') :
+          (Auth::user()->role->slug === 'administrator' ? route('admin.dashboard') :
+          (Auth::user()->role->slug === 'instructor' ? route('instructor.dashboard') :
+          (Auth::user()->role->slug === 'student' ? route('student.dashboard') : '')
+          )) }}">
+            <i class="fas fa-gauge-high align-middle"></i> <span class="align-middle">{{ __('Dashboard') }}</span>
         </a>
       </li>
 
@@ -21,27 +26,42 @@
           <i class="fas fa-chalkboard-user align-middle"></i> <span class="align-middle">{{ __('Manage Lessons') }}</span>
         </a>
       </li>
-      <li class="sidebar-item">
+      {{-- <li class="sidebar-item">
         <a class="sidebar-link" href="{{ route('category.index') }}">
           <i class="fas fa-code-branch align-middle pe-1"></i> <span class="align-middle">{{ __('Category') }}</span>
         </a>
-      </li>
-      <li class="sidebar-item">
-        <a class="sidebar-link" href="{{ route('category.index') }}">
-          <i class="fas fa-tags align-middle"></i> <span class="align-middle">{{ __('Tags Manager') }}</span>
-        </a>
-      </li>
-      <li class="sidebar-header">{{ __('Users Management') }}</li>
-      <li class="sidebar-item">
-        <a class="sidebar-link" href="{{ route('users.index') }}">
-          <i class="fas fa-users align-middle"></i> <span class="align-middle">{{ __('Manage Users') }}</span>
-        </a>
-      </li>
-      <li class="sidebar-item">
-        <a class="sidebar-link" href="{{ route('roles.index') }}">
-          <i class="fas fa-user-shield align-middle"></i> <span class="align-middle">{{ __('User Settings') }}</span>
-        </a>
-      </li>
+      </li> --}}
+      @if (Auth::check() && (Auth::user()->role->slug === 'super-admin' || Auth::user()->role->slug === 'administrator'))
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{{ route('category.index') }}">
+            <i class="fas fa-code-branch align-middle pe-1"></i> <span class="align-middle">{{ __('Category') }}</span>
+          </a>
+        </li>
+      @endif
+      @if (Auth::check() && (Auth::user()->role->slug === 'super-admin' || Auth::user()->role->slug === 'administrator'))
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{{ route('topics.index') }}">
+            <i class="fas fa-tags align-middle"></i> <span class="align-middle">{{ __('Topics Manager') }}</span>
+          </a>
+        </li>
+      @endif
+      @if (Auth::check() && (Auth::user()->role->slug === 'super-admin' || Auth::user()->role->slug === 'administrator'))
+        <li class="sidebar-header">{{ __('Users Management') }}</li>
+      @endif
+      @if (Auth::check() && (Auth::user()->role->slug === 'super-admin' || Auth::user()->role->slug === 'administrator'))
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{{ Auth::user()->role->slug === 'super-admin' ? route('users.index') : route('admin.users.index') }}">
+            <i class="fas fa-users align-middle"></i> <span class="align-middle">{{ __('Manage Users') }}</span>
+          </a>
+        </li>
+      @endif
+      @if (Auth::check() && (Auth::user()->role->slug === 'super-admin' || Auth::user()->role->slug === 'administrator'))
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{{ route('roles.index') }}">
+            <i class="fas fa-user-shield align-middle"></i> <span class="align-middle">{{ __('User Settings') }}</span>
+          </a>
+        </li>
+      @endif
       <li class="sidebar-header">{{ __('Settings & Security') }}</li>
       <li class="sidebar-item">
         <a class="sidebar-link" href="javascript:void(0)">

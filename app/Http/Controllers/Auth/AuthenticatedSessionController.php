@@ -17,19 +17,39 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        return view('auth.login2');
     }
 
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
+    // public function store(LoginRequest $request): RedirectResponse
+    // {
+    //     $request->authenticate();
 
-        $request->session()->regenerate();
+    //     $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+    //     return redirect()->intended(RouteServiceProvider::HOME);
+    // }
+
+    public function store(LoginRequest $request): RedirectResponse {
+      $request->authenticate();
+      $request->session()->regenerate();
+      $user = Auth::user();
+    //   dd($user->role->slug);
+      if ($user->role->slug === 'super-admin') {
+        return redirect()->intended(RouteServiceProvider::SUPER);
+      }
+      if ($user->role->slug === 'administrator') {
+        return redirect()->intended(RouteServiceProvider::ADMIN);
+      }
+      if ($user->role->slug === 'instructor') {
+        return redirect()->intended(RouteServiceProvider::INSTRUCTOR);
+      }
+      if ($user->role->slug === 'student') {
+        return redirect()->intended(RouteServiceProvider::STUDENT);
+      }
+      return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**

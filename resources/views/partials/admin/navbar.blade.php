@@ -17,22 +17,36 @@
       <div class="dropdown-menu py-0" aria-labelledby="itemsDropdown">
         <div class="dropdown-menu-header">{{ __('Add New Items') }}</div>
         <div class="list-group">
-          <a href="{{ route('category.create') }}" class="list-group-item">
-            <i class="fas fa-plus align-middle"></i>
-            <span class="text-dark ps-2">{{ __('Category') }}</span>
-          </a>
-          <a href="{{ route('courses.create') }}" class="list-group-item">
-            <i class="fas fa-plus align-middle"></i>
-            <span class="text-dark ps-2">{{ __('Course') }}</span>
-          </a>
-          <a href="{{ route('lessons.create') }}" class="list-group-item">
-            <i class="fas fa-plus align-middle"></i>
-            <span class="text-dark ps-2">{{ __('Lesson') }}</span>
-          </a>
-          <a href="{{ route('users.create') }}" class="list-group-item">
-            <i class="fas fa-plus align-middle"></i>
-            <span class="text-dark ps-2">{{ __('User') }}</span>
-          </a>
+          @if (Auth::check() && (Auth::user()->role->slug === 'super-admin' || Auth::user()->role->slug === 'administrator'))
+            <a href="{{ route('category.create') }}" class="list-group-item">
+              <i class="fas fa-plus align-middle"></i>
+              <span class="text-dark ps-2">{{ __('Category') }}</span>
+            </a>
+          @endif
+          @if (Auth::check() && (Auth::user()->role->slug === 'super-admin' || Auth::user()->role->slug === 'administrator' || Auth::user()->role->slug === 'instructor'))
+            <a href="{{ route('courses.create') }}" class="list-group-item">
+              <i class="fas fa-plus align-middle"></i>
+              <span class="text-dark ps-2">{{ __('Course') }}</span>
+            </a>
+          @endif
+          @if (Auth::check() && (Auth::user()->role->slug === 'super-admin' || Auth::user()->role->slug === 'administrator' || Auth::user()->role->slug === 'instructor'))
+            <a href="{{ route('lessons.create') }}" class="list-group-item">
+              <i class="fas fa-plus align-middle"></i>
+              <span class="text-dark ps-2">{{ __('Lesson') }}</span>
+            </a>
+          @endif
+          @if (Auth::check() && (Auth::user()->role->slug === 'super-admin' || Auth::user()->role->slug === 'administrator'))
+            <a href="{{ route('topics.create') }}" class="list-group-item">
+              <i class="fas fa-plus align-middle"></i>
+              <span class="text-dark ps-2">{{ __('Topics') }}</span>
+            </a>
+          @endif
+          @if (Auth::check() && (Auth::user()->role->slug === 'super-admin' || Auth::user()->role->slug === 'administrator'))
+            <a href="{{ Auth::user()->role->slug === 'super-admin' ? route('users.create') : route('admin.users.create') }}" class="list-group-item">
+              <i class="fas fa-plus align-middle"></i>
+              <span class="text-dark ps-2">{{ __('User') }}</span>
+            </a>
+          @endif
         </div>
       </div>
     </li>
@@ -172,7 +186,7 @@
           <i class="align-middle" data-feather="settings"></i>
         </a>
         <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="javascript:void(0)" data-bs-toggle="dropdown">
-          <img src="{{ asset('img/avatars/avatar.jpg') }}" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">Charles Hall</span>
+          <img src="{{ asset('img/avatars/avatar.jpg') }}" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">{{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}</span>
         </a>
         <div class="dropdown-menu dropdown-menu-end">
           <a class="dropdown-item" href="javascript:void(0)"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
@@ -181,7 +195,15 @@
           <a class="dropdown-item" href="javascript:void(0)"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
           <a class="dropdown-item" href="javascript:void(0)"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="javascript:void(0)"><i class="align-middle me-1" data-feather="log-out"></i> Log out</a>
+          {{-- <a class="dropdown-item" href="javascript:void(0)"><i class="align-middle me-1" data-feather="log-out"></i> Log out</a> --}}
+          <!-- Authentication -->
+          <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <a class="dropdown-item" href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
+              <i class="align-middle me-1" data-feather="log-out"></i>
+              <span class="me-1">{{ __('Log Out') }}</span>
+            </a>
+          </form>
         </div>
       </li>
     </ul>
