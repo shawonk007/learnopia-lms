@@ -22,9 +22,9 @@
           <thead>
             <tr>
               <th class="d-none d-xl-table-cell">{{ __('SL') }}</th>
-              <th>{{ __('Name of Users') }}</th>
+              <th>{{ __('Name of Instructor') }}</th>
               <th class="d-none d-xl-table-cell">{{ __('Email Address') }}</th>
-              <th>{{ __('User Role') }}</th>
+              {{-- <th>{{ __('User Role') }}</th> --}}
               <th class="d-none d-md-table-cell">{{ __('Status') }}</th>
               <th class="d-none d-md-table-cell">{{ __('Date Created') }}</th>
               <th>{{ __('Action') }}</th>
@@ -37,9 +37,9 @@
                 <td>
                   <strong>{{ $user->firstname }} {{ $user->lastname }}</strong>
                 </td>
-                <td class="d-none d-xl-table-cell">{{ $user->email }}</td>
-                <td><span class="badge bg-info">{{ $user->role->title }}</span></td>
-                <td class="d-none d-md-table-cell">
+                <td class="d-none d-xl-table-cell">{{ App\Models\Course::where('user_id', $user->id)->count() }}</td>
+                {{-- <td><span class="badge bg-info">{{ $user->role->title }}</span></td> --}}
+                {{-- <td class="d-none d-md-table-cell">
                   @if ($user->status === 1)
                     <span class="badge bg-success">{{ __('Enable') }}</span>
                   @elseif($user->status === 0)
@@ -47,8 +47,8 @@
                   @else  
                     <span class="badge bg-secondary">{{ __('Pending') }}</span>
                   @endif
-                </td>
-                <td class="d-none d-md-table-cell">{{ $user->created_at->diffforhumans() }}</td>
+                </td> --}}
+                {{-- <td class="d-none d-md-table-cell">{{ $user->created_at->diffforhumans() }}</td> --}}
                 <td>
                   <form action="" method="post">
                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-primary btn-sm">

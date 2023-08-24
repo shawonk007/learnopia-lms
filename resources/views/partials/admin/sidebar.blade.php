@@ -6,7 +6,7 @@
     <ul class="sidebar-nav">
       <li class="sidebar-item active">
         <a class="sidebar-link" href="{{ 
-          Auth::user()->role->slug === 'super_admin' ? route('super.dashboard') :
+          Auth::user()->role->slug === 'super-admin' ? route('super.dashboard') :
           (Auth::user()->role->slug === 'administrator' ? route('admin.dashboard') :
           (Auth::user()->role->slug === 'instructor' ? route('instructor.dashboard') :
           (Auth::user()->role->slug === 'student' ? route('student.dashboard') : '')
@@ -15,9 +15,13 @@
         </a>
       </li>
 
+      
+
       <li class="sidebar-header">{{ __('Course Management') }}</li>
       <li class="sidebar-item">
-        <a class="sidebar-link" href="{{ route('courses.index') }}">
+        <a class="sidebar-link" href="{{ 
+          Auth::user()->role->slug === 'super-admin' ? route('courses.index') : 
+          (Auth::user()->role->slug === 'administrator' ? route('admin.courses.index') : route('instructor.courses.index')) }}">
           <i class="fas fa-graduation-cap align-middle"></i> <span class="align-middle">{{ __('Manage Courses') }}</span>
         </a>
       </li>
@@ -56,6 +60,20 @@
         </li>
       @endif
       @if (Auth::check() && (Auth::user()->role->slug === 'super-admin' || Auth::user()->role->slug === 'administrator'))
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{{ Auth::user()->role->slug === 'super-admin' ? route('instructor.index') : route('admin.users.index') }}">
+            <i class="fas fa-user-tie align-middle"></i> <span class="align-middle">{{ __('Manage Instructors') }}</span>
+          </a>
+        </li>
+      @endif
+      @if (Auth::check() && (Auth::user()->role->slug === 'super-admin' || Auth::user()->role->slug === 'administrator'))
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{{ Auth::user()->role->slug === 'super-admin' ? route('student.index') : route('admin.users.index') }}">
+            <i class="fas fa-user-graduate align-middle"></i> <span class="align-middle">{{ __('Manage Students') }}</span>
+          </a>
+        </li>
+      @endif
+      @if (Auth::check() && (Auth::user()->role->slug === 'super-admin'))
         <li class="sidebar-item">
           <a class="sidebar-link" href="{{ route('roles.index') }}">
             <i class="fas fa-user-shield align-middle"></i> <span class="align-middle">{{ __('User Settings') }}</span>

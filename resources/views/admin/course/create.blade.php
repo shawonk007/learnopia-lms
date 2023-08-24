@@ -124,7 +124,7 @@
             </div>
           </div>
         </div>
-        {{-- <div class="card">
+        <div class="card">
           <div class="card-header">
             <h5 class="card-title mb-0">{{ __('Course Tags') }}</h5>
           </div>
@@ -140,7 +140,7 @@
               </div>
             </div>
           </div>
-        </div> --}}
+        </div>
         <div class="card">
           <div class="card-header">
             <h5 class="card-title mb-0">{{ __('Course Thumbnail') }}</h5>

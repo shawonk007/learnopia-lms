@@ -5,15 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Instructor;
 use App\Http\Requests\StoreInstructorRequest;
 use App\Http\Requests\UpdateInstructorRequest;
+use App\Models\User;
 
-class InstructorController extends Controller
-{
+class InstructorController extends Controller {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         //
+        $users = User::where([
+            ['role_id', 7],
+            ['status', 1]
+        ])->get(['firstname', 'lastname', 'id']);
+        return view('admin.instructor.index', compact('users'));
     }
 
     /**

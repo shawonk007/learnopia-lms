@@ -12,11 +12,22 @@
       <a href="{{ route('site.about') }}" class="nav-item nav-link">{{ __('About') }}</a>
       <a href="{{ route('site.courses') }}" class="nav-item nav-link">{{ __('Courses') }}</a>
       <div class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+        <a href="{{ route('site.courses') }}" class="nav-item nav-link">{{ __('Courses') }}</a>
         <div class="dropdown-menu fade-down m-0">
-          <a href="team.html" class="dropdown-item">Our Team</a>
-          <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-          <a href="404.html" class="dropdown-item">404 Page</a>
+          @php
+            $categories = App\Models\Category::where('status', 1)->get();
+          @endphp
+          @foreach ($categories as $categorie)
+            <a href="javascript:void(0)" class="dropdown-item">{{ $categorie->title }}</a>
+          @endforeach
+        </div>
+      </div>
+      <div class="nav-item dropdown">
+        <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+        <div class="dropdown-menu fade-down m-0">
+          <a href="javascript:void(0)" class="dropdown-item">Our Team</a>
+          <a href="javascript:void(0)" class="dropdown-item">Testimonial</a>
+          <a href="javascript:void(0)" class="dropdown-item">404 Page</a>
         </div>
       </div>
       <a href="{{ route('site.contact') }}" class="nav-item nav-link">{{ __('Contact') }}</a>
