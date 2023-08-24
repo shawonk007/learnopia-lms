@@ -1,11 +1,11 @@
 <x-admin-layout>
 
   <x-slot name="title">
-    {{ __('Add New User') }}
+    {{ __('Add New Instructor') }}
   </x-slot>
 
   <x-slot name="header">
-    <h1 class="h3 mb-3">{{ __('Users & Members') }}</h1>
+    <h1 class="h3 mb-3">{{ __('Instructor Profile') }}</h1>
   </x-slot>
 
   <form action="{{ route('users.store') }}" method="post">
@@ -45,19 +45,10 @@
                 <input type="text" name="username" class="form-control" id="uName" placeholder="{{ __('Username') }}" required />
               </div>
               <div class="col-6">
-                <input type="date" name="dob" class="form-control" id="dob" />
+                <input type="text" name="title" class="form-control" id="title" placeholder="{{ __('Professional Title') }}" required />
               </div>
               <div class="col-12">
                 <input type="email" name="email" class="form-control" id="email" placeholder="{{ __('Primary Email') }}" required />
-              </div>
-              <div class="col-12">
-                <input type="email" name="email_alt" class="form-control" id="emailAlt" placeholder="{{ __('Secondary Email') }}" />
-              </div>
-              <div class="col-6">
-                <input type="tel" name="phone" class="form-control" id="phone" placeholder="{{ __('Primary Phone') }}" required oninput="formatPhoneNumber(this)" maxlength="19" />
-              </div>
-              <div class="col-6">
-                <input type="tel" name="phone_alt" class="form-control" id="phoneAlt" placeholder="{{ __('Secondary Phone') }}" oninput="formatPhoneNumber(this)" maxlength="19" />
               </div>
               <div class="col-6">
                 <input type="password" name="password" class="form-control" id="pass" placeholder="{{ __('Password') }}" required />
@@ -66,13 +57,7 @@
                 <input type="password" name="c_password" class="form-control" id="cPass" placeholder="{{ __('Confirm Password') }}" required />
               </div>
               <div class="col-6">
-                <select name="role_id" class="form-control" id="userRole">
-                  @forelse ($roles as $roleId => $roleTitle)
-                    <option value="{{ $roleId }}">{{ $roleTitle }}</option>
-                  @empty
-                    <option value="" selected>{{ __('-- User Role --') }}</option>  
-                  @endforelse
-                </select>
+                <input type="tel" name="phone" class="form-control" id="phone" placeholder="{{ __('Primary Phone') }}" required oninput="formatPhoneNumber(this)" maxlength="19" />
               </div>
               <div class="col-6">
                 <select name="status" class="form-control" id="roleStats">
@@ -144,6 +129,9 @@
               </div>
               <div class="col-4">
                 <input type="text" name="postal" class="form-control" id="postalCode" placeholder="{{ __('Postal Code') }}" />
+              </div>
+              <div class="col-6">
+                <input type="date" name="dob" class="form-control" id="dob" />
               </div>
             </div>
           </div>

@@ -43,17 +43,23 @@
         <div class="col-5">
           <div class="card">
             <div class="card-body">
-              <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+              {{-- <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="{{ route('site.home') }}">{{ __('Home') }}</a></li>
                   <li class="breadcrumb-item"><a href="{{ route('site.courses') }}">{{ __('Courses') }}</a></li>
                   <li class="breadcrumb-item active" aria-current="page">{{ $course->title }}</li>
                 </ol>
-              </nav>
-              <h4>{{ $course->title }}</h4>
+              </nav> --}}
+              <h5>{{ $course->title }}</h5>
               <h6>{{ $course->category->title }}</h6>
               <p>{{ $course->course_code }}</p>
-              <p>{{ $course->details->highlights }}</p>
+              {{-- <p>{{ $course->details->highlights }}</p> --}}
+              <p>{!! $course->details->highlights !!}</p>
+            </div>
+            <div class="card-footer">
+              <a href="javascript:void(0)" class="btn btn-primary btn-block w-100">
+                <span>{{ __('Enroll Now') }}</span>
+              </a>
             </div>
           </div>
         </div>
@@ -81,7 +87,7 @@
       </div>
       <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-          {{ $course->details->description }}
+          {!! $course->details->description !!}
         </div>
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
           <div class="accordion" id="accordionExample">
@@ -89,12 +95,14 @@
               <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                    {{ $lesson->title }}
+                    <span>Lesson-{{ $loop->iteration }}</span>
+                    <span class="ms-1 me-1"> : </span>
+                    <span>{{ $lesson->title }}</span>
                   </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                   <div class="accordion-body">
-                    {{ $lesson->highlights }}
+                    {!! $lesson->highlights !!}
                   </div>
                 </div>
               </div>

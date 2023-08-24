@@ -1,11 +1,13 @@
 <x-admin-layout>
+
   <x-slot name="title">
-    {{ __('Manage Users') }}
+    {{ __('Manage Instructors') }}
   </x-slot>
+
   <x-slot name="header">
     <div class="d-flex align-items-center justify-content-between">
       <h1 class="h3 mb-3">{{ __('Users & Members') }}</h1>
-      <a href="{{ route('users.create') }}" class="btn btn-outline-primary mb-4" >
+      <a href="{{ route('instructor.create') }}" class="btn btn-outline-primary mb-4" >
         <i class="align-middle me-1" data-feather="plus"></i>
         <span class="ps-1">{{ __('Add New') }}</span>
       </a>
@@ -16,14 +18,14 @@
     <div class="col-12">
       <div class="card flex-fill">
         <div class="card-header">              
-          <h5 class="card-title mb-0">{{ __('Users DataTable') }}</h5>
+          <h5 class="card-title mb-0">{{ __('Instructors DataTable') }}</h5>
         </div>
         <table class="table table-hover my-0">
           <thead>
             <tr>
               <th class="d-none d-xl-table-cell">{{ __('SL') }}</th>
               <th>{{ __('Name of Instructor') }}</th>
-              <th class="d-none d-xl-table-cell">{{ __('Email Address') }}</th>
+              <th class="d-none d-xl-table-cell">{{ __('Courses') }}</th>
               {{-- <th>{{ __('User Role') }}</th> --}}
               <th class="d-none d-md-table-cell">{{ __('Status') }}</th>
               <th class="d-none d-md-table-cell">{{ __('Date Created') }}</th>
@@ -48,7 +50,8 @@
                     <span class="badge bg-secondary">{{ __('Pending') }}</span>
                   @endif
                 </td> --}}
-                {{-- <td class="d-none d-md-table-cell">{{ $user->created_at->diffforhumans() }}</td> --}}
+                <td></td>
+                <td class="d-none d-md-table-cell">{{ $user->created_at->diffforhumans() }}</td>
                 <td>
                   <form action="" method="post">
                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-primary btn-sm">

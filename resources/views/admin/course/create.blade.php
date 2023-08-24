@@ -66,6 +66,9 @@
                 <input type="text" name="offer_price" class="form-control" id="sPrice" placeholder="{{ __('Sell Price') }}" />
               </div>
               <div class="col-12">
+                <input type="text" name="duration" class="form-control" id="duration" placeholder="{{ __('Course Duration') }}" required />
+              </div>
+              <div class="col-12">
                 <input type="text" name="slug" class="form-control" id="slug" placeholder="{{ __('Course Slug') }}" required />
               </div>
               <div class="col-12">

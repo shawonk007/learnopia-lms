@@ -15,7 +15,8 @@ return new class extends Migration {
             $table->foreign('course_id')->references('id')->on('courses')->onDelete("cascade");
             $table->string('title', 100);
             $table->text('description');
-            $table->string('highlights', 255)->nullable();
+            $table->text('highlights')->nullable();
+            $table->string('duration', 50);
             $table->string('thumbnail', 255)->nullable();
             $table->string('slug', 255)->unique();
             $table->tinyInteger('status')->nullable();

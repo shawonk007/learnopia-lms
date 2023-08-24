@@ -17,7 +17,7 @@ class InstructorController extends Controller {
         $users = User::where([
             ['role_id', 7],
             ['status', 1]
-        ])->get(['firstname', 'lastname', 'id']);
+        ])->get(['firstname', 'lastname', 'created_at', 'id']);
         return view('admin.instructor.index', compact('users'));
     }
 
@@ -27,6 +27,11 @@ class InstructorController extends Controller {
     public function create()
     {
         //
+        $users = User::where([
+            ['role_id', 7],
+            ['status', 1]
+        ])->get(['firstname', 'lastname', 'id']);
+        return view('admin.instructor.create', compact('users'));
     }
 
     /**

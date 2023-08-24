@@ -17,8 +17,8 @@
           @php
             $categories = App\Models\Category::where('status', 1)->get();
           @endphp
-          @foreach ($categories as $categorie)
-            <a href="javascript:void(0)" class="dropdown-item">{{ $categorie->title }}</a>
+          @foreach ($categories as $category)
+            <a href="{{ url('/courses/'.$category->slug) }}" class="dropdown-item">{{ $category->title }}</a>
           @endforeach
         </div>
       </div>

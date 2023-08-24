@@ -14,7 +14,7 @@ class Lesson extends Model {
      *
      * @var array<int, string>
      */
-    protected $fillable = [ 'course_id', 'title', 'description', 'highlights', 'thumbnail', 'slug', 'status' ];
+    protected $fillable = [ 'course_id', 'title', 'description', 'highlights', 'duration', 'thumbnail', 'slug', 'status' ];
 
     public function course(): BelongsTo {
         return $this->belongsTo(Course::class);

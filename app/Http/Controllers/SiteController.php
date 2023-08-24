@@ -17,6 +17,11 @@ class SiteController extends Controller {
         return view('front-end.about');
     }
     // 
+    public function category($slug) {
+        $category = Category::where('slug', $slug)->firstOrFail();
+        return view('front-end.category', compact('category'));
+    }
+    // 
     public function courses() {
         $categories = Category::all();
         $courses = Course::all();
@@ -34,6 +39,10 @@ class SiteController extends Controller {
     // 
     public function team() {
         return view('front-end.team');
+    }
+    // 
+    public function instructor() {
+        return view('front-end.instructor');
     }
     // 
     public function contact() {

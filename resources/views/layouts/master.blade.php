@@ -36,6 +36,10 @@
     </div>
     <!-- Spinner End -->
 
+    @auth
+      <x-front-topbar />
+    @endauth
+
     <x-front-navbar />
 
     @isset($hero)

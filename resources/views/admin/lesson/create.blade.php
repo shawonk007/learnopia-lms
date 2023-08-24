@@ -48,6 +48,9 @@
           <div class="card-body py-0">
             <div class="row g-3">
               <div class="col-12">
+                <input type="text" name="duration" class="form-control" id="duration" placeholder="{{ __('Lesson Duration') }}" required />
+              </div>
+              <div class="col-12">
                 <input type="text" name="slug" class="form-control" id="slug" placeholder="{{ __('Lesson Slug') }}" required />
               </div>
               <div class="col-12">

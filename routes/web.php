@@ -33,6 +33,7 @@ Route::get('/about', [SiteController::class, 'about'])->name('site.about');
 Route::get('/courses', [SiteController::class, 'courses'])->name('site.courses');
 Route::get('/courses/{slug}', [SiteController::class, 'display'])->name('course.display');
 Route::get('/team', [SiteController::class, 'team'])->name('site.team');
+Route::get('/team/instructor', [SiteController::class, 'instructor'])->name('team.instructor');
 Route::get('/contact', [SiteController::class, 'contact'])->name('site.contact');
 Route::get('/disclaimer', [SiteController::class, 'disclaimer'])->name('site.disclaimer');
 Route::get('/privacy-policy', [SiteController::class, 'privacy'])->name('site.privacy');
