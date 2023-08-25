@@ -30,10 +30,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [SiteController::class, 'home'])->name('site.home');
 Route::get('/about', [SiteController::class, 'about'])->name('site.about');
-Route::get('/courses', [SiteController::class, 'courses'])->name('site.courses');
-Route::get('/courses/{slug}', [SiteController::class, 'display'])->name('course.display');
+Route::prefix('courses')->group(function() {
+  Route::get('/', [SiteController::class, 'courses'])->name('site.courses');
+  Route::get('/{slug}', [SiteController::class, 'display'])->name('course.display');
+  Route::get('/{slug}/purchase', [SiteController::class, 'enrollment'])->name('course.enroll');
+});
 Route::get('/team', [SiteController::class, 'team'])->name('site.team');
-Route::get('/team/instructor', [SiteController::class, 'instructor'])->name('team.instructor');
+Route::get('/team/{uname}', [SiteController::class, 'instructor'])->name('team.instructor');
 Route::get('/contact', [SiteController::class, 'contact'])->name('site.contact');
 Route::get('/disclaimer', [SiteController::class, 'disclaimer'])->name('site.disclaimer');
 Route::get('/privacy-policy', [SiteController::class, 'privacy'])->name('site.privacy');
@@ -52,6 +55,9 @@ Route::middleware('super_admin')->prefix('super')->group(function () {
   Route::resource('instructor', InstructorController::class);
   Route::resource('student', StudentController::class);
   Route::resource('roles', RoleController::class);
+  // Route::prefix('profile')->group(function() {
+    Route::get('/profile', [AdminController::class, 'edit'])->name('edit.profile');
+  // });
 });
 
 Route::middleware('admin')->prefix('admin')->group(function () {

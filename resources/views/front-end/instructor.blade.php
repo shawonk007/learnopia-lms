@@ -1,7 +1,8 @@
 <x-master-layout>
 
   <x-slot name="title">
-    {{ __('Instructor Profile') }}
+    {{-- {{ __('Instructor Profile') }} --}}
+    {{ $instructor->firstname . ' ' . $instructor->lastname }}
   </x-slot>
 
   <x-slot name="hero"></x-slot>
@@ -15,7 +16,7 @@
           </div>
           <div class="card-body text-center">
             <img src="{{ asset('img/avatars/avatar-4.jpg') }}" alt="Christina Mason" class="img-fluid rounded-circle mb-2" width="128" height="128" />
-            <h5 class="card-title mb-0">Christina Mason</h5>
+            <h5 class="card-title mb-0">{{ $instructor->firstname . ' ' . $instructor->lastname }}</h5>
             <div class="text-muted mb-2">Lead Developer</div>
             <div>
               <a class="btn btn-primary btn-sm" href="#">Follow</a>

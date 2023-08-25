@@ -179,6 +179,16 @@
   </form>
 
   <x-slot name="script">
+    <script>
+      var imgInp = document.getElementById("imageInput");
+      var dummy = document.getElementById("dummy");
+      imgInp.onchange = evt => {
+        const [file] = imgInp.files
+        if (file) {
+          dummy.src = URL.createObjectURL(file)
+        }
+      }
+    </script>
   </x-slot>
  
 </x-admin-layout>

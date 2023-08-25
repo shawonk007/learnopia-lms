@@ -11,25 +11,17 @@
       <a href="{{ route('site.home') }}" class="nav-item nav-link active">{{ __('Home') }}</a>
       <a href="{{ route('site.about') }}" class="nav-item nav-link">{{ __('About') }}</a>
       <a href="{{ route('site.courses') }}" class="nav-item nav-link">{{ __('Courses') }}</a>
-      <div class="nav-item dropdown">
+      {{-- <div class="nav-item dropdown">
         <a href="{{ route('site.courses') }}" class="nav-item nav-link">{{ __('Courses') }}</a>
         <div class="dropdown-menu fade-down m-0">
           @php
             $categories = App\Models\Category::where('status', 1)->get();
           @endphp
           @foreach ($categories as $category)
-            <a href="{{ url('/courses/'.$category->slug) }}" class="dropdown-item">{{ $category->title }}</a>
+            <a href="{{ route('site.category', ['slug' => $category->slug]) }}" class="dropdown-item">{{ $category->title }}</a>
           @endforeach
         </div>
-      </div>
-      <div class="nav-item dropdown">
-        <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-        <div class="dropdown-menu fade-down m-0">
-          <a href="javascript:void(0)" class="dropdown-item">Our Team</a>
-          <a href="javascript:void(0)" class="dropdown-item">Testimonial</a>
-          <a href="javascript:void(0)" class="dropdown-item">404 Page</a>
-        </div>
-      </div>
+      </div> --}}
       <a href="{{ route('site.contact') }}" class="nav-item nav-link">{{ __('Contact') }}</a>
     </div>
     <a href="javascript:void(0)" class="btn btn-success py-4 px-lg-4 d-none d-lg-block">{{ __('Enroll Now') }}<i class="fas fa-arrow-right ms-3"></i></a>

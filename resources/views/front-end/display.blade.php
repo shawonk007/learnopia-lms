@@ -11,7 +11,7 @@
       <div class="container py-5">
         <div class="row justify-content-center">
           <div class="col-lg-10 text-center">
-            <h1 class="display-3 text-white animated slideInDown">{{ __('Our Courses') }}</h1>
+            <h1 class="display-3 text-white animated slideInDown">{{ $course->title }}</h1>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb justify-content-center">
                 <li class="breadcrumb-item"><a class="text-white" href="{{ route('site.home') }}">{{ __('Home') }}</a></li>
@@ -29,7 +29,7 @@
   <section class="container-xxl py-5">
     <div class="container">
       <div class="row">
-        <div class="col-7">
+        <div class="col-12 col-xl-7">
           <div class="card">
             <div class="card-body">
               <div class="col-lg-12 col-md-12 wow zoomIn" data-wow-delay="0.1s">
@@ -39,8 +39,16 @@
               </div>
             </div>
           </div>
+          <div class="card mt-5">
+            <div class="card-body">
+              <div class="col-lg-12 col-md-12 wow fadeInUp" data-wow-delay="0.1s">
+                <h4>{{ __('What you will learn') }}</h4>
+                <p>{!! $course->details->highlights !!}</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-5">
+        <div class="col-12 col-xl-5 mt-5 mt-xl-0">
           <div class="card">
             <div class="card-body">
               {{-- <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
@@ -51,13 +59,31 @@
                 </ol>
               </nav> --}}
               <h5>{{ $course->title }}</h5>
-              <h6>{{ $course->category->title }}</h6>
-              <p>{{ $course->course_code }}</p>
-              {{-- <p>{{ $course->details->highlights }}</p> --}}
-              <p>{!! $course->details->highlights !!}</p>
+              @if ($course->offer_price)
+                <div class="d-flex align-items-middle">
+                  <h2>
+                    <span>BDT. </span>
+                    <span>{{ $course->offer_price }}</span>
+                  </h2>
+                  <s class="ms-2">{{ $course->regular_price }}</s>
+                </div>
+              @else
+                <h2>
+                  <span>BDT. </span>
+                  <span>{{ $course->regular_price }}</span>
+                </h2>
+              @endif
+              <h6>
+                <span>Category : </span>
+                <span>{{ $course->category->title }}</span>
+              </h6>
+              <p>
+                <span>Course Code : </span>
+                <span>{{ $course->course_code }}</span>
+              </p>
             </div>
             <div class="card-footer">
-              <a href="javascript:void(0)" class="btn btn-primary btn-block w-100">
+              <a href="{{ route('course.enroll', ['slug' => $course->slug, 'course_id' => $course->id]) }}" class="btn btn-primary btn-block w-100">
                 <span>{{ __('Enroll Now') }}</span>
               </a>
             </div>

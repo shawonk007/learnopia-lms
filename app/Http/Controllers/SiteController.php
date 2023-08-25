@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Course;
 use App\Models\Lesson;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller {
@@ -19,7 +20,7 @@ class SiteController extends Controller {
     // 
     public function category($slug) {
         $category = Category::where('slug', $slug)->firstOrFail();
-        return view('front-end.category', compact('category'));
+        return view('front-end.courses', compact('category'));
     }
     // 
     public function courses() {
@@ -33,16 +34,23 @@ class SiteController extends Controller {
         // $lessons = Lesson::where()
         return view('front-end.display', compact('course'));
     }
-    // public function display(Course $course) {
-    //     // return view('front-end.display', compact('course'));
+    // public function category($slug) {
+    //     return view('front-end.courses', compact('course'));
     // }
+    // 
+    public function enrollment(Request $request) {
+        $courseId = $request->query('course_id');
+        $course = Course::find($courseId);
+        return view('front-end.enrollment', compact('course'));
+    }
     // 
     public function team() {
         return view('front-end.team');
     }
     // 
-    public function instructor() {
-        return view('front-end.instructor');
+    public function instructor($uname) {
+        $instructor = User::where([['role_id', 7], ['username', $uname]])->firstOrFail();
+        return view('front-end.instructor', compact('instructor'));
     }
     // 
     public function contact() {

@@ -306,7 +306,9 @@
                 </div>
               </div>
               <div class="text-center p-4">
-                <h5 class="mb-0">{{ $instructor->firstname . ' ' . $instructor->lastname }}</h5>
+                <a href="{{ route('team.instructor', ['uname' => $instructor->username]) }}">
+                  <h5 class="mb-0">{{ $instructor->firstname . ' ' . $instructor->lastname }}</h5>
+                </a>
                 <small>Designation</small>
               </div>
             </div>
