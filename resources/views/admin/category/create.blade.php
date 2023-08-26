@@ -41,7 +41,7 @@
                 </select>
               </div>
               <div class="col-6">
-                <input type="checkbox" name="is_featured" class="form-check-input align-middle" id="catFeatured" value="1" />
+                <input type="checkbox" name="featured" class="form-check-input align-middle" id="catFeatured" value="1" />
                 <label for="catFeatured" class="align-middle ps-2">{{ __('Featured Category') }}</label>
               </div>
               <div class="col-6">

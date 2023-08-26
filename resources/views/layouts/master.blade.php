@@ -58,6 +58,7 @@
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('plugins/wow/wow.min.js' )}}"></script>
     <script src="{{ asset('plugins/easing/easing.min.js') }}"></script>
@@ -65,6 +66,30 @@
     <script src="{{ asset('plugins/owlcarousel/owl.carousel.min.js') }}"></script>
     <!-- Template Javascript -->
     <script src="{{ asset('js/main.js') }}"></script>
+    {{-- <script>
+      var stripe = Stripe('pk_test_51NjDwlSD9efIpDnkzJHyxyifgXgCFsfpPtjU4yGIIqbfaV4FELkeR5zuJOAA0v5moJChG6dLzx9jDEoEKHsgjrML009hG558hA');
+    </script> --}}
+    {{-- <script>
+      document.getElementById('payment-form').addEventListener('submit', function(event) {
+        // event.preventDefault();
+  
+        var card = {
+          number: '4242424242424242',
+          exp_month: 12,
+          exp_year: 25,
+          cvc: '123'
+        };
+  
+        stripe.createToken(card).then(function(result) {
+          if (result.error) {
+            // Handle error
+          } else {
+            // Handle successful payment simulation
+            console.log(result.token);
+          }
+        });
+      });
+    </script>   --}}
     @isset($script)
       {{ $script }}
     @endisset

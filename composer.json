@@ -11,7 +11,8 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
-        "spatie/laravel-html": "^3.2"
+        "spatie/laravel-html": "^3.2",
+        "stripe/stripe-php": "^12.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",

@@ -43,6 +43,7 @@ Route::get('/privacy-policy', [SiteController::class, 'privacy'])->name('site.pr
 Route::get('/terms-and-conditions', [SiteController::class, 'terms'])->name('site.terms');
 Route::get('/faq', [SiteController::class, 'faq'])->name('site.faq');
 Route::get('/sitemap', [SiteController::class, 'sitemap'])->name('site.sitemap');
+Route::post('/checkout', [SiteController::class, 'processPayment'])->name('site.checkout');
 
 Route::middleware('super_admin')->prefix('super')->group(function () {
 // Route::prefix('admin')->group(function () {

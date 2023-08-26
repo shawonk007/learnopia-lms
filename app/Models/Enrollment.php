@@ -16,10 +16,10 @@ class Enrollment extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [ 'student_id', 'course_id', 'status' ];
+    protected $fillable = [ 'user_id', 'course_id', 'status' ];
 
-    public function student(): BelongsToMany {
-        return $this->belongsToMany(Student::class);
+    public function user(): BelongsToMany {
+        return $this->belongsToMany(User::class);
     }
 
     public function course(): BelongsToMany {

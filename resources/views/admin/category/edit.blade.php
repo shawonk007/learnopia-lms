@@ -42,14 +42,14 @@
                 </select>
               </div>
               <div class="col-6">
-                <input type="checkbox" name="is_featured" class="form-check-input align-middle" id="catFeatured" value="1" />
+                <input type="checkbox" name="featured" class="form-check-input align-middle" id="catFeatured" value="1" {{ $category->featured === 1 ? 'checked' : '' }} />
                 <label for="catFeatured" class="align-middle ps-2">{{ __('Featured Category') }}</label>
               </div>
               <div class="col-6">
                 <select name="status" class="form-control" id="catStatus">
                   <option value="">{{ __('-- Choose Status --') }}</option>
-                  <option value="1">{{ __('Enable') }}</option>
-                  <option value="0">{{ __('Disable') }}</option>
+                  <option value="1" {{ $category->status === 1 ? 'selected' : '' }} >{{ __('Enable') }}</option>
+                  <option value="0" {{ $category->status === 0 ? 'selected' : '' }} >{{ __('Disable') }}</option>
                 </select>
               </div>
             </div>

@@ -86,6 +86,10 @@ class User extends Authenticatable {
         return $this->hasMany(Feedback::class);
     }
 
+    public function enrollments(): HasMany {
+        return $this->hasMany(Enrollment::class);
+    }
+
     public function payments(): HasMany {
         return $this->hasMany(Payment::class);
     }

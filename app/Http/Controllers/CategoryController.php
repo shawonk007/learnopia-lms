@@ -15,7 +15,6 @@ class CategoryController extends Controller {
         //
         $cats = Category::all();
         return view('admin.category.index', compact('cats'));
-        return response()->json($cats);
     }
 
     /**
@@ -35,7 +34,7 @@ class CategoryController extends Controller {
         $data = $request->validated();
         $parent = $request->sub() ?? $request->main() ?? null;
         Category::create(array_merge($data, ['parent_id' => $parent]));
-        return redirect()->route('category.create')->with('success', 'Category created successfully');
+        return back()->with('success', 'Category created successfully');
     }
 
     /**
@@ -57,8 +56,11 @@ class CategoryController extends Controller {
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, Category $category) {
+    // public function update(UpdateCategoryRequest $request, Category $category) {
+    public function update(Request $request, Category $category) {
         //
+        $category->update($request->all());
+        return back()->with('success', 'Category updated successfully');
     }
 
     /**
@@ -66,5 +68,7 @@ class CategoryController extends Controller {
      */
     public function destroy(Category $category) {
         //
+        $category->delete();
+        return back()->with('success', 'Category deleted successfully');
     }
 }
