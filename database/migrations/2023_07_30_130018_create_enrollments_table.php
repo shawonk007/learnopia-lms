@@ -12,7 +12,7 @@ return new class extends Migration {
         Schema::create('enrollments', function (Blueprint $table) {
             $table->id();
             $table->bigInteger("user_id")->unsigned();
-            $table->foreign('user_id')->references('id')->on('students')->onDelete("cascade");
+            $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
             $table->bigInteger("course_id")->unsigned();
             $table->foreign('course_id')->references('id')->on('courses')->onDelete("cascade");
             $table->tinyInteger('status')->default(1);

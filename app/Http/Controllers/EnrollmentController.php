@@ -7,14 +7,15 @@ use App\Http\Requests\StoreEnrollmentRequest;
 use App\Http\Requests\UpdateEnrollmentRequest;
 use Illuminate\Http\Request;
 
-class EnrollmentController extends Controller
-{
+class EnrollmentController extends Controller {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
+    public function index() {
         //
+        $enrollments = Enrollment::all();
+        return view('admin.enroll.index', compact('enrollments'));
+        // return view('admin.enroll.index');
     }
 
     /**

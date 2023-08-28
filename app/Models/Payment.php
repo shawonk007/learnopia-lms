@@ -15,13 +15,13 @@ class Payment extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [ 'user_id', 'course_id', 'payment_method', 'transaction_id', 'card_number', 'amount', 'status' ];
+    protected $fillable = [ 'user_id', 'course_id', 'payment_method', 'transaction_id', 'card_holder', 'card_number', 'amount', 'status' ];
 
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }
 
-    public function enrollment(): BelongsTo {
-        return $this->belongsTo(Enrollment::class);
+    public function course(): BelongsTo {
+        return $this->belongsTo(Course::class);
     }
 }

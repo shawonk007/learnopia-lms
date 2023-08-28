@@ -7,8 +7,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TopicController;
 use Illuminate\Support\Facades\Route;
@@ -33,8 +35,9 @@ Route::get('/about', [SiteController::class, 'about'])->name('site.about');
 Route::prefix('courses')->group(function() {
   Route::get('/', [SiteController::class, 'courses'])->name('site.courses');
   Route::get('/{slug}', [SiteController::class, 'display'])->name('course.display');
-  Route::get('/{slug}/purchase', [SiteController::class, 'enrollment'])->name('course.enroll');
+  // Route::get('/{slug}/purchase', [SiteController::class, 'enrollment'])->name('enrollment');
 });
+Route::get('/checkout', [SiteController::class, 'enrollment'])->name('enrollment');
 Route::get('/team', [SiteController::class, 'team'])->name('site.team');
 Route::get('/team/{uname}', [SiteController::class, 'instructor'])->name('team.instructor');
 Route::get('/contact', [SiteController::class, 'contact'])->name('site.contact');
@@ -43,7 +46,8 @@ Route::get('/privacy-policy', [SiteController::class, 'privacy'])->name('site.pr
 Route::get('/terms-and-conditions', [SiteController::class, 'terms'])->name('site.terms');
 Route::get('/faq', [SiteController::class, 'faq'])->name('site.faq');
 Route::get('/sitemap', [SiteController::class, 'sitemap'])->name('site.sitemap');
-Route::post('/checkout', [SiteController::class, 'processPayment'])->name('site.checkout');
+Route::post('/session', [SiteController::class, 'processPayment'])->name('session');
+Route::get('/success', [SiteController::class, 'success'])->name('success');
 
 Route::middleware('super_admin')->prefix('super')->group(function () {
 // Route::prefix('admin')->group(function () {
@@ -52,6 +56,8 @@ Route::middleware('super_admin')->prefix('super')->group(function () {
   Route::resource('lessons', LessonController::class);
   Route::resource('category', CategoryController::class);
   Route::resource('topics', TopicController::class);
+  Route::resource('enrollments', EnrollmentController::class);
+  Route::resource('payments', PaymentController::class);
   Route::resource('users', UserController::class);
   Route::resource('instructor', InstructorController::class);
   Route::resource('student', StudentController::class);

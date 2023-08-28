@@ -13,9 +13,10 @@ return new class extends Migration {
             $table->id();
             $table->bigInteger("user_id")->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
-            $table->bigInteger("enrollment_id")->unsigned();
-            $table->foreign('enrollment_id')->references('id')->on('enrollments')->onDelete("cascade");
+            $table->bigInteger("course_id")->unsigned();
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete("cascade");
             $table->tinyInteger('payment_method');
+            $table->string('card_holder');
             $table->string('card_number');
             $table->string('transaction_id')->unique();
             $table->decimal('amount', 10, 2);

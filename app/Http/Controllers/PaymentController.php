@@ -14,6 +14,7 @@ class PaymentController extends Controller
     public function index()
     {
         //
+        return view('admin.payment.index');
     }
 
     /**

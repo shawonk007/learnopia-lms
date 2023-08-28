@@ -95,8 +95,32 @@ class SiteController extends Controller {
 
 
     public function processPayment(Request $request) {
-        dd($request);
-        Stripe::setApiKey(config('services.stripe.secret'));
+        // dd($request);
+        Stripe::setApiKey(config('stripe.sk'));
+
+        $courseId = $request->get('course_id');
+        $courseTitle = $request->get('course_title');
+        $coursePrice = $request->get('regular_price');
+
+        $session = \Stripe\Checkout\Session::create([
+            'line_items' => [
+                [
+                    'price_data' => [
+                        'currency' => 'INR',
+                        'product_data' => [
+                            'name' => $courseTitle,
+                        ],
+                        'unit_amount' => $coursePrice,
+                    ],
+                    'quantity' => 1,
+                ],
+            ],
+            'mode' => 'payment',
+            'success_url' => route('success'),
+            'cancel_url' => route('enrollment'),
+        ]);
+
+        return redirect()->away($session->url);
 
         $card = [
             'number' => '4242424242424242',
@@ -146,5 +170,17 @@ class SiteController extends Controller {
             Log::error('Stripe Exception: ' . $e->getMessage());
             return response()->json(['error' => 'An error occurred.'], 500);
         }
+
+        // dd($request->all());
+        // $enroll = Enrollment::create($request->all());
+        // if ($enroll) {
+        //   $payment = new Payment($request->all());
+        //   $enroll->payment()->save($payment);
+        // }
+        // return "Payment successful";
+    }
+
+    public function success() {
+        return "Payment successful";
     }
 }

@@ -12,7 +12,7 @@
         <h6 class="section-title bg-white text-center text-primary px-3">{{ __('Enroll') }}</h6>
         <h1 class="mb-5">{{ __('Purchase Course') }}</h1>
       </div>
-      <form action="{{ route('site.checkout') }}" method="post" id="payment-form">
+      <form action="{{ route('session') }}" method="post" id="payment-form">
         @csrf
         <div class="row g-5">
           <div class="col-lg-7 col-md-6">
@@ -71,6 +71,7 @@
                 <h6 class="section-title bg-white text-start text-primary pe-3 mb-4">{{ __('Course Information') }}</h6>
                 <table class="table">
                   <tbody>
+                    <input type="hidden" name="course_id" value="{{ $course->id }}">
                     <tr>
                       <td>{{ $course->course_code }}</td>
                       <td class="text-end">{{ $course->regular_price }}</td>
@@ -101,13 +102,23 @@
               <div class="card-body">
                 <div class="row g-3">
                   <div class="col-12">
-                    <input type="text" name="card_number" class="form-control" id="card-number" placeholder="Card Number" value="4242424242424242" />
+                    <label for="method">
+                      <i class="fab fa-stripe"></i>
+                    </label>
+                    <input type="radio" name="payment_method" id="method" value="1" />
+                    <input type="hidden" name="transaction_id" id="transactionID" />
                   </div>
                   <div class="col-12">
-                    <input type="text" class="form-control" id="card-expiry" placeholder="MM/YY" value="12/25" />
+                    <input type="text" name="card_holder" class="form-control" id="card-number" placeholder="Card Holder"  />
                   </div>
                   <div class="col-12">
-                    <input type="text" class="form-control" id="card-cvc" placeholder="CVC" value="123" />
+                    <input type="text" name="card_number" class="form-control" id="card-number" placeholder="Card Number"  />
+                  </div>
+                  <div class="col-6">
+                    <input type="text" class="form-control" id="card-expiry" placeholder="MM/YY"  />
+                  </div>
+                  <div class="col-6">
+                    <input type="text" class="form-control" id="card-cvc" placeholder="CVC" />
                   </div>
                 </div>
               </div>
@@ -120,34 +131,75 @@
 
   <x-slot name="script">
 
+    <script src="https://js.stripe.com/v3/"></script>
+
     <script>
-      var stripe = Stripe('pk_test_51NjDwlSD9efIpDnkzJHyxyifgXgCFsfpPtjU4yGIIqbfaV4FELkeR5zuJOAA0v5moJChG6dLzx9jDEoEKHsgjrML009hG558hA');
+      const stripe = Stripe('pk_test_51NjDwlSD9efIpDnkzJHyxyifgXgCFsfpPtjU4yGIIqbfaV4FELkeR5zuJOAA0v5moJChG6dLzx9jDEoEKHsgjrML009hG558hA');
   
-      document.getElementById('payment-form').addEventListener('submit', function(event) {
-        // event.preventDefault();
-        var purchaseButton = document.getElementById('purchase-button');
-        purchaseButton.disabled = true;
+      // document.getElementById('payment-form').addEventListener('submit', function(event) {
+      //   // event.preventDefault();
+      //   var purchaseButton = document.getElementById('purchase-button');
+      //   purchaseButton.disabled = true;
   
-        stripe.createToken('card', {
-          number: document.getElementById('card-number').value,
-          exp_month: document.getElementById('card-expiry').value.split('/')[0],
-          exp_year: document.getElementById('card-expiry').value.split('/')[1],
-          cvc: document.getElementById('card-cvc').value
-        }).then(function(result) {
-          if (result.error) {
-            // Handle error
-            alert(result.error.message);
-            purchaseButton.disabled = false;
-          } else {
-            var tokenInput = document.createElement('input');
-            tokenInput.setAttribute('type', 'hidden');
-            tokenInput.setAttribute('name', 'stripeToken');
-            tokenInput.setAttribute('value', result.token.id);
-            document.getElementById('payment-form').appendChild(tokenInput);
-            document.getElementById('payment-form').submit();
-          }
-        });
+      //   stripe.createToken('card', {
+      //     number: document.getElementById('card-number').value,
+      //     exp_month: document.getElementById('card-expiry').value.split('/')[0],
+      //     exp_year: document.getElementById('card-expiry').value.split('/')[1],
+      //     cvc: document.getElementById('card-cvc').value
+      //   }).then(function(result) {
+      //     if (result.error) {
+      //       // Handle error
+      //       alert(result.error.message);
+      //       purchaseButton.disabled = false;
+      //     } else {
+      //       var tokenInput = document.createElement('input');
+      //       tokenInput.setAttribute('type', 'hidden');
+      //       tokenInput.setAttribute('name', 'stripeToken');
+      //       tokenInput.setAttribute('value', result.token.id);
+      //       document.getElementById('payment-form').appendChild(tokenInput);
+      //       document.getElementById('payment-form').submit();
+      //     }
+      //   });
+      // });
+
+// Handle form submission
+          const form = document.getElementById('payment-form');
+          form.addEventListener('submit', async (event) => {
+            // event.preventDefault();
+
+            const { token, error } = await stripe.createToken('card', {
+              name: document.getElementById('cardholder-name').value,
+            });
+
+            if (error) {
+              // Handle error
+            } else {
+              // Send token to server
+              fetch('/session', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'X-CSRF-TOKEN': '{{ csrf_token() }}', // Laravel CSRF token
+                },
+                body: JSON.stringify({ token: token.id }),
+              })
+              .then(response => response.json())
+              .then(data => {
+                // Handle server response
+              });
+            }
+          });
+
+    </script>
+
+    <script>
+      $(document).ready(function() {
+        generateTransactionID();
       });
+      function generateTransactionID() {
+        var trxID = "TRXID_" + new Date().getTime();
+        $("#transactionID").val(trxID);
+      }
     </script>
 
     <script>

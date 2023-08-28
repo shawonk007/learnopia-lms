@@ -83,7 +83,7 @@
               </p>
             </div>
             <div class="card-footer">
-              <a href="{{ route('course.enroll', ['slug' => $course->slug, 'course_id' => $course->id]) }}" class="btn btn-primary btn-block w-100">
+              <a href="{{ route('enrollment', ['slug' => $course->slug, 'course_id' => $course->id]) }}" class="btn btn-primary btn-block w-100">
                 <span>{{ __('Enroll Now') }}</span>
               </a>
             </div>

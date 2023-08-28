@@ -14,9 +14,6 @@
             <i class="fas fa-gauge-high align-middle"></i> <span class="align-middle">{{ __('Dashboard') }}</span>
         </a>
       </li>
-
-      
-
       <li class="sidebar-header">{{ __('Course Management') }}</li>
       <li class="sidebar-item">
         <a class="sidebar-link" href="{{ 
@@ -49,6 +46,17 @@
           </a>
         </li>
       @endif
+      <li class="sidebar-header">{{ __('Enroll Management') }}</li>
+      <li class="sidebar-item">
+        <a class="sidebar-link" href="{{ route('enrollments.index') }}">
+          <i class="fas fa-user-shield align-middle"></i> <span class="align-middle">{{ __('Enrolled Courses') }}</span>
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a class="sidebar-link" href="{{ route('payments.index') }}">
+          <i class="fas fa-user-shield align-middle"></i> <span class="align-middle">{{ __('Manage Payments') }}</span>
+        </a>
+      </li>
       @if (Auth::check() && (Auth::user()->role->slug === 'super-admin' || Auth::user()->role->slug === 'administrator'))
         <li class="sidebar-header">{{ __('Users Management') }}</li>
       @endif
