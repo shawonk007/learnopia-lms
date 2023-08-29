@@ -78,15 +78,17 @@
                     </tr>
                     <tr>
                       <th>{{ __('Sub-Total') }}</th>
-                      <th class="text-end">{{ $subTotal = number_format($course->regular_price * 1, 2) }}</th>
+                      {{-- <th class="text-end">{{ $subTotal = number_format($course->regular_price * 1, 2) }}</th> --}}
+                      <th class="text-end">{{ $course->regular_price }}</th>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                       <th>{{ __('Tax') }}</th>
                       <th class="text-end">{{ $tax = number_format($course->regular_price * 0.05, 2) }}</th>
-                    </tr>
+                    </tr> --}}
                     <tr>
                       <th>{{ __('Grand Total') }}</th>
-                      <th class="text-end">{{ $total = number_format($subTotal + $tax, 2) }}</th>
+                      {{-- <th class="text-end">{{ $total = number_format($subTotal + $tax, 2) }}</th> --}}
+                      <th class="text-end">{{ $total = $course->regular_price }}</th>
                       <input type="hidden" name="amount" value="{{ $total }}">
                     </tr>
                   </tbody>
@@ -106,8 +108,8 @@
                       <i class="fab fa-stripe"></i>
                     </label>
                     <input type="radio" name="payment_method" id="method" value="1" />
-                    <input type="hidden" name="transaction_id" id="transactionID" />
                   </div>
+                  <input type="hidden" name="transaction_id" id="transactionID" />
                   <div class="col-12">
                     <input type="text" name="card_holder" class="form-control" id="card-number" placeholder="Card Holder"  />
                   </div>

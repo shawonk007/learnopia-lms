@@ -37,7 +37,7 @@ class SiteController extends Controller {
     }
     //
     public function display($slug) {
-        $course = Course::where('slug', $slug)->firstOrFail();
+        $course = Course::with('topic')->where('slug', $slug)->firstOrFail();
         // $lessons = Lesson::where()
         return view('front-end.display', compact('course'));
     }
@@ -96,88 +96,100 @@ class SiteController extends Controller {
 
     public function processPayment(Request $request) {
         // dd($request);
-        Stripe::setApiKey(config('stripe.sk'));
+        // Stripe::setApiKey(config('stripe.sk'));
 
-        $courseId = $request->get('course_id');
-        $courseTitle = $request->get('course_title');
-        $coursePrice = $request->get('regular_price');
+        // $courseId = $request->get('course_id');
+        // $courseTitle = $request->get('course_title');
+        // $coursePrice = $request->get('regular_price');
 
-        $session = \Stripe\Checkout\Session::create([
-            'line_items' => [
-                [
-                    'price_data' => [
-                        'currency' => 'INR',
-                        'product_data' => [
-                            'name' => $courseTitle,
-                        ],
-                        'unit_amount' => $coursePrice,
-                    ],
-                    'quantity' => 1,
-                ],
-            ],
-            'mode' => 'payment',
-            'success_url' => route('success'),
-            'cancel_url' => route('enrollment'),
-        ]);
+        // $session = \Stripe\Checkout\Session::create([
+        //     'line_items' => [
+        //         [
+        //             'price_data' => [
+        //                 'currency' => 'INR',
+        //                 'product_data' => [
+        //                     'name' => $courseTitle,
+        //                 ],
+        //                 'unit_amount' => $coursePrice,
+        //             ],
+        //             'quantity' => 1,
+        //         ],
+        //     ],
+        //     'mode' => 'payment',
+        //     'success_url' => route('success'),
+        //     'cancel_url' => route('enrollment'),
+        // ]);
 
-        return redirect()->away($session->url);
+        // return redirect()->away($session->url);
 
-        $card = [
-            'number' => '4242424242424242',
-            'exp_month' => 12,
-            'exp_year' => 25,
-            'cvc' => '123',
-        ];
+        // $card = [
+        //     'number' => '4242424242424242',
+        //     'exp_month' => 12,
+        //     'exp_year' => 25,
+        //     'cvc' => '123',
+        // ];
 
-        try {
-            $token = Token::create([
-                'card' => $card,
-            ]);
-            Log::info('Stripe Token Created: ' . json_encode($token));
+        // try {
+        //     $token = Token::create([
+        //         'card' => $card,
+        //     ]);
+        //     Log::info('Stripe Token Created: ' . json_encode($token));
 
-            $course = Course::findOrFail($request->course_id);
+        //     $course = Course::findOrFail($request->course_id);
 
-            // Create an enrollment record
-            $enroll = Enrollment::create([
-                'user_id' => Auth::user()->id,
-                'course_id' => $course->id,
-                // 'status' => 1,
-            ]);
+        //     // Create an enrollment record
+        //     $enroll = Enrollment::create([
+        //         'user_id' => Auth::user()->id,
+        //         'course_id' => $course->id,
+        //         // 'status' => 1,
+        //     ]);
 
-            $subTotal = $course->regular_price * 1;
-            $tax = $course->regular_price * 0.05;
-            $total = $subTotal + $tax;
+        //     $subTotal = $course->regular_price * 1;
+        //     $tax = $course->regular_price * 0.05;
+        //     $total = $subTotal + $tax;
 
-            // Create a payment record
-            $payment = Payment::create([
-                'user_id' => Auth::user()->id,
-                'enrollment_id' => $enroll->id,
-                'payment_method' => 'Stripe',
-                'transaction_id' => $token->id,
-                'card_number' => '**** **** **** ' . substr($card['number'], -4),
-                'amount' => $total,
-                // 'status' => 1,
-            ]);
+        //     // Create a payment record
+        //     $payment = Payment::create([
+        //         'user_id' => Auth::user()->id,
+        //         'enrollment_id' => $enroll->id,
+        //         'payment_method' => 'Stripe',
+        //         'transaction_id' => $token->id,
+        //         'card_number' => '**** **** **** ' . substr($card['number'], -4),
+        //         'amount' => $total,
+        //         // 'status' => 1,
+        //     ]);
 
-            // Handle successful payment simulation
-            return response()->json(['payment' => $payment]);
-        } catch (\Stripe\Exception\CardException $e) {
-            // Handle card error
-            Log::error('Stripe Card Exception: ' . $e->getMessage());
-            return response()->json(['error' => $e->getMessage()], 400);
-        } catch (\Exception $e) {
-            // Handle other errors
-            Log::error('Stripe Exception: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred.'], 500);
-        }
+        //     // Handle successful payment simulation
+        //     return response()->json(['payment' => $payment]);
+        // } catch (\Stripe\Exception\CardException $e) {
+        //     // Handle card error
+        //     Log::error('Stripe Card Exception: ' . $e->getMessage());
+        //     return response()->json(['error' => $e->getMessage()], 400);
+        // } catch (\Exception $e) {
+        //     // Handle other errors
+        //     Log::error('Stripe Exception: ' . $e->getMessage());
+        //     return response()->json(['error' => 'An error occurred.'], 500);
+        // }
 
         // dd($request->all());
-        // $enroll = Enrollment::create($request->all());
-        // if ($enroll) {
-        //   $payment = new Payment($request->all());
-        //   $enroll->payment()->save($payment);
-        // }
-        // return "Payment successful";
+        // Assuming the user is authenticated
+        // $userId = auth()->user()->id;
+        
+        // // Validate the request data and create the enrollment
+        // $enroll = Enrollment::create([
+        //     'user_id' => $userId,
+        //     'course_id' => $request->input('course_id'),
+        //     // Add other enrollment data
+        // ]);
+
+        $enroll = Enrollment::create($request->all());
+
+        if ($enroll) {
+            $payment = new Payment($request->all());
+            $enroll->payment()->save($payment);
+        }
+        
+        return redirect()->route('site.home')->with('success', 'Purchased successfull!');
     }
 
     public function success() {

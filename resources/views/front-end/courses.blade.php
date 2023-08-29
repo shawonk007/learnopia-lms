@@ -90,11 +90,11 @@
           <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
             <div class="course-item bg-light">
               <div class="position-relative overflow-hidden">
-                <img class="img-fluid" src="img/course-1.jpg" alt="">
+                <img class="img-fluid" src="{{ Storage::url($course->details->thumbnail ) }}" alt="">
                 {{-- <img src="{{ asset('storage/' . $course->details->thumbnail) }}" alt="Course Thumbnail"> --}}
                 <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
                   <a href="{{ route('course.display', ['slug' => $course->slug]) }}" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">{{ __('Read More') }}</a>
-                  <a href="javascript:void(0)" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">{{ __('Enroll') }}</a>
+                  <a href="{{ route('enrollment', ['slug' => $course->slug, 'course_id' => $course->id]) }}" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">{{ __('Enroll') }}</a>
                 </div>
               </div>
               <div class="text-center p-4 pb-0">

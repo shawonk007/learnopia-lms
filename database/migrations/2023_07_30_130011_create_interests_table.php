@@ -11,8 +11,8 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('interests', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("student_id")->unsigned();
-            $table->foreign('student_id')->references('id')->on('students')->onDelete("cascade");
+            $table->bigInteger("user_id")->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
             $table->bigInteger("topic_id")->unsigned();
             $table->foreign('topic_id')->references('id')->on('topics');
             $table->timestamps();

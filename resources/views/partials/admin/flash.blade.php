@@ -7,6 +7,14 @@
       confirmButtonText: 'OK'
     });
   @endif
+  @if(session('success'))
+    Swal.fire({
+      title: 'Purchased',
+      text: '{{ session('success') }}',
+      icon: 'success',
+      confirmButtonText: 'OK'
+    });
+  @endif
   @if(session('updated'))
     Swal.fire({
       title: 'Updated',

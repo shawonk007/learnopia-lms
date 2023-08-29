@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder{
             RoleSeeder::class,
             UserSeeder::class,
             InstructorSeeder::class,
-            StudentSeeder::class,
             CategorySeeder::class,
             TopicSeeder::class,
         ]);

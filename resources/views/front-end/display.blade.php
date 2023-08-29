@@ -34,7 +34,8 @@
             <div class="card-body">
               <div class="col-lg-12 col-md-12 wow zoomIn" data-wow-delay="0.1s">
                 <a class="position-relative d-block overflow-hidden" href="javascript:void(0)">
-                  <img class="img-fluid" src="{{asset('img/cat-1.jpg')}}" alt="" />
+                  {{-- <img class="img-fluid" src="{{asset('img/cat-1.jpg')}}" alt="" /> --}}
+                  <img class="img-fluid" src="{{ Storage::url($course->details->thumbnail ) }}" alt="" />
                 </a>
               </div>
             </div>
@@ -59,33 +60,35 @@
                 </ol>
               </nav> --}}
               <h5>{{ $course->title }}</h5>
-              @if ($course->offer_price)
-                <div class="d-flex align-items-middle">
-                  <h2>
-                    <span>BDT. </span>
-                    <span>{{ $course->offer_price }}</span>
-                  </h2>
-                  <s class="ms-2">{{ $course->regular_price }}</s>
-                </div>
-              @else
-                <h2>
-                  <span>BDT. </span>
-                  <span>{{ $course->regular_price }}</span>
-                </h2>
-              @endif
-              <h6>
+              <h2 class="my-3">
+                <span>BDT. </span>
+                <span>{{ $course->regular_price }}</span>
+              </h2>
+              <p>
                 <span>Category : </span>
                 <span>{{ $course->category->title }}</span>
-              </h6>
+              </p>
               <p>
                 <span>Course Code : </span>
                 <span>{{ $course->course_code }}</span>
+              </p>
+              <p>
+                <span>Course Duration : </span>
+                <span>{{ $course->details->duration }}</span>
               </p>
             </div>
             <div class="card-footer">
               <a href="{{ route('enrollment', ['slug' => $course->slug, 'course_id' => $course->id]) }}" class="btn btn-primary btn-block w-100">
                 <span>{{ __('Enroll Now') }}</span>
               </a>
+            </div>
+          </div>
+          <div class="card mt-5">
+            <div class="card-body">
+              <h4 class="mb-3">{{ __('Course Topics') }}</h4>
+              @foreach ($course->topic as $topic)
+                <span class="badge bg-info rounded-pill">{{$topic->title}}</span>
+              @endforeach
             </div>
           </div>
         </div>

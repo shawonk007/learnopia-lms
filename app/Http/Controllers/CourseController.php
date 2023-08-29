@@ -105,7 +105,7 @@ class CourseController extends Controller {
             $course->details()->save($details);
     
             if ($request->topic_id) {
-                $course->topic()->attach($request->topic_id);
+                // $course->topic()->attach($request->topic_id);
                 foreach ($request->topic_id as $topicId) {
                     CourseTag::create([
                         'course_id' => $course->id,

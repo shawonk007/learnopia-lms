@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
             $table->string('website', 100)->nullable();
             $table->decimal('commission', 10, 2);
+            $table->decimal('balance', 10, 2)->nullable();
             $table->integer('ratings')->nullable();
             $table->boolean('featured')->default(false);
             $table->timestamps();

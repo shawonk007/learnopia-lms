@@ -63,13 +63,15 @@
     <script src="{{ asset('plugins/easing/easing.min.js') }}"></script>
     <script src="{{ asset('plugins/waypoints/waypoints.min.js') }}"></script>
     <script src="{{ asset('plugins/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+	  <script src="{{ asset('plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <!-- Template Javascript -->
     <script src="{{ asset('js/main.js') }}"></script>
     @include('partials.admin.flash')
-    {{-- <script>
+    <script>
       var stripe = Stripe('pk_test_51NjDwlSD9efIpDnkzJHyxyifgXgCFsfpPtjU4yGIIqbfaV4FELkeR5zuJOAA0v5moJChG6dLzx9jDEoEKHsgjrML009hG558hA');
-    </script> --}}
-    {{-- <script>
+    </script>
+    <script>
       document.getElementById('payment-form').addEventListener('submit', function(event) {
         // event.preventDefault();
   
@@ -89,7 +91,7 @@
           }
         });
       });
-    </script>   --}}
+    </script>
     @isset($script)
       {{ $script }}
     @endisset
