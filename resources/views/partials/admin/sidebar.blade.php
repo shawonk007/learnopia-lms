@@ -5,19 +5,22 @@
     </a>
     <ul class="sidebar-nav">
       <li class="sidebar-item active">
-        <a class="sidebar-link" href="{{ 
+        <a class="sidebar-link" href="{{ route('admin.dashboard') }}">
+            <i class="fas fa-gauge-high align-middle"></i> <span class="align-middle">{{ __('Dashboard') }}</span>
+        </a>
+        {{-- <a class="sidebar-link" href="{{
           Auth::user()->role->slug === 'super-admin' ? route('super.dashboard') :
           (Auth::user()->role->slug === 'administrator' ? route('admin.dashboard') :
           (Auth::user()->role->slug === 'instructor' ? route('instructor.dashboard') :
           (Auth::user()->role->slug === 'student' ? route('student.dashboard') : '')
           )) }}">
             <i class="fas fa-gauge-high align-middle"></i> <span class="align-middle">{{ __('Dashboard') }}</span>
-        </a>
+        </a> --}}
       </li>
       <li class="sidebar-header">{{ __('Course Management') }}</li>
       <li class="sidebar-item">
-        <a class="sidebar-link" href="{{ 
-          Auth::user()->role->slug === 'super-admin' ? route('courses.index') : 
+        <a class="sidebar-link" href="{{
+          Auth::user()->role->slug === 'super-admin' ? route('courses.index') :
           (Auth::user()->role->slug === 'administrator' ? route('admin.courses.index') : route('instructor.courses.index')) }}">
           <i class="fas fa-graduation-cap align-middle"></i> <span class="align-middle">{{ __('Manage Courses') }}</span>
         </a>

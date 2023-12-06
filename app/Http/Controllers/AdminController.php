@@ -2,59 +2,64 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Profile;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use App\Models\Admin;
+use App\Http\Requests\StoreAdminRequest;
+use App\Http\Requests\UpdateAdminRequest;
 
-class AdminController extends Controller {
+class AdminController extends Controller
+{
     /**
      * Display a listing of the resource.
      */
-    public function index() {
+    public function index()
+    {
         //
-        return view('admin.dashboard');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {
+    public function create()
+    {
         //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {
+    public function store(StoreAdminRequest $request)
+    {
         //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id) {
+    public function show(Admin $admin)
+    {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user) {
-        return view('admin.users.profile', compact('user'));
+    public function edit(Admin $admin)
+    {
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id) {
+    public function update(UpdateAdminRequest $request, Admin $admin)
+    {
         //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Admin $admin)
     {
         //
     }

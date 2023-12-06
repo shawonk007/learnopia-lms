@@ -25,7 +25,16 @@
                   {{ $header }}
                 @endisset
 			  </div>
-              {{ $slot }}
+              <div class="card">
+                <div class="card-body">
+                  <div class="m-sm-4">
+                    <div class="text-center">
+                      <img src="{{ asset('img/avatars/avatar.jpg') }}" alt="Charles Hall" class="img-fluid rounded-circle" width="132" height="132" />
+                    </div>
+                    {{ $slot }}
+                  </div>
+                </div>
+              </div>
 			</div>
 		  </div>
 		</div>

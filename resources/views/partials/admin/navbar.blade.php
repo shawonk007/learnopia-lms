@@ -186,7 +186,7 @@
           <i class="align-middle" data-feather="settings"></i>
         </a>
         <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="javascript:void(0)" data-bs-toggle="dropdown">
-          <img src="{{ asset('img/avatars/avatar.jpg') }}" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">{{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}</span>
+          <img src="{{ asset('img/avatars/avatar.jpg') }}" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">{{ Auth::guard('admin')->user()->firstname . ' ' . Auth::guard('admin')->user()->lastname }}</span>
         </a>
         <div class="dropdown-menu dropdown-menu-end">
           <a class="dropdown-item" href="{{ route('edit.profile') }}"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
@@ -197,7 +197,7 @@
           <div class="dropdown-divider"></div>
           {{-- <a class="dropdown-item" href="javascript:void(0)"><i class="align-middle me-1" data-feather="log-out"></i> Log out</a> --}}
           <!-- Authentication -->
-          <form method="POST" action="{{ route('logout') }}">
+          <form method="POST" action="{{ route('admin.logout') }}">
             @csrf
             <a class="dropdown-item" href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
               <i class="align-middle me-1" data-feather="log-out"></i>

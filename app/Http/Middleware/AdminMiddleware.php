@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class AdminMiddleware {
@@ -13,16 +15,9 @@ class AdminMiddleware {
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next) {
-        // Check if the user is authenticated
-        if (!auth()->check()) {
-            return redirect('/login');
+        if(Auth::guard('admin')->check()){
+            return redirect(RouteServiceProvider::ADMIN);
         }
-        
-        // Check if the user has the role slug 'super_admin'
-        if (auth()->user()->role->slug !== 'administrator') {
-            abort(403, 'Unauthorized');
-        }
-
-        return $next($request);
+        return redirect('/app');
     }
 }

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class RoleSeeder extends Seeder{
     /**
@@ -13,19 +14,20 @@ class RoleSeeder extends Seeder{
     public function run(): void{
         //
         $roles = [
-            [ 'title' => 'Super Admin', 'slug' => 'super-admin', 'status' => 1 ],
-            [ 'title' => 'Administrator', 'slug' => 'administrator', 'status' => 1 ],
-            [ 'title' => 'Moderator', 'slug' => 'moderator', 'status' => 1 ],
-            [ 'title' => 'Editor', 'slug' => 'Editor', 'status' => 1 ],
-            [ 'title' => 'Contributor', 'slug' => 'contributor', 'status' => 1 ],
-            [ 'title' => 'Author', 'slug' => 'author', 'status' => 1 ],
-            [ 'title' => 'Instructor', 'slug' => 'instructor', 'status' => 1 ],
-            [ 'title' => 'Support Staff', 'slug' => 'support-staff', 'status' => 1 ],
-            [ 'title' => 'Student', 'slug' => 'student', 'status' => 1 ],
-            [ 'title' => 'Subscriber', 'slug' => 'subscriber', 'status' => 1 ],
+            [ 'title' => 'Super Admin', 'status' => 1 ],
+            [ 'title' => 'Administrator', 'status' => 1 ],
+            [ 'title' => 'Moderator', 'status' => 1 ],
+            [ 'title' => 'Editor', 'status' => 1 ],
+            [ 'title' => 'Contributor', 'status' => 1 ],
+            [ 'title' => 'Author', 'status' => 1 ],
+            [ 'title' => 'Instructor', 'status' => 1 ],
+            [ 'title' => 'Support Staff', 'status' => 1 ],
+            [ 'title' => 'Student', 'status' => 1 ],
+            [ 'title' => 'Subscriber', 'status' => 1 ],
         ];
 
         foreach ($roles as $role) {
+            $role['slug'] = Str::slug($role['title']);
             Role::create($role);
         }
     }
