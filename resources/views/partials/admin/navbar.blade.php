@@ -189,7 +189,7 @@
           <img src="{{ asset('img/avatars/avatar.jpg') }}" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">{{ Auth::guard('admin')->user()->firstname . ' ' . Auth::guard('admin')->user()->lastname }}</span>
         </a>
         <div class="dropdown-menu dropdown-menu-end">
-          <a class="dropdown-item" href="{{ route('edit.profile') }}"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+          <a class="dropdown-item" href="{{ route('show.profile', Auth::guard('admin')->user()->username) }}"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
           <a class="dropdown-item" href="javascript:void(0)"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="javascript:void(0)"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>

@@ -44,10 +44,22 @@ class AdminAuthenticatedSessionController extends Controller {
     }
 
     /**
+     * Show the form for showing the specified resource.
+     */
+
+    // public function show($username) {
+    //     $username = Admin::where('username', $username)->firstOrFail();
+    //     return view('admin.profiles.show', compact('username'));
+    // }
+    public function show(Admin $admin) {
+        return view('admin.profiles.show', compact('admin'));
+    }
+
+    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Admin $admin) {
-        return view('admin.users.profile', compact('admin'));
+        return view('admin.profiles.edit', compact('admin'));
     }
 
     /**

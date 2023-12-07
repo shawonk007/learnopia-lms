@@ -54,7 +54,8 @@ Route::get('/success', [SiteController::class, 'success'])->name('success');
 Route::prefix('app')->group(function () {
 // Route::prefix('admin')->group(function () {
   Route::get('/', [AdminAuthenticatedSessionController::class, 'index'])->name('admin.dashboard');
-  Route::get('/profile', [AdminAuthenticatedSessionController::class, 'edit'])->name('edit.profile');
+  Route::get('/{username}', [AdminAuthenticatedSessionController::class, 'show'])->name('show.profile');
+  Route::get('/{username}/edit', [AdminAuthenticatedSessionController::class, 'edit'])->name('edit.profile');
   Route::resource('courses', CourseController::class);
   Route::resource('lessons', LessonController::class);
   Route::resource('category', CategoryController::class);
